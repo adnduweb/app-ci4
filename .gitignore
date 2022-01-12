@@ -120,7 +120,7 @@ nb-configuration.xml
 .phpintel
 /api/
 node_modules/*
-app/Modules/*
+# app/Modules/*
 tests/
 public/backend/themes/metronic/cache/*
 public/frontend/themes/metronic/cache/*
