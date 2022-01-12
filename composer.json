@@ -1,15 +1,13 @@
 {
-    "name": "codeigniter4/appstarter",
+    "name": "adnduweb/app-ci4",
     "type": "project",
-    "description": "CodeIgniter4 starter app",
-    "homepage": "https://codeigniter.com",
+    "description": "A project skeleton/admin area for CodeIgniter 4 projects",
+    "homepage": "https://github.com/adnduweb/app-ci4",
     "license": "MIT",
     "require": {
         "php": "^7.3||^8.0",
         "codeigniter4/framework": "^4",
         "michalsn/codeigniter4-uuid": "^1.0",
-        "irsyadulibad/codeigniter4-datatables": "^2.0",
-        "4spacesdk/ci4ormextension": "^1.0",
         "illuminate/database": "^8.57",
         "tatter/relations": "^2.0",
         "whichbrowser/parser": "^2.1",
@@ -51,7 +49,7 @@
             "Core\\": "core"
         }
     },
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "scripts": {
         "test": "phpunit"
     },

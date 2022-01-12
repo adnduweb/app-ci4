@@ -37,7 +37,6 @@ class Toolbar extends BaseConfig
 	public $collectors = [
 		Timers::class,
 		Database::class,
-		//\Nfaiz\DbToolbar\Collectors\Database::class,
 		Logs::class,
 		Views::class,
 		// \CodeIgniter\Debug\Toolbar\Collectors\Cache::class,
