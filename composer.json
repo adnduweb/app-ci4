@@ -7,6 +7,8 @@
     "require": {
         "php": "^7.3||^8.0",
         "codeigniter4/framework": "^4",
+        "adnduweb/ci4-core": "^2",
+        "adnduweb/ci4-admin": "^2",
         "michalsn/codeigniter4-uuid": "^1.0",
         "illuminate/database": "^8.57",
         "tatter/relations": "^2.0",
