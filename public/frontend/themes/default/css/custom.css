@@ -1,0 +1,13 @@
+/********** custom css *********/
+
+.owl-carousel .owl-item img {
+    display: block;
+    width: auto;
+    text-align: center;
+}
+
+.owl-carousel .owl-item .item {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
