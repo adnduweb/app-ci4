@@ -22,6 +22,7 @@
                     <th class="min-w-125px" title="Natif">Natif</th>
                     <th class="min-w-125px" title="Instal">Installé</th>
                     <th class="min-w-125px" title="Date_update">Date de création</th>
+                    <th class="min-w-125px" >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,34 +60,29 @@
                         <?php } ?>
                         </td>
 
-                    <!-- <td> 
-                        <?php if($module->active == 1){ ?>
 
-                            <?php if($module->is_natif == 1){ ?>
-                                <a href="javascript:;" data-kt-module-update="active" disabled data-status="" data-handle="<?= $module->handle; ?>" data-class="<?= $module->class; ?>"  class="actionActive btn btn-bold btn-sm btn-font-sm btn-light-success">
-                                    <?= lang('Core.desactive'); ?>
-                                </a>
-                            <?php }else{ ?>
-                                <a href="javascript:;" data-kt-module-update="active" data-status="" data-handle="<?= $module->handle; ?>" data-class="<?= $module->class; ?>"  class="actionActive btn btn-bold btn-sm btn-font-sm btn-light-success">
-                                    <?= lang('Core.desactive'); ?>
-                                </a>
-                            <?php } ?>
-                            <?php }else{ ?>
+                    <td>  <?= $module->updated_at->humanize(); ?> </td>
 
-                            <?php if($module->is_natif == 1){ ?>
-                                <a href="javascript:;" data-kt-module-update="active" disabled data-status="disabled" data-handle="<?= $module->handle; ?>" data-class="<?= $module->class; ?>"  class="actionActive btn btn-bold btn-sm btn-font-sm btn-light-danger">
-                                    <?= lang('Core.active'); ?>
-                                </a>
-                            <?php }else{ ?>
-                                <a href="javascript:;" data-kt-module-update="active" data-status="disabled" data-handle="<?= $module->handle; ?>" data-class="<?= $module->class; ?>"  class="actionActive btn btn-bold btn-sm btn-font-sm btn-light-danger">
-                                    <?= lang('Core.active'); ?>
-                                </a>
-                            <?php } ?>
+                    <td>
+                    <?php if($module->is_installed == 1 && $module->is_natif == 0){ ?>
+                            <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions 
+                            <?= service('theme')->getSVG("duotune/arrows/arr072.svg", "svg-icon svg-icon-5 m-0"); ?>
+                          </a>
+                            <!--begin::Menu-->
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true" style="">
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a data-kt-module-sync="bdd" data-id="<?= $module->id; ?>" class="menu-link px-3">Sync la bdd</a>
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::Menu-->
+                    <?php }else{ ?>
+                        --
+                    <?php } ?>
+                     
+                     </td>
 
-                        <?php } ?>
-                    </td> -->
-
-                    <td> <?= $module->updated_at->humanize(); ?> </td>
                 </tr>
             <?php } ?>
 
@@ -109,21 +105,7 @@
                         <?php } ?>
                         </td>
 
-                    <!-- <td> 
-                        <?php if($module->active == 1){ ?>
-
-                            <a href="javascript:;" <?= ($module->is_installed == 1) ? '' : 'disabled' ; ?> data-kt-module-update="active" data-status="" data-handle="<?= $module->handle; ?>" data-class="<?= $module->class; ?>"  class="actionActive btn btn-bold btn-sm btn-font-sm btn-light-success">
-                                <?= lang('Core.desactive'); ?>
-                            </a>
-
-                        <?php }else{ ?>
-
-                            <a href="javascript:;" <?= ($module->is_installed == 1) ? '' : 'disabled' ; ?> data-kt-module-update="active" data-status="disabled" data-handle="<?= $module->handle; ?>" data-class="<?= $module->class; ?>"  class="actionActive btn btn-bold btn-sm btn-font-sm btn-light-danger">
-                                <?= lang('Core.active'); ?>
-                            </a>
-
-                        <?php } ?>
-                    </td> -->
+                    <td> -- </td>
 
                     <td> -- </td>
                 </tr>
@@ -234,6 +216,25 @@
         });
     }
 
+    var initSyncBdd = () => {
+
+        window.jQuery('[data-kt-module-sync="bdd"]').on('click', function (e) {
+            // Prevent default button action
+            e.preventDefault();
+
+            const packets = {
+                id:  $(this).data('id'),
+                token: $('meta[name="X-CSRF-TOKEN"]').attr('content'),
+            };
+            axios.post("<?= route_to('module-sync-bdd') ?>", packets)
+            .then( response => {
+                toastr.success(response.data.messages.success, _LANG_.updated + "!"); // Notif
+                Ci4DataTables["kt_table_module-table"].ajax.reload();
+            })
+            .catch(error => {}); 
+            
+        });
+    }
 
 
     return {
@@ -245,6 +246,7 @@
 
             initPermissionTable();
             initModuleEnableOrUnabled();
+            initSyncBdd();
 
         }
     }

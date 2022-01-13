@@ -138,6 +138,7 @@ $routes->group(CI_AREA_ADMIN, ['namespace' => '\Adnduweb\Ci4Admin\Controllers\Ad
     $routes->group('settings-advanced/modules', function ($routes) {
         $routes->get('/', 'ModulesController::index', ['as' => 'modules']);
         $routes->post('update-ajax', 'ModulesController::updateAjax', ['as' => 'module-update-ajax']);
+        $routes->post('module-sync-bdd', 'ModulesController::syncBDD', ['as' => 'module-sync-bdd']);
     });
 
 

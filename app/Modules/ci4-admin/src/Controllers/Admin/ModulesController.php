@@ -155,6 +155,41 @@ class ModulesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControll
 
         return $this->getResponse(['success' => 'Module deleted successfully'], 200);
        }
+    }
+
+        /**
+     * Update item details. https://www.positronx.io/codeigniter-rest-api-tutorial-with-example/
+     * 
+     *
+     * @return RedirectResponse
+     */
+    public function syncBDD(): ResponseInterface
+    {
+
+       $module = $this->request->getJSON();    
+
+       $moduleInstance = model(ModuleModel::class)->find($module->id);
+    
+       if(!empty($moduleInstance)){
+
+
+            $migrate = \Config\Services::migrations();
+
+            try
+            {
+                $migrate->setNamespace($moduleInstance->class)->latest();
+            }
+            catch (\Throwable $e)
+            {
+                return $this->getResponse(['error' =>  $e->getMessage()], 500);
+            }
+
+        
+            return $this->getResponse(['success' => command('migrate status ')], 200);
+       }else{
+        return $this->getResponse(['error' => 'Sync not successfully'], 500);
+       }
+        
         
     }
 
