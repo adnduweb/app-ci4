@@ -9,15 +9,15 @@ class CreateTableModule extends Migration
     public function up()
     {
         $fields = [
-            'id'              => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-			'name'         => ['type' => 'VARCHAR', 'constraint' => 255],
-			'handle'       => ['type' => 'VARCHAR', 'constraint' => 255],
-			'path'         => ['type' => 'VARCHAR', 'constraint' => 255],
-			'is_natif'     => ['type' => 'INT', 'constraint' => 11],
-			'is_installed' => ['type' => 'INT', 'constraint' => 11],
-			'active'       => ['type' => 'INT', 'constraint' => 11],
-			'created_at'   => ['type' => 'DATETIME', 'null' => true],
-			'updated_at'   => ['type' => 'DATETIME', 'null' => true],
+            'id'           => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'name'         => ['type' => 'VARCHAR', 'constraint' => 255],
+            'handle'       => ['type' => 'VARCHAR', 'constraint' => 255],
+            'class'        => ['type' => 'VARCHAR', 'constraint' => 255],
+            'is_natif'     => ['type' => 'INT', 'constraint' => 11],
+            'is_installed' => ['type' => 'INT', 'constraint' => 11],
+            'active'       => ['type' => 'INT', 'constraint' => 11],
+            'created_at'   => ['type' => 'DATETIME', 'null' => true],
+            'updated_at'   => ['type' => 'DATETIME', 'null' => true],
 		];
 		
 		$this->forge->addField('id');
