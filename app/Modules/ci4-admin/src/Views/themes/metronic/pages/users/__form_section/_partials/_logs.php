@@ -21,7 +21,11 @@
             <!--end::source=-->
 
             <!--begin::source=-->
-                <td><?php $data = json_decode($log->data); ?> <?=  (!is_array($data->id)) ? $data->id : $data->id[0]; ?></td>
+            <?php if(!empty($log->data)){ ?>
+                <td><?php $data = json_decode($log->data); ?> id : <?=  (!is_array($data->id) && !empty($data)) ? $data->id : $data->id[0]; ?></td>
+            <?php }else{ ?>
+                <td> -- </td>
+            <?php } ?>
             <!--end::source=-->
 
 
