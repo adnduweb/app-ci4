@@ -12,9 +12,10 @@
 
 
 <div class="inputs">
-    <input type="hidden" class="id_media" name="id_media" />
-    <input type="hidden" class="uuid_media" name="uuid_media" />
-    <input type="hidden" class="url_media_medium" name="url_media_medium" />
+    <input type="hidden" class="id_media" name="media_id" value="<?= $media->getID(); ?>" />
+    <input type="hidden" class="uuid_media" name="uuid_media" value="<?= $media->getUuid(); ?>" />
+    <input type="hidden" class="url_media_medium" name="url_media_medium" value="<?= $media->getUrlMedia('medium'); ?>" />
 </div>
+
 
 <?= view('Adnduweb\Ci4Medias\Views\themes\metronic\_modals\ImageManger') ?>
