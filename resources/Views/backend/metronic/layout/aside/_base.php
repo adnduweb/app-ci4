@@ -1,4 +1,4 @@
- <?php $logoFileName = 'logo-1.svg'; ?>
+<?php $logoFileName = 'logo-ADN.svg'; ?>
  <?php  if (Config('Theme')->layout['aside']['theme'] == 'light'){ ?>
      <?php $logoFileName = 'logo-1-dark.svg'; ?>
  <?php } ?>
@@ -51,7 +51,7 @@
          <?php if(service('theme')->isDocumentationMenu()){ ?>
              <a href="<?= site_url(); ?> " class="btn btn-primary w-100"> <?= lang('Core.Preview Application'); ?></a>
          <?php }else{ ?>
-                 <a href="<?= site_url('documentation/getting-started/overview'); ?> " class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="8000" title="Check out the complete documentation with over 100 components">
+                 <a href="<?= current_url(); ?> " class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="8000" title="Check out the complete documentation with over 100 components">
              <span class="btn-label">
                  <?= lang('Core.Documentation'); ?>
              </span>

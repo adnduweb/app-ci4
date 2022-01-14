@@ -62,7 +62,9 @@ class Media
 				'chunkSize'        => $chunkSize,
 				'maxFileSize'      => $maxFileSize,
 				'acceptedFiles'    => 'image/*,application/pdf',
-				'maxFiles'         => 20
+				'maxFiles'         => 20,
+				'id_media_default' => 1,
+				'url_media_default' => site_url(Config('Medias')->segementUrl) . '/medium/default.jpg',
             ]);
 
             return $paramJs;

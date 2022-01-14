@@ -29,7 +29,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5">
         <a href="<?= route_to('user-edit', user()->uuid); ?>" class="menu-link px-5">
-            <?= lang('Core.My Profile'); ?>
+            <?= ucfirst(lang('Core.My Profile')); ?>
         </a>
     </div>
     <!--end::Menu item-->
@@ -52,10 +52,10 @@
     <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start" data-kt-menu-flip="center, top">
         <a href="#" class="menu-link px-5">
             <span class="menu-title position-relative">
-                Language
+                <?= ucfirst(lang('Core.language')); ?>
 
                 <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
-                <?= $supportedLocales[service('request')->getLocale()]['name']; ?> <img class="w-15px h-15px rounded-1 ms-2" src="<?= assetAdmin($supportedLocales[service('request')->getLocale()]['flag']); ?>" alt="metronic"/>
+                <?= ucfirst(lang($supportedLocales[service('request')->getLocale()]['name'])); ?> <img class="w-15px h-15px rounded-1 ms-2" src="<?= assetAdmin($supportedLocales[service('request')->getLocale()]['flag']); ?>" alt="metronic"/>
                 </span>
             </span>
         </a>
@@ -70,7 +70,7 @@
                     <span class="symbol symbol-20px me-4">
                         <img class="rounded-1" src="<?= assetAdmin($lang['flag']); ?>" alt="metronic"/>
                     </span>
-                    <?=$lang['name']; ?>
+                    <?= ucfirst(lang($lang['name'])); ?>
                 </a>
             </div>
             <!--end::Menu item-->
@@ -83,7 +83,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5 my-1">
         <a href="<?= route_to('settings-index'); ?>" class="menu-link px-5">
-            Account Settings
+            <?= ucfirst(lang('Core.settings')); ?>
         </a>
     </div>
     <!--end::Menu item-->
@@ -91,7 +91,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5">
         <a href="<?= site_url(CI_AREA_ADMIN . '/logout'); ?>" data-action="<?= site_url(CI_AREA_ADMIN . '/logout'); ?>" data-method="post" data-csrf="<?= csrf_hash(); ?>" data-reload="true" class="button-ajax menu-link px-5">
-            <?= lang('Core.Sign Out'); ?> 
+            <?= ucfirst(lang('Core.Sign Out')); ?> 
         </a>
     </div>
     <!--end::Menu item-->

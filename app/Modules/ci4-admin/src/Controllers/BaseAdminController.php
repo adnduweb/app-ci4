@@ -1070,6 +1070,10 @@ abstract class BaseAdminController extends Controller
         if(!logged_in())
             return false;
 
+        // On vérifie que l'on peut enregistrer un item 
+        if( $this->display == 'create' && has_permission($this->controller . '.new'))
+            return true;
+
         if(in_array($this->display, $this->cruds)) {
 
             if(!has_permission($this->controller . '.'. $this->display)){

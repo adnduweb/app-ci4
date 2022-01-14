@@ -876,6 +876,17 @@ class InitializeCore extends Seeder
                 'created_at'   => date('Y-m-d H:i:s'),
                 'updated_at'   => date('Y-m-d H:i:s'),
             ],
+            [
+                'id'           => 3,
+                'name'         => 'ci4 medias',
+                'handle'       => 'ci4-medias',
+                'class'         => 'Adnduweb\Ci4Medias',
+                'is_natif'     => 1,
+                'is_installed' => 1,
+                'active'       => 1,
+                'created_at'   => date('Y-m-d H:i:s'),
+                'updated_at'   => date('Y-m-d H:i:s'),
+            ],
 
         ];
 

@@ -5,8 +5,8 @@
     <!--begin::Content-->
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
         <!--begin::Logo-->
-        <a href="index.html" class="mb-12">
-			<img alt="Logo" src="<?= assetAdmin('/media/logos/logo-2-dark.svg'); ?>" class="h-45px" />
+        <a href="<?= current_url(); ?>" class="mb-12">
+			<img alt="Logo" src="<?= assetAdmin('/media/logos/logo-ADN.svg'); ?>" class="h-45px" />
 		</a>
         <!--end::Logo-->
         <!--begin::Wrapper-->
@@ -49,10 +49,10 @@
     <div class="d-flex flex-center flex-column-auto p-10">
         <!--begin::Links-->
         <div class="d-flex align-items-center fw-bold fs-6">
-            <a href="<?= route_to('a-propos-de'); ?>" class="text-muted text-hover-primary px-2">A propos de </a>
+			<a href="<?= current_url(); ?>" class="text-muted text-hover-primary px-2">A propos de </a>
 			<a href="mailto:contact@adnduweb.com" class="text-muted text-hover-primary px-2">Contact</a>
-			<a href="<?= route_to('nous-contacter'); ?>" class="text-muted text-hover-primary px-2">Nous contacter</a>
-        </div>
+			<a href="<?= current_url(); ?>" class="text-muted text-hover-primary px-2">Nous contacter</a>
+		</div>
         <!--end::Links-->
     </div>
     <!--end::Footer-->

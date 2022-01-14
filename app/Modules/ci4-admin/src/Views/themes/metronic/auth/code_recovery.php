@@ -4,7 +4,7 @@
     <!--begin::Content-->
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
         <!--begin::Logo-->
-        <a href="/metronic8/demo1/../demo1/index.html" class="mb-12">
+        <a href="<?= current_url(); ?>" class="mb-12">
             <img alt="Logo" src="<?= assetAdmin('/media/logos/logo-2-dark.svg'); ?>" class="h-40px">
         </a>
         <!--end::Logo-->

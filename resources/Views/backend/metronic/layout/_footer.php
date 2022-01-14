@@ -9,9 +9,9 @@
         </div>
 
         <div class="nav nav-dark order-1 order-md-2">
-            <a href="<?= route_to('a-propos-de'); ?>" class="text-muted text-hover-primary px-2">A propos de </a>
+            <a href="<?= current_url(); ?>" class="text-muted text-hover-primary px-2">A propos de </a>
 			<a href="mailto:contact@adnduweb.com" class="text-muted text-hover-primary px-2">Contact</a>
-			<a href="<?= route_to('nous-contacter'); ?>" class="text-muted text-hover-primary px-2">Nous contacter</a>
+			<a href="<?= current_url(); ?>" class="text-muted text-hover-primary px-2">Nous contacter</a>
         </div>
     </div>
 </div>

@@ -410,13 +410,12 @@ class MediaModel extends UuidModel
 
 	public function getMedias($paginate = false, $perPage = false, $theme = false, $page = false, $type= false){
 
-		
-
 		if($paginate == true){
 			$media = $this->select()
 			->join('medias_langs', 'medias.id = medias_langs.media_id')
 			->like("type", $type)
 			->where('lang', service('request')->getLocale())
+			->where('medias.id != 1') // Image par default
 			->orderBy('medias.id ASC')
 			->paginate($perPage, $theme, $page);
 		}
@@ -425,6 +424,7 @@ class MediaModel extends UuidModel
 			->join('medias_langs', 'medias.id = medias_langs.media_id')
 			->like("type", $type)
 			->where('lang', service('request')->getLocale())
+			->where('medias.id != 1') // Image par default
 			->orderBy('medias.id ASC')
 			->findAll();
 		}
