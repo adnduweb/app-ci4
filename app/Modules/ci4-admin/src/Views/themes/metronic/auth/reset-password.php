@@ -1,4 +1,4 @@
-<?= $this->extend('Themes\backend\metronic\layout\auth') ?>
+<?= $this->extend('Themes\backend\metronic\auth') ?>
 <?= $this->section('main') ?>
 
 <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(<?= assetAdmin('/media/illustrations/sketchy-1/14.png'); ?>">
@@ -6,7 +6,7 @@
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
         <!--begin::Logo-->
         <a href="<?= current_url(); ?>" class="mb-12">
-			<img alt="Logo" src="<?= assetAdmin('/media/logos/logo-ADN.svg'); ?>" class="h-45px" />
+			<img alt="Logo" src="<?= assetAdmin('/media/logos/logo-ADN.svg'); ?>" class="h-65px" />
 		</a>
         <!--end::Logo-->
         <!--begin::Wrapper-->
@@ -16,7 +16,7 @@
                <!--begin::Heading-->
                 <div class="text-center mb-10">
                     <!--begin::Title-->
-                    <h1 class="text-dark mb-3">Setup New Password</h1>
+                    <h1 class="text-dark mb-3"><?=lang('Auth.SetupNewPassword');?></h1>
                     <!--end::Title-->
                     <!--begin::Link-->
                     <?php if (config('Auth')->allowRegistration): ?>
@@ -60,7 +60,7 @@
                     <!--begin::Wrapper-->
                     <div class="mb-1">
                         <!--begin::Label-->
-                        <label class="form-label fw-bolder text-dark fs-6">Password</label>
+                        <label class="form-label fw-bolder text-dark fs-6"><?=lang('Auth.password');?></label>
                         <!--end::Label-->
                         <!--begin::Input wrapper-->
                         <div class="position-relative mb-3">
@@ -82,31 +82,22 @@
                     </div>
                     <!--end::Wrapper-->
                     <!--begin::Hint-->
-                    <div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+                    <div class="text-muted"><?=lang('Auth.Use8OrMoreCharacters');?></div>
                     <!--end::Hint-->
                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                 <!--end::Input group=-->
                 <!--begin::Input group=-->
                 <div class="fv-row mb-10 fv-plugins-icon-container">
-                    <label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
+                    <label class="form-label fw-bolder text-dark fs-6"><?=lang('Auth.ConfirmPassword');?></label>
                     <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off">
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                <!--end::Input group=-->
-                <!--begin::Input group=-->
-                <div class="fv-row mb-10 fv-plugins-icon-container">
-                    <div class="form-check form-check-custom form-check-solid form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="toc" value="1">
-                        <label class="form-check-label fw-bold text-gray-700 fs-6">I Agree &amp; 
-                        <a href="#" class="ms-1 link-primary">Terms and conditions</a>.</label>
-                    </div>
                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                 <!--end::Input group=-->
                 <!--begin::Action-->
                 <div class="text-center">
                     <button type="button" id="kt_new_password_submit" class="btn btn-lg btn-primary fw-bolder">
-                        <span class="indicator-label">Submit</span>
-                        <span class="indicator-progress">Please wait... 
-                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        <span class="indicator-label"><?=lang('Auth.continue');?></span>
+						<span class="indicator-progress"><?=lang('Auth.Please wait');?>...
+						<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
                 </div>
                 <!--end::Action-->
@@ -151,14 +142,24 @@ var KTPasswordResetNewPassword = function() {
         validator = FormValidation.formValidation(
 			form,
 			{
-				fields: {					 
+				fields: {	
+                    // 'email': {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: _LANG_.EmailAddressIsRequired
+                    //         },
+                    //         emailAddress: {
+                    //             message: _LANG_.ValueIsNotAValidEmail
+                    //         }
+					// 	}
+					// },				 
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: _LANG_.PasswordIsRequired
                             },
                             callback: {
-                                message: 'Please enter valid password',
+                                message: _LANG_.PleaseEnterValidPassword,
                                 callback: function(input) {
                                     if (input.value.length > 0) {        
                                         return validatePassword();
@@ -170,23 +171,23 @@ var KTPasswordResetNewPassword = function() {
                     'confirm-password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password confirmation is required'
+                                message: _LANG_.PleaseConfirmationIsRequired,
                             },
                             identical: {
                                 compare: function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
+                                message: _LANG_.PasswordAndItsConfirmAreNotTheSame,
                             }
                         }
                     },
-                    'toc': {
-                        validators: {
-                            notEmpty: {
-                                message: 'You must accept the terms and conditions'
-                            }
-                        }
-                    }
+                    // 'tokenHash': {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: _LANG_.JetonNotConforme,
+                    //         }
+                    //     }
+                    // }
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger({
@@ -221,14 +222,17 @@ var KTPasswordResetNewPassword = function() {
                         toastr.success(response.data.messages.success, _LANG_.updated + "!"); // Notif
                         window.location.href = response.data.redirect;
                     })
-                    .catch(error => {}); 	
+                    .catch(error => {
+                        submitButton.removeAttribute('data-kt-indicator');
+                        submitButton.disabled = false;
+                    }); 	
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: _LANG_.SorryErrorsDetected,
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: _LANG_.Fermer,
                         customClass: {
                             confirmButton: "btn btn-primary"
                         }

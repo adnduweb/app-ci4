@@ -35,6 +35,19 @@
     </div>
 </div>
 
+<div class="row mb-10">
+    <label for="id_group" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.themes_front')); ?>* : </label>
+    <div class="col-lg-8">
+        <!-- <select required name="user[themeAdmin]" class="form-select form-select-solid form-select-lg fw-bold" aria-label="Select a Country" data-kt-select2="true" data-control="select2" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>" id="themeAdmin"> -->
+        <select required name="theme_fo[name]" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>" data-hide-search="true">
+            <option value="">Select a Country...</option>
+            <?php foreach ($getThemesFront as $theme) { ?>
+                <option <?= $theme ==  service('settings')->get('App.theme_fo', 'name') ? 'selected' : ''; ?> value="<?= $theme; ?>"><?= ucfirst($theme); ?></option>
+            <?php } ?>
+        </select>
+    </div>
+</div>
+
 <div class="form-group form-group-sm row  mb-10">
     <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.displayManifest')); ?></label>
     <div class="col-lg-8">

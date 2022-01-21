@@ -118,6 +118,8 @@ $routes->group(CI_AREA_ADMIN, ['namespace' => '\Adnduweb\Ci4Admin\Controllers\Ad
         $routes->get('datatable-traffics', 'LogsController::ajaxDatatableTraffics', ['as' => 'logs-traffics-listajax']);
         $routes->get('connexions', 'LogsController::indexConnexions', ['as' => 'log-list-connexions']);
         $routes->get('datatable-connexions', 'LogsController::ajaxDatatableConnexions', ['as' => 'logs-connexions-listajax']);
+        $routes->get('files', 'LogsController::indexFiles', ['as' => 'log-list-files']);
+        $routes->get('files/(:any)', 'LogsController::viewsFiles/$1', ['as' => 'log-views-files']);
 
     });
 
@@ -160,33 +162,3 @@ $routes->group(CI_AREA_ADMIN, ['namespace' => '\Adnduweb\Ci4Admin\Controllers\Ad
 });
 
 $routes->get('vie-privee', '\Adnduweb\Ci4Admin\Controllers\Pages::viePrivee',  ['as' => 'vie-privee']);
-
-/**
- * --------------------------------------------------------------------------------------
- * API
- * --------------------------------------------------------------------------------------
- */
-
-
-$routes->group('api/v1', ['namespace' => '\Adnduweb\Ci4Admin\Controllers\Api\v1'], function($routes)
-{
-    $routes->post('auth/login', 'Auth::index', ['as' => 'api-v1-login']);
-    $routes->post('auth/signin', 'Auth::index', ['as' => 'api-v1-signin']);
-    $routes->get('auth/users', 'UsersController::index', ['as' => 'api-v1-users']);
-    $routes->get('auth/me', 'UsersController::me', ['as' => 'api-v1-me']);
-});
-
-//$routes->post('api/v1/auth/login', '\Adnduweb\Ci4Admin\Controllers\Api\v1\Auth::index', ['as' => 'api-v1-login']);
-//$routes->post('api/v1/users', '\Adnduweb\Ci4Admin\Controllers\Api\v1\UsersController::index', ['as' => 'api-v1-users']);
-
-// $routes->group('api', ['filter' => 'api-auth'], function($routes)
-// {
-//     $routes->resource('users');
-// });
-
-//$routes->resource('api/user');
-// $routes->resource('api/user', ['controller' =>'\Adnduweb\Ci4Admin\Controllers\Api\Users']);
-// $routes->post('api/user/list', '\Adnduweb\Ci4Admin\Controllers\Api\UsersController::list');
-
-//print_r($routes); exit;
-

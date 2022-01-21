@@ -3,7 +3,7 @@
     
   
     <?php if (isset($notice) ){ ?>
-        <?= $this->include('\Themes\backend\metronic\layout\partials\extras\_notice'); ?>
+        <?= $this->include('\Themes\backend\metronic\partials\extras\_notice'); ?>
     <?php } ?>
 
   

@@ -446,13 +446,13 @@ class MediaModel extends UuidModel
 		if(!empty($media)){
 			list($pathinfo, $extension) = explode('.', $media[0]->clientname);
 			//echo $pathinfo . '_'.count($media) + 1 .'.' . $extension; exit;
-			return $pathinfo . '_'.count($media) + 1 .'.' . $extension;
+			return $pathinfo . '_'.(count($media) + 1) .'.' . $extension;
 		}
 	
 		return $file['clientname'];
 
 	}
-
+	
 	/**
 	 * Get Localname
 	 */
@@ -469,8 +469,28 @@ class MediaModel extends UuidModel
 		return false;
 	}
 
+	public function createImageDefault(){
 
-	
+		$row = [
+			'uuid' => $this->uuid->uuid4(),
+			'filename' => 'default.jpg',
+			'localname' => 'default.jpg',
+			'clientname' => 'default.jpg',
+			'type' => 'image/jpg',
+			'size' => '200',
+			'ext' => 'jpg',
 
+		];
 
+		// Record it in the database
+		$mediaId = $this->insert($row);
+
+		$this->addToLang($mediaId, 'image par default');
+
+		// If a user is logged in then associate the File
+		if ($userId = user()->id)
+		{
+		}
+		
+	}
 }

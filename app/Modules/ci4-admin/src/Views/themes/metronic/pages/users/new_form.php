@@ -3,7 +3,7 @@
 use \Adnduweb\Ci4Admin\Libraries\Theme;
 
 ?>
-<?= $this->extend('Themes\backend\metronic\layout\admin') ?>
+<?= $this->extend('Themes\backend\metronic\admin') ?>
 <?= $this->section('main') ?>
 
 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">

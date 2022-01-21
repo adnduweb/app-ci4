@@ -19,7 +19,6 @@ class Theme extends BaseConfig
             'dark-mode-enabled' => true,        // Enable optioanl dark mode mode
             'primary-color'     => '#009EF7',
         ),
-
         // Loader
         'loader'     => array(
             'display' => false,
@@ -98,7 +97,7 @@ class Theme extends BaseConfig
 
         // Content
         'content'    => array(
-            'width'  => 'fixed', // Set content width(fixed|fluid)
+            'width'  => 'fluid', // Set content width(fixed|fluid)
             'layout' => 'default'  // Set content layout(default|documentation)
         ),
 

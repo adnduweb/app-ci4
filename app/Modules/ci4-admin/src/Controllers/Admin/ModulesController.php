@@ -152,7 +152,6 @@ class ModulesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControll
                 return $this->getResponse(['error' =>  $e->getMessage()], 500);
             }
 
-        
             return $this->getResponse(['success' => command('migrate status ')], 200);
        }else{
         return $this->getResponse(['error' => 'Sync not successfully'], 500);

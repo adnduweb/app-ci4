@@ -1,4 +1,4 @@
-<?= $this->extend('Themes\backend\metronic\layout\admin') ?>
+<?= $this->extend('Themes\backend\metronic\admin') ?>
 <?= $this->section('main') ?>
 <div class="card card-docs mb-2">
     <!--begin::Card Body-->

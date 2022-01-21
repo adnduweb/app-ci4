@@ -102,7 +102,7 @@ trait ExportData
 
             $dompdf = new \Dompdf\Dompdf(); 
             //$customPaper = array(0,0,567.00,283.80);
-            $dompdf->loadHtml(view('Themes\backend\metronic\layout\partials\extras\_pdf_view_export_datatable', $this->viewData));
+            $dompdf->loadHtml(view('Themes\backend\metronic\partials\extras\_pdf_view_export_datatable', $this->viewData));
             // $dompdf->setPaper('A4', 'landscape');
             $dompdf->setPaper($setPaper, $orientation);
             $dompdf->render();
@@ -117,7 +117,7 @@ trait ExportData
         }else{
 
             $dompdf = new \Dompdf\Dompdf(); 
-            $dompdf->loadHtml(view('Themes\backend\metronic\layout\partials\extras\_pdf_view_export_datatable', $this->viewData));
+            $dompdf->loadHtml(view('Themes\backend\metronic\partials\extras\_pdf_view_export_datatable', $this->viewData));
             $dompdf->setPaper($setPaper, $orientation);
             $dompdf->render();
             $dompdf->stream($filename, [ "Attachment" => true ]);
@@ -259,7 +259,7 @@ trait ExportData
                       $this->viewData['data'] = model(PermissionModel::class)->asArray()->select(implode(',', $this->viewData['header']))->findAll();
                       $dompdf = new \Dompdf\Dompdf(); 
                       //$customPaper = array(0,0,567.00,283.80);
-                      $dompdf->loadHtml(view('Themes\backend\metronic\layout\partials\extras\_pdf_view_export_datatable', $this->viewData));
+                      $dompdf->loadHtml(view('Themes\backend\metronic\partials\extras\_pdf_view_export_datatable', $this->viewData));
                       // $dompdf->setPaper('A4', 'landscape');
                       $dompdf->setPaper('A4', 'portrait');
                       $dompdf->render();
@@ -280,7 +280,7 @@ trait ExportData
                       $this->viewData['header'] = array_merge(model(PermissionModel::class)::$orderable, ['created_at']);
                       $this->viewData['data'] = model(PermissionModel::class)->asArray()->select(implode(',', $this->viewData['header']))->findAll();
                       $dompdf = new \Dompdf\Dompdf(); 
-                      $dompdf->loadHtml(view('Themes\backend\metronic\layout\partials\extras\_pdf_view_export_datatable', $this->viewData));
+                      $dompdf->loadHtml(view('Themes\backend\metronic\partials\extras\_pdf_view_export_datatable', $this->viewData));
                       $dompdf->setPaper('A4', 'landscape');
                       $dompdf->render();
                       $dompdf->stream();

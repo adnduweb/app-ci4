@@ -1,4 +1,4 @@
-<?= $this->extend('Themes\backend\metronic\layout\admin') ?>
+<?= $this->extend('Themes\backend\metronic\admin') ?>
 <?= $this->section('main') ?>
 
 
@@ -135,6 +135,19 @@
                         </div>
                     </div>
                      <!--end::Input group-->
+
+                     <?php if (!is_writable(ROOTPATH . 'writable/medias/')){ ?>
+                        <div class="d-flex align-items-sm-center mb-7">
+                            <!--begin::Title-->
+                            <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                                <div class="flex-grow-1 me-2">
+                                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6"> medias not writable:</a>
+                                </div>
+                                <span class="badge badge-light-success fs-8 fw-bolder my-2"><?= ROOTPATH . 'writable/medias/'; ?></span>
+                            </div>
+                            <!--end::Title-->
+                        </div>
+                    <?php  } ?>
 
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <button type="reset" class="btn btn-white btn-active-light-primary me-2"> <?= ucfirst(lang('Core.cancel')); ?></button>

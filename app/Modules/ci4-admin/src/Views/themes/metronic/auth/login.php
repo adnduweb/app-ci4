@@ -1,4 +1,4 @@
-<?= $this->extend('Themes\backend\metronic\layout\auth') ?>
+<?= $this->extend('Themes\backend\metronic\auth') ?>
 <?= $this->section('main') ?>
 <!--begin::Authentication - Sign-in -->
 	<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(<?= assetAdmin('/media/illustrations/progress-hd.png'); ?>)">
@@ -6,7 +6,7 @@
 	<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 		<!--begin::Logo-->
 		<a href="<?= current_url(); ?>" class="mb-12">
-			<img alt="Logo" src="<?= assetAdmin('/media/logos/logo-ADN.svg'); ?>" class="h-45px" />
+			<img alt="Logo" src="<?= assetAdmin('/media/logos/logo-ADN.svg'); ?>" class="h-65px" />
 		</a>
 		<!--end::Logo-->
 		<!--begin::Wrapper-->
@@ -25,7 +25,7 @@
 					<!--end::Link-->
 					<?php endif; ?>
 				</div>
-				<?= view('Themes\backend\metronic\layout\partials\message_block') ?>
+				<?= view('Themes\backend\metronic\partials\message_block') ?>
 				<!--begin::Heading-->
 				
 				<!--begin::Input group-->
@@ -34,7 +34,7 @@
 					<label class="form-label fs-6 fw-bolder text-dark"><?= lang("Core.your_email"); ?></label>
 					<!--end::Label-->
 					<!--begin::Input-->
-					<input class="form-control form-control-lg form-control-solid" type="text"  placeholder="<?= lang('Auth.emailOrUsername') ?>" name="login" autocomplete="off" value="admin@admin.com" />
+					<input class="form-control form-control-lg form-control-solid" required type="text"  placeholder="<?= lang('Auth.emailOrUsername') ?>" name="login" autocomplete="off" value="" />
 					<!--end::Input-->
 				</div>
 				<!--end::Input group-->
@@ -51,7 +51,7 @@
 					</div>
 					<!--end::Wrapper-->
 					<!--begin::Input-->
-					<input class="form-control form-control-lg form-control-solid" type="password"  placeholder="<?= lang('Auth.password') ?>" name="password" value="123456">
+					<input class="form-control form-control-lg form-control-solid" required type="password"  placeholder="<?= lang('Auth.password') ?>" name="password" value="">
 					<!--end::Input-->
 				</div>
 				
@@ -72,7 +72,7 @@
 					<!--begin::Submit button-->
 					<button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
 						<span class="indicator-label"><?=lang('Auth.continue');?></span>
-						<span class="indicator-progress"><?=lang('Auth.Please wait...');?>
+						<span class="indicator-progress"><?=lang('Auth.Please wait');?>...
 						<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 					</button>
 					<!--end::Submit button-->

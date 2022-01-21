@@ -75,7 +75,6 @@
 </div>
 <!--end::Card-->
 
-<
 <?= $this->section('AdminAfterExtraJs') ?>
 <script type="text/javascript">
 

@@ -1,4 +1,4 @@
-<?= $this->extend('Themes\backend\metronic\layout\auth') ?>
+<?= $this->extend('Themes\backend\metronic\auth') ?>
 <?= $this->section('main') ?>
 <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(<?= assetAdmin('/media/illustrations/sketchy-1/14.png'); ?>">
     <!--begin::Content-->

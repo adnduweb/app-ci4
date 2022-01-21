@@ -8,7 +8,7 @@
         <div class="d-flex flex-center flex-column py-5">
             <!--begin::Avatar-->
             <div class="symbol symbol-100px symbol-circle mb-7">
-                <span class="symbol-label fs-3 bg-light-danger text-danger"><?= $form->lastname[0]; ?> <?= $form->firstname[0]; ?></span>
+                <span class="symbol-label fs-1 bg-light-danger text-danger"><?= $form->lastname[0]; ?> <?= $form->firstname[0]; ?></span>
             </div>
             <!--end::Avatar-->
             <!--begin::Name-->
@@ -27,8 +27,8 @@
         <!--begin::Details toggle-->
         <div class="d-flex flex-stack fs-4 py-3">
             <div class="fw-bolder rotate collapsible collapsed"><?= lang('Core.details'); ?> </div>
-            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="" data-bs-original-title="<?= lang('Core.Edit customer details'); ?>'">
-                <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_details"><?= lang('Core.Edit'); ?></a>
+            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="" data-bs-original-title="<?= lang('Core.edit_customer_details'); ?>">
+                <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_details"><?= lang('Core.edit'); ?></a>
             </span>
         </div>
         <!--end::Details toggle-->

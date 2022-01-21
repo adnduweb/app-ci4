@@ -372,7 +372,7 @@ abstract class BaseAdminController extends Controller
                     $this->page_header_toolbar_btn['create'] = [
                         'color' => 'primary',
                         'href'  => $this->path_redirect .'/create?token=' . $this->token,
-                        'svg'   => service('theme')->getSVG("icons/duotone/Communication/Add-user.svg", "svg-icon-5 svg-icon-gray-500 me-1"),
+                        'svg'   => service('theme')->getSVG("duotune/arrows/arr087.svg", "svg-icon svg-icon-5 m-0"),
                         'desc'  => lang('Core.add'),
                     ];
                 }
@@ -391,7 +391,7 @@ abstract class BaseAdminController extends Controller
                      $this->page_header_toolbar_btn['create'] = [
                         'color' => 'primary',
                         'href'  => $this->path_redirect .'/create?token=' . $this->token,
-                        'svg'   => service('theme')->getSVG("icons/duotone/Communication/Add-user.svg", "svg-icon-5 svg-icon-gray-500 me-1"),
+                        'svg'   => service('theme')->getSVG("duotune/arrows/arr087.svg", "svg-icon svg-icon-5 m-0"),
                         'desc'  => lang('Core.add'),
                     ];
                  }
@@ -446,8 +446,6 @@ abstract class BaseAdminController extends Controller
             $this->page_header_toolbar_title = $this->toolbar_title[count($this->toolbar_title) - 1];
         }
 
-        // $this->context->smarty->assign('help_link', 'https://help.prestashop.com/' . service('request')->getLocale() . '/doc/'
-        //     . service('request')->getGet('controller') . '?version=' . CI_VERSION . '&country=' . service('request')->getLocale());
     }
 
     /**
@@ -555,33 +553,9 @@ abstract class BaseAdminController extends Controller
 
                 break;
             default:
-                // list
-                // $this->toolbar_btn = [];
-                // return $this->toolbar_btn; 
-                // if(!is_null($this->tableModel)){
-                //      $this->toolbar_btn['new'] = [
-                //             'color' => 'dark',
-                //             'svg'   => service('theme')->getSVG("icons/duotone/Communication/Contact1.svg", "svg-icon-5 svg-icon-gray-500 me-1"),
-                //             'href' => 'javascript:;',
-                //             'desc' => lang('Core.Help'),
-                //         ];
-                     
-
-
-                    // $this->toolbar_btn['new'] = [
-                    //     'href' => self::$currentIndex . '&add' . model(ucfirst($this->tableModel->table .  'Model')) . '&token=' . $this->token,
-                    //     'desc' => lang('Core.Add new'),
-                    // ];
-                    // if ($this->allow_export) {
-                    //     $this->toolbar_btn['export'] = [
-                    //         'href' => self::$currentIndex . '&export' . model(ucfirst($this->tableModel->table .  'Model')) . '&token=' . $this->token,
-                    //         'desc' => lang('Core.Export'),
-                    //     ];
-                    // }
-                //}
+               
         }
 
-        //print_r($this->toolbar_btn);
     }
 
     /**
@@ -717,14 +691,14 @@ abstract class BaseAdminController extends Controller
             $htmlJs .= "\n";
             $htmlJs .= '}';
             try {
-                $write = write_file('admin/themes/' . service('settings')->get('App.theme_bo', 'name') . '/assets/js/language/lang_' . service('request')->getLocale() . '.js', $htmlJs);
+                $write = write_file('backend/themes/' . service('settings')->get('App.theme_bo', 'name') . '/language/lang_' . service('request')->getLocale() . '.js', $htmlJs);
             } catch (\Exception $e) {
 
-                throw new \RuntimeException('admin/themes/' . service('settings')->get('App.theme_bo', 'name') . '/assets/js/language/lang_' . service('request')->getLocale() . '.js');
+                throw new \RuntimeException('backend/themes/' . service('settings')->get('App.theme_bo', 'name') . '/language/lang_' . service('request')->getLocale() . '.js');
                 exit;
             }
         } else {
-            $write = write_file('admin/themes/' . service('settings')->get('App.theme_bo', 'name') . '/assets/js/language/lang_' . service('request')->getLocale() . '.js', '');
+            $write = write_file('backend/themes/' . service('settings')->get('App.theme_bo', 'name') . '/language/lang_' . service('request')->getLocale() . '.js', '');
         }
 
         //exit;

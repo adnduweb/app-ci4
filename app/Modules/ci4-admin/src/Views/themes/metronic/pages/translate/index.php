@@ -1,4 +1,4 @@
-<?= $this->extend('\Themes\backend\metronic\layout\admin') ?>
+<?= $this->extend('\Themes\backend\metronic\admin') ?>
 <?= $this->section('main') ?>
 
 
@@ -9,7 +9,7 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header border-0 pt-6">
                         <!--begin::Card title-->
-                            <?= $this->include('\Themes\backend\metronic\layout\partials\extras\_search') ?> 
+                            <?= $this->include('\Themes\backend\metronic\partials\extras\_search') ?> 
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
@@ -18,15 +18,15 @@
                             <div class="d-flex justify-content-end" data-kt-<?= singular($controller); ?>-table-toolbar="base">
                             
                                 <?php if ($filterDatabase == true) { ?>
-                                    <?= $this->include('\Themes\backend\metronic\layout\partials\extras\_filter_database') ?> 
+                                    <?= $this->include('\Themes\backend\metronic\partials\extras\_filter_database') ?> 
                                 <?php } ?>
 
                                 <?php if ($allow_import == true) { ?>
-                                    <?= $this->include('\Themes\backend\metronic\layout\partials\extras\_import_data') ?>
+                                    <?= $this->include('\Themes\backend\metronic\partials\extras\_import_data') ?>
                                 <?php } ?>
 
                                 <?php if ($allow_export == true) { ?>
-                                    <?= $this->include('\Themes\backend\metronic\layout\partials\extras\_export_data') ?>
+                                    <?= $this->include('\Themes\backend\metronic\partials\extras\_export_data') ?>
                                 <?php } ?>
                             </div>
                             <!--end::Toolbar-->

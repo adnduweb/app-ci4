@@ -280,6 +280,7 @@
 	'created_at' => 'Date de création',
 	'actions' => 'Actions',
 	'users_index' => 'Listes de utilisateurs',
+	'SorryErrorsDetected' => 'Désolé, il semble qu\'il y ait des erreurs, veuillez réessayer.'
 ];
 
 /* write : 12/01/2022 10:03:43 */

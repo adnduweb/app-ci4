@@ -25,18 +25,14 @@ class InitializeCore extends Seeder
 
     public function run()
     {
-        //helper('common');
 
         cache()->clean();
 
         $this->createLanguages();
 
-        //$this->createCurrency();
-
         $this->createCrountry();
 
         $uuid_company = $this->createCompany();
-        //$uuid_company= '';
 
         $this->createUsers($uuid_company);
 

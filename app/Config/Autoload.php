@@ -45,6 +45,8 @@ class Autoload extends AutoloadConfig
 		'Adnduweb\\Ci4Core' => APPPATH . 'Modules/ci4-core/src',
 		'Adnduweb\\Ci4Admin' => APPPATH . 'Modules/ci4-admin/src',
 		'Adnduweb\\Ci4Medias' => APPPATH . 'Modules/ci4-medias/src',
+		'Adnduweb\\Ci4Pages' => APPPATH . 'Modules/ci4-pages/src',
+		'Adnduweb\\Ci4Vassorts' => APPPATH . 'Modules/ci4-vassorts/src',
 		'Themes' => ROOTPATH .'resources/Views',
 	];
 

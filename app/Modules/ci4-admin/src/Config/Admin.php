@@ -13,7 +13,7 @@ class Admin extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $resourcesPath = ROOTPATH . 'public/admin/themes/';
+	public $resourcesPath = ROOTPATH . 'public/backend/themes/';
 
     // Tables to ignore when creating the schema
 	public $ignoredTables = ['migrations'];

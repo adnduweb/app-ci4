@@ -38,7 +38,7 @@ class SettingsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControl
 
 
     public function __construct(){
-        Config('Theme')->layout['header']['display_create'] = false;
+        Config('Theme')->layout['header']['display_create'] = false; 
     }
 
     /**
@@ -56,6 +56,7 @@ class SettingsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControl
         parent::index();
 
         $this->viewData['getThemesAdmin'] = $this->getThemesAdmin();
+        $this->viewData['getThemesFront'] = $this->getThemesFront();
         $this->viewData['languages']      = (new LanguageModel())->select('id, name, iso_code')->where('active', 1)->get()->getResult();
         $this->viewData['countList']      = [];
         $this->viewData['action'] = 'edit';
@@ -138,14 +139,18 @@ class SettingsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControl
 
     public function getThemesAdmin()
     {
-
         $dirTheme = [];
-        foreach (glob(VENDORPATH . '/adnduweb/ci4-admin/Views/themes/*', GLOB_ONLYDIR) as $dir) {
+        foreach (glob(ROOTPATH . '/public/backend/themes/*', GLOB_ONLYDIR) as $dir) {
             $dirTheme[] = basename($dir);
         }
+        return $dirTheme;
+    }
+
+    public function getThemesFront()
+    {
 
         if(empty($dirTheme)){
-            foreach (glob(APPPATH . 'Modules/ci4-admin/src/Views/themes/*', GLOB_ONLYDIR) as $dir) {
+            foreach (glob(ROOTPATH . '/public/frontend/themes/*', GLOB_ONLYDIR) as $dir) {
                 $dirTheme[] = basename($dir);
             }
         }

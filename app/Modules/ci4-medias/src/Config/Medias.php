@@ -170,8 +170,8 @@ class Medias extends BaseConfig
 	//  * @var array<string, string>
 	//  */
 	// public $layouts = [
-	// 	'public' => 'Adnduweb\Ci4Medias\Views\themes\metronic\layout',
-	// 	'manage' => 'Adnduweb\Ci4Medias\Views\themes\metronic\layout',
+	// 	'public' => 'Adnduweb\Ci4Medias\Views\themes\metronic',
+	// 	'manage' => 'Adnduweb\Ci4Medias\Views\themes\metronic',
 	// ];
 
 	// /**

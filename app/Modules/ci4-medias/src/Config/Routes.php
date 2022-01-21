@@ -20,22 +20,7 @@ $routes->group(CI_AREA_ADMIN . '/medias', $options, function ($routes)
 	$routes->get('edit/(:any)', 'Medias::edit/$2', ['as' => 'Media-edit']);
     $routes->post('edit/(:any)', 'Medias::update/$1', ['as' => 'Media-update']);
 
-	// $routes->get('user', 'Medias::user');
-	// $routes->get('user/(:any)', 'Medias::user/$1');
-	// $routes->get('remove/(:num)',    'Medias::remove/$1');
-	// $routes->get('removeAll/(:num)',    'Medias::removeAll/$1');
-	
-	// $routes->get('thumbnail/(:num)', 'Medias::thumbnail/$1');
-	// $routes->get('rename/(:num)', 'Medias::rename/$1');
-
 	$routes->post('upload', 'Medias::upload', ['as' => 'media-upload']);
-	// $routes->add('export/(:any)', 'Medias::export/$1');
-
-	// $routes->add('(:any)', 'Medias::$1');
-	// $routes->add('getManagerEdition', 'Medias::getManagerEdition');
-
-	// $routes->get('removedfile/(:any)', 'Medias::removeFile/$1');
-	// $routes->post('saveManagerEdition', 'Medias::saveManagerEdition');
 
 	$routes->post('rename', 'Medias::rename', ['as' => 'media-rename']);
 	$routes->delete('remove-file', 'Medias::removeFile', ['as' => 'media-remove-file']);

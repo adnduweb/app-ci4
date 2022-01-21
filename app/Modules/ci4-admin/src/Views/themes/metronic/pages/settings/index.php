@@ -1,4 +1,4 @@
-<?= $this->extend('\Themes\backend\metronic\layout\admin') ?>
+<?= $this->extend('\Themes\backend\metronic\admin') ?>
 <?= $this->section('main') ?>
 
 <?= form_open('', ['id' => 'kt_apps_user_add_user_form', 'class' => 'kt-form', 'novalidate' => false]); ?>

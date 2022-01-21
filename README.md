@@ -28,3 +28,11 @@ Find more details in the [docs folder](_docs).
 - [Tatter/relations](https://github.com/tattersoftware/relations) CodeIgniter library for simple relation (orm). 
 - [Tatter/Schemas](https://github.com/tattersoftware/schemas) CodeIgniter library for simple schemas (orm). 
 - [Myth/Auth](https://github.com/lonnieezell/myth-auth/tree/develop/docs) CodeIgniter library for simple schemas (orm). 
+
+
+## Install
+
+- php spark adw:install   
+- npm run watch --front
+- npm run watch --front
+- npm run production --admin --dark_mode

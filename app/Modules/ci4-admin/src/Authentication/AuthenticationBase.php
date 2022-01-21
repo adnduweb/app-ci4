@@ -104,12 +104,6 @@ class AuthenticationBase
         ));
 
         session()->set($fieldSession);
-        // session()->set('logged_in', $this->user->id);
-        // session()->set('administrator_login', true);
-        // session()->set('username', $this->user->lastname);
-        // session()->set('email', $this->user->email);
-        // session()->set('permissions', $this->user->auth_groups_users);
-
         // When logged in, ensure cache control headers are in place
         service('response')->noCache();
 

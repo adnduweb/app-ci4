@@ -226,24 +226,10 @@ class Init
 
     private static function initContent()
     {
-        // if (isset(Config('Theme')->layout['content']['fit-top'])) {
-        //     Theme::addHtmlClass('content', 'pt-0');
-        // }
-
-        // if (isset(Config('Theme')->layout['content']['fit-bottom'])) {
-        //     Theme::addHtmlClass('content', 'pt-0');
-        // }
-
-        // if (Config('Theme')->layout['content']['width'] == 'fluid') {
-        //     Theme::addHtmlClass('content-container', 'container-fluid');
-        // } else {
-        //     Theme::addHtmlClass('content-container', 'container');
-        // }
-
-        if (isset(Config('Theme')->layout['content']['width']) === 'fluid') { 
+        if (Config('Theme')->layout['content']['width'] == 'fluid') { 
             Theme::addHtmlClass('content-container', 'container-fluid');
         } else {
-            Theme::addHtmlClass('content-container', 'container-xl');
+            Theme::addHtmlClass('content-container', 'container-xxl');
         }
     }
 

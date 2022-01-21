@@ -5,10 +5,12 @@ namespace Adnduweb\Ci4Admin\Controllers\Admin;
 use Adnduweb\Ci4Admin\Controllers\BaseAdminController;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
+use Adnduweb\Ci4Core\Libraries\Logs;
 use Adnduweb\Ci4Admin\Libraries\Theme;
 use Adnduweb\Ci4Core\Models\AuditModel;
 use Adnduweb\Ci4Core\Traits\ExportData;
 use CodeIgniter\API\ResponseTrait;
+
 
 class LogsController extends BaseAdminController
 {
@@ -40,9 +42,15 @@ class LogsController extends BaseAdminController
     /** @var bool */
     public $filterDatabase = false;
 
+    protected $logsPath   = WRITEPATH . 'logs/';
+    
+    protected $logsLimit = '20';
+
 
     public function __construct(){
+        helper('filesystem');
         Config('Theme')->layout['header']['display_create'] = false;
+        $this->logsHandler = new Logs();
     }
 
 
@@ -65,6 +73,16 @@ class LogsController extends BaseAdminController
     {
 
         if ($this->display == 'index' || $this->display == 'indexTraffics' || $this->display == 'indexConnexions') {
+
+            $this->page_header_toolbar_btn['list-files'] = [
+                'short' => 'ListFiles',
+                'color' => 'primary',
+                'href' => route_to('log-list-files'),
+                'desc' => lang('Core.Files'),
+                'svg'   => service('theme')->getSVG("icons/duotone/Home/Earth.svg", "svg-icon-5 svg-icon-gray-500 me-1"),
+                'force_desc' => true,
+            ];
+
 
             $this->page_header_toolbar_btn['list-system'] = [
                 'short' => 'ListSystem',
@@ -313,6 +331,48 @@ class LogsController extends BaseAdminController
         }
 
         return $this->getResponse(['success' => lang('Core.no_content')], 204);
+    }
+
+      /**
+     * Displays a list of available.
+     *
+     * @return string
+     */
+    public function indexFiles(): string
+    {
+        parent::index();
+        // Load the Log Files.
+         $this->viewData['logs'] = get_filenames($this->logsPath);
+
+
+        unset( $this->viewData['logs'][0]);
+
+        $this->viewData['result'] = $this->logsHandler->paginateLogs( $this->viewData['logs'], $this->logsLimit);
+        $this->viewData['pager'] = $this->viewData['result']['pager'];
+        //print_r( $viewData['logs']); exit;
+        return $this->render($this->viewPrefix . $this->theme . '/\pages\logs\index_files', $this->viewData);
+    }
+
+    public function viewsFiles(string $file){
+        helper('security');
+        $file = sanitize_filename($file);
+
+        if (empty($file) || ! file_exists($this->logsPath . $file)) {
+            Theme::set_message('error', lang('Logs.empty'), lang('Core.warning_error'));
+            return redirect()->back()->withInput();
+        }
+
+        $logs = $this->logsHandler->processFileLogs($this->logsPath . $file);
+
+        $result = $this->logsHandler->paginateLogs($logs, $this->logsLimit);
+
+         $this->viewData['logFile']       = $file;
+         $this->viewData['canDelete']     = 1;
+         $this->viewData['logContent']    = $result['logs'];
+         $this->viewData['pager']         = $result['pager'];
+         $this->viewData['logFilePretty'] = date('F j, Y', strtotime(str_replace('.log', '', str_replace('log-', '', $file))));
+
+        return $this->render($this->viewPrefix . $this->theme . '/\pages\logs\view_log', $this->viewData);
     }
 
 }

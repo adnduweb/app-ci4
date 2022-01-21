@@ -56,32 +56,6 @@ class GroupsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControlle
         return $this->render($this->viewPrefix . $this->theme . '/\pages\groups\index', $this->viewData);
     }
 
-//    /**
-//      * Function datatable.
-//      *
-//      * @return CodeIgniter\Http\Response
-//      */
-//     public function ajaxDatatable()
-//     {
-//         if ($this->request->isAJAX()) {
-//             $start = $this->request->getVar('start');
-//             $length = $this->request->getVar('length');
-//             $search = $this->request->getVar('search[value]');
-//             $order = GroupModel::ORDERABLE[$this->request->getVar('order[0][column]')];
-//             $dir = $this->request->getVar('order[0][dir]');
-
-//             return $this->respond([
-//                 'draw'            => $this->request->getVar('draw'),
-//                 'recordsTotal'    => $this->tableModel->getResource()->countAllResults(),
-//                 'recordsFiltered' => $this->tableModel->getResource($search)->countAllResults(),
-//                 'data'            => $this->tableModel->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject(),
-//                 'token'           => csrf_hash()
-//             ]);
-//         }
-
-//         return $this->respondNoContent();
-//     }
-
     /**
      * Shows details for one item.
      *

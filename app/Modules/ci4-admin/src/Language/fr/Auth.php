@@ -108,5 +108,10 @@ return [
 	'explain_banned' => 'Votre compte a été banni',
     'banned' => 'Banni',
     'valider' => 'Valider',
-    'cancel' => 'Annuler'
+    'cancel' => 'Annuler',
+    'continue' => 'continuer',
+    'Please wait' => 'patienter',
+    'SetupNewPassword' => 'Nouveau mot de passe',
+    'Use8OrMoreCharacters' => 'Utilisez 8 caractères ou plus avec un mélange de lettres (majuscules/minuscules), chiffres &amp; symboles.',
+    'ConfirmPassword' => 'Confirmation de votre de passe'
 ];

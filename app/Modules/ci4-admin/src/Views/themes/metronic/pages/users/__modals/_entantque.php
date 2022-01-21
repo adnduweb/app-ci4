@@ -17,8 +17,8 @@
 			<div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
 				<!--begin::Content-->
 				<div class="text-center mb-12">
-					<h1 class="fw-bolder mb-3">Search users</h1>
-					<div class="text-gray-400 fw-bold fs-5">Add a customer to a subscription</div>
+					<h1 class="fw-bolder mb-3"><?= lang('Core.search_users'); ?></h1>
+					<div class="text-gray-400 fw-bold fs-5"><?= lang('Core.list_users_apps'); ?></div>
 				</div>
 				<!--end::Content-->
 				<!--begin::Search-->
@@ -32,7 +32,7 @@
 						<?= service('theme')->getSVG('icons/duotune/general/gen021.svg', "svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y"); ?>
 						<!--end::Icon-->
 						<!--begin::Input-->
-						<input type="text" class="form-control form-control-lg form-control-solid px-15" name="search" value="" placeholder="Search by username, full name or email..." data-kt-search-element="input" />
+						<input type="text" class="form-control form-control-lg form-control-solid px-15" name="search" value="" placeholder="<?= lang('Core.search_by_username_full_name_or_email'); ?>..." data-kt-search-element="input" />
 						<!--end::Input-->
 						<!--begin::Spinner-->
 						<span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
@@ -66,8 +66,8 @@
 						<div data-kt-search-element="empty" class="text-center d-none">
 							<!--begin::Message-->
 							<div class="fw-bold py-0 mb-10">
-								<div class="text-gray-600 fs-3 mb-2">No users found</div>
-								<div class="text-gray-400 fs-6">Try to search by username, full name or email...</div>
+								<div class="text-gray-600 fs-3 mb-2"><?= lang('Core.no_users_found'); ?></div>
+								<div class="text-gray-400 fs-6"><?= lang('Core.try_search_by_username_full_name_or_email'); ?></div>
 							</div>
 							<!--end::Message-->
 							<!--begin::Illustration-->

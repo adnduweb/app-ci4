@@ -16,9 +16,6 @@ use Adnduweb\Ci4Medias\Models\MediaModel;
 use CodeIgniter\API\ResponseTrait;
 use Throwable;
 
-
-
-
 class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 {
 
@@ -168,7 +165,11 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 	 * @return RedirectResponse|string
 	 */
 	public function list(){
-		
+
+		if(service('settings')->get('Medias.format', 'thumbnail') == 'list'){
+			return redirect()->to(route_to('media-settings'));
+		}
+
 		return $this->display();
 	}
 
@@ -284,67 +285,8 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
          Theme::set_message('success', lang('Core.saved_data'), lang('Core.cool_success'));
          return redirect()->to($this->path_redirect . '/edit/' . $id);
 
-    }
-
-	// /**
-	//  * Handles bulk actions.
-	//  *
-	//  * @return ResponseInterface
-	//  */
-	// public function bulk(): ResponseInterface
-	// {
-	// 	// Load post data
-	// 	$post = $this->request->getPost();
-
-	// 	// Harvest file IDs and the requested action
-	// 	$action  = '';
-	// 	$fileIds = [];
-	// 	foreach ($post as $key => $value) {
-	// 		if (is_numeric($value)) {
-	// 			$fileIds[] = $value;
-	// 		} else {
-	// 			$action = $key;
-	// 		}
-	// 	}
-
-	// 	// Make sure some files where checked
-	// 	if (empty($fileIds)) {
-	// 		return $this->failure(400, lang('Medias.noFile'));
-	// 	}
-
-	// 	// Handle actions
-	// 	if (empty($action)) {
-	// 		return $this->failure(400, 'No valid action');
-	// 	}
-
-	// 	// Bulk delete request
-	// 	if ($action === 'delete') {
-	// 		$this->model->delete($fileIds);
-	// 		return redirect()->back()->with('success', 'Deleted ' . count($fileIds) . ' files.');
-	// 	}
-
-	// 	// Bulk export of some kind, match the handler
-	// 	if (!$handler = handlers('Exports')->where(['slug' => $action])->first()) {
-	// 		return $this->failure(400, 'No handler found for ' . $action);
-	// 	}
-
-	// 	$export = new $handler();
-	// 	foreach ($fileIds as $fileId) {
-	// 		if ($file = $this->model->find($fileId)) {
-	// 			$export->setFile($file->object->setBasename($file->filename));
-	// 		}
-	// 	}
-
-	// 	try {
-	// 		$result = $export->process();
-	// 	} catch (ExportsException $e) {
-	// 		return $this->failure(400, $e->getMessage());
-	// 	}
-
-	// 	alert('success', 'Processed ' . count($fileIds) . ' files.');
-	// 	return $result;
-	// }
-
+	}
+	
 	/**
 	 * Receives uploads from Dropzone.
 	 *
@@ -748,106 +690,6 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 	}
 
 
-
-	// public function getCropTemplate()
-	// {
-
-	// 	// Load post data
-	// 	$post = $this->request->getPost();
-
-	// 	$this->uuid = $this->uuid->fromString($post['uuid'])->getBytes();
-
-	// 	$this->viewData['media'] = $this->tableModel->where([$this->tableModel->uuidFields[0] => $this->uuid])->first();
-
-	// 	if (!$this->viewData['media']) {
-	// 		$response = ['error' => ['code' => 400, 'message' => lang('Medias.noFile')], 'success' => false, csrf_token() => csrf_hash()];
-	// 		return $this->respond($response, 400);
-	// 	}
-
-	// 	$this->viewData['dir_image_original'] =  config('Medias')->getPath() . 'original/';
-	// 	$this->viewData['uuid'] = $post['uuid'];
-	// 	$this->viewData['field'] = (isset($value['field'])) ? $value['field'] : false;
-	// 	$this->viewData['mine'] = $this->viewData['media']->getType();
-	// 	$this->viewData['extension'] = $this->viewData['media']->getExtension();
-	// 	$this->viewData['image'] = $this->viewData['media']->localname;
-
-	// 	$this->viewData['crop_width'] = (isset($value['crop_width'])) ? $value['crop_width'] : false;
-	// 	$this->viewData['crop_height'] = (isset($value['crop_height'])) ? $value['crop_height'] : false;
-	// 	$this->viewData['only'] = (isset($value['only'])) ? $value['only'] : false;
-	// 	$this->viewData['input'] = '';
-
-	// 	$html = view('Adnduweb\Ci4Medias\themes\/'. $this->theme .'/\cropImage', $this->viewData);
-	// 	//return $this->respond(['status' => true, 'type' => 'success', 'path' => site_url('public/uploads/' . $newName)], 200);
-	// 	$return = [
-	// 		'status' => true,
-	// 		'type' => 'success',
-	// 		'crop' => true,
-	// 		'cropImage' => $html,
-	// 		'path' => img_data($this->viewData['media']->getThumbnail())
-	// 	];
-	// 	return $this->response->setJSON($return);
-	// }
-
-	// public function cropFile()
-	// {
-
-	// 	// Load post data
-	// 	$post = $this->request->getPost();
-
-	// 	$this->uuid = $this->uuid->fromString($post['uuid'])->getBytes();
-
-	// 	$this->viewData['media'] = $this->tableModel->where([$this->tableModel->uuidFields[0] => $this->uuid])->first();
-
-
-	// 	if (!$this->viewData['media']) {
-	// 		$response = ['error' => ['code' => 400, 'message' => lang('Medias.noFile')], 'success' => false, csrf_token() => csrf_hash()];
-	// 		return $this->respond($response, 400);
-	// 	}
-
-
-	// 	$file = $this->request->getFile('croppedImage');
-
-	// 	if ($file->isValid() && !$file->hasMoved()) {
-	// 		// On enregistre l'image que l 'on vient de créer
-	// 		list($width, $height, $type, $attr) =  getimagesize($file->getPathName());
-	// 		$name = str_replace('.' . $this->viewData['media']->getExtension(), '-' . $width . 'x' . $height . '.' .  $this->viewData['media']->getExtension(), $this->viewData['media']->nameFile());
-	// 		if (!$file->move(config('Medias')->getPath() . 'custom/', $name)) {
-	// 			return $this->respond(['status' => false, 'type' => 'warning', 'message' => $file->getErrorString() . '(' . $file->getError() . ')']);
-	// 		}
-	// 		$mediaCustomEdition = [];
-	// 		if ($this->request->getPost('imageCustomEdition') == true) {
-	// 			$this->infosCustomImage($this->viewData['media']);
-	// 			$mediaCustomEdition = view('Adnduweb\Ci4Medias\themes\/'. $this->theme .'/\imageCustom', $this->viewData);
-	// 		}
-
-	// 		$response =
-	// 			[
-	// 				'success' =>
-	// 				[
-	// 					'code' => 200,
-	// 					'message' =>
-	// 					lang('Core.success_update')
-	// 				],
-	// 				'error' => false,
-	// 				csrf_token() => csrf_hash(),
-	// 				'field'              => $this->request->getPost('field'),
-	// 				'only'               => $this->request->getPost('only'),
-	// 				'input'              => $this->request->getPost('input'),
-	// 				'imageCustomEdition' => $mediaCustomEdition,
-	// 				'idMedia'            => $this->viewData['media']->getID(),
-	// 				'name'               => $name,
-	// 				'filename'           => img_data(config('Medias')->getPath() . 'custom/' . $name),
-	// 				'format'             => $width . 'x' . $height,
-	// 				'widgetOption'       => json_encode(['media' => [$this->tableModel->primaryKey => $this->viewData['media']->getID(), 'filename' => img_data(config('Medias')->getPath() . 'custom/' . $name), 'format' => $name]]),
-	// 				'pathThumbnail'      => img_data($this->viewData['media']->getThumbnail()),
-	// 				'path'               => img_data($this->viewData['media']->getOriginal())
-	// 			];
-
-
-	// 		return $this->respond($response,  200);
-	// 	}
-	// }
-
 	protected function infosCustomImage($image)
 	{
 		if (!empty($image)) {
@@ -870,29 +712,6 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 		}
 		return $image->custom;
 	}
-
-	// public function deteteFileCustom()
-	// {
-	// 		// Load post data
-	// 		$post = $this->request->getPost();
-
-	// 		$this->uuid = $this->uuid->fromString($post['uuid'])->getBytes();
-	// 		$this->format = $post['format'];
-
-	// 		$this->viewData['media'] = $this->tableModel->where([$this->tableModel->uuidFields[0] => $this->uuid])->first();
-
-	// 		$file = config('Medias')->getPath() . 'custom/' . $this->format;
-	// 		if (!@unlink($file)) {
-	// 			$response = ['error' => ['code' => 400, 'message' => lang('Medias.noFile')], 'success' => false, csrf_token() => csrf_hash()];
-	// 			return $this->respond($response, 400);
-	// 		}
-
-	// 		$this->infosCustomImage($this->viewData['media']);
-	// 		$mediaCustomEdition = view('Adnduweb\Ci4Medias\themes\/'. $this->theme .'/\imageCustom', $this->viewData);
-
-	// 		$response = ['success' => ['code' => 200, 'message' => lang('Medias.delete_file_success')], 'error' => false, 'customImage' => $mediaCustomEdition, csrf_token() => csrf_hash()];
-	// 		return $this->respond($response,  200);
-	// }
 
 	public function getDisplayImageManager()
 	{
@@ -928,6 +747,11 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 		foreach($response->uuid as $uuid){
 
 			$media = model(MediaModel::class)->getMediaByUUID($uuid);
+
+			//image par default
+			if($media->id == 1){
+				return $this->getResponse(['error' => lang('Core.pas autorisé à supprimer')], 401);
+			}
 
 			if (model(MediaModel::class)->delete($media->id)) {
 				@unlink(config('Medias')->getPath() . 'thumbnails/' . $media->localname);
@@ -1171,6 +995,32 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 
 			model(MediaModel::class)->emptyTable();
 		}
+
+		// On créer l'image par default
+		if(!model(MediaModel::class)->find(1)){
+
+			list($thumbnailWidth, $thumbnailHeight) = explode('|', service('settings')->get('Medias.format', 'thumbnail'));
+			list($smallWidth, $smallHeight) = explode('|', service('settings')->get('Medias.format', 'small'));
+			list($mediumWidth, $mediumHeight) = explode('|', service('settings')->get('Medias.format', 'medium'));
+			list($largeWidth, $largeHeight) = explode('|', service('settings')->get('Medias.format', 'large'));
+
+			try
+			{
+				\Config\Services::image()->withFile(APPPATH . 'Modules/ci4-medias/src/default.jpg')->save(WRITEPATH . 'medias/original/default.jpg');
+				\Config\Services::image()->withFile(APPPATH . 'Modules/ci4-medias/src/default.jpg')->fit($thumbnailWidth, $thumbnailHeight, 'center')->save(WRITEPATH . 'medias/thumbnails/default.jpg');
+				\Config\Services::image()->withFile(APPPATH . 'Modules/ci4-medias/src/default.jpg')->fit($smallWidth, $smallHeight, 'center')->save(WRITEPATH . 'medias/small/default.jpg');
+				\Config\Services::image()->withFile(APPPATH . 'Modules/ci4-medias/src/default.jpg')->fit($mediumWidth, $mediumHeight, 'center')->save(WRITEPATH . 'medias/medium/default.jpg');
+				\Config\Services::image()->withFile(APPPATH . 'Modules/ci4-medias/src/default.jpg')->fit($largeWidth, $largeHeight, 'center')->save(WRITEPATH . 'medias/large/default.jpg');
+
+				model(MediaModel::class)->createImageDefault();
+			}
+			catch (ImageException $e)
+			{
+				return false;
+			}
+
+		}
+
 	
 
         // Success!

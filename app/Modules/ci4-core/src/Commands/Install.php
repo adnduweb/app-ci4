@@ -230,7 +230,7 @@ class Install extends BaseCommand
         $this->updateEnvFile("# security.tokenRandomize = false", "security.tokenRandomize = false");
         $this->updateEnvFile("# security.tokenName = 'csrf_token_name'", "security.tokenName = 'csrf_token_name'");
         $this->updateEnvFile("# security.headerName = 'X-CSRF-TOKEN'", "security.headerName = 'X-CSRF-TOKEN'");
-        $this->updateEnvFile("# security.cookieName = 'csrf_cookie_name'", "security.cookieName = 'adn_".rand()."''");
+        $this->updateEnvFile("# security.cookieName = 'csrf_cookie_name'", "security.cookieName = 'adn_".rand()."'");
         $this->updateEnvFile("# security.expires = 7200", "security.expires = 7200");
         $this->updateEnvFile("# security.regenerate = true", "security.regenerate = false");
         $this->updateEnvFile("# security.redirect = true", "security.redirect = true");

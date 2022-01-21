@@ -46,7 +46,7 @@
                     <li id="menu-item-19508" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19508"><a href="<?= site_url(); ?>nice/">Nice</a></li>
                     <li id="menu-item-19961" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19961"><a href="<?= site_url(); ?>toulouse/">Toulouse</a></li> -->
                 </ul>
-                <p class="footer-legal">Créé avec beaucoup d'amour <i class="fas fa-heart"></i> et un peu de <i class="fas fa-code"></i> © 2021 ADN du Web</p>
+                <p class="footer-legal">Créé avec beaucoup <i class="fas fa-heart"></i> et un peu de <i class="fas fa-code"></i> © 2021 ADN du Web</p>
             </div>
         </div>
     </div>

@@ -51,7 +51,7 @@ class Auth extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $viewLayout = 'Adnduweb\Ci4Admin\Views\layout';
+	public $viewLayout = 'Adnduweb\Ci4Admin\Views';
 
 	/**
 	 * --------------------------------------------------------------------

@@ -139,6 +139,14 @@
 	'id' => 'Id',
 	'user' => 'Utilisateur',
 	'details' => 'Détails',
+	'email_is_required' => "L'email est requis",
+    'champs_is_required' => "Le champ est requis",
+    'the_value_is_not_address_valid' => "la valeur n'est pas une adresse valide",
+    'close' => "fermer",
+    'sorry_looks_like_errors_detected' => "des erreurs inconnues ont Ã©tÃ© dÃ©tectÃ©es",
+    'password_cannot_be_the_same_as_username' => "The password cannot be the same as username",
+    'password_not_ecal_pass_confirm' => "Le mot de passe et la confirmation ne sont pas les mÃªmes",
+	'password_is_required' => 'Le mot de passe est requis',
 ];
 
 /* write : 03/12/2020 10:57:38 */

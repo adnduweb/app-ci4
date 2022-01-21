@@ -301,16 +301,6 @@ class AuthenticationController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminC
             return redirect()->route('login-area')->with('error', lang('Auth.forgotDisabled'));
         }
 
-        // if (!$this->auth->check()) {
-        //     unset($_SESSION['redirect_url']);
-        //     return redirect()->to(route_to('login-area'));
-        // }
-
-        
-        // if ($this->auth->user()->force_pass_reset === false) {
-        //     return redirect()->route('dashboard');
-        // }
-
         session()->set(['wait_valid_two_factor' => true]);
         $this->viewData['token'] = $this->request->getGet('token');
 
@@ -318,7 +308,6 @@ class AuthenticationController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminC
 
         return $this->render($this->viewPrefix . $this->theme . '\auth\reset-password', $this->viewData);
 
-        //return view('Adnduweb\Ci4Admin\themes\/' . $this->setting->themeAdmin . '/\templates\authentication\reset-password', ['config' => $this->config, 'data' => $this->viewData, 'token'  => $token]);
     }
 
     /**
@@ -338,7 +327,7 @@ class AuthenticationController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminC
             $users = model(UserModel::class);
 
             // First things first - log the reset attempt.
-            $users->logResetAttempt(
+            $users->logResetAttempt( 
                 $this->request->getPost('email'),
                 $this->request->getPost('tokenHash'),
                 $this->request->getIPAddress(),
@@ -346,11 +335,20 @@ class AuthenticationController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminC
             );
 
             $rules = [
-                'token'            => 'required',
-                'email'            => 'required|valid_email',
+                'tokenHash' => 'required',
+                'email'     => 'required|valid_email'
+            ];
+
+            if (!$this->validate($rules)) {
+                return $this->getResponse(['error' => $this->validator->listErrors()], 500);
+            }
+
+            $rules = [
                 'password'         => 'required|strong_password',
                 'confirm-password' => 'required|matches[password]',
             ];
+
+           
 
             if (!$this->validate($rules)) {
                 return $this->getResponse(['error' => $this->validator->listErrors()], 500);

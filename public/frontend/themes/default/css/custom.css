@@ -11,3 +11,58 @@
     display: flex;
     justify-content: center;
 }
+
+.kt_form .icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 32px;
+    right: 5px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.kt_form .icon .icon-success {
+    fill: green;
+}
+
+.kt_form .icon .icon-error {
+    fill: red;
+}
+
+.kt_form .hidden {
+    display: none;
+}
+
+.error-message {
+    font-size: .85rem;
+    color: red;
+}
+
+.kt_form .fv-row {
+    position: relative;
+}
+
+.has-success .form-control {
+    border-bottom: 2px solid #168b3f;
+}
+
+.has-danger .form-control {
+    border-bottom: 2px solid #dc1d34;
+}
+
+.pristine-error {
+    display: table;
+}
+
+.fv-row .text-help {
+    color: #dc1d34;
+    font-size: 12px;
+}
+
+aside.alerts-fixed {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 99;
+}
