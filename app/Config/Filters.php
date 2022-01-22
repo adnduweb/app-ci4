@@ -13,6 +13,7 @@ use \Adnduweb\Ci4Admin\Filters\RoleFilter;
 use \Adnduweb\Ci4Admin\Filters\PermissionFilter;
 use \Adnduweb\Ci4Core\Filters\CorsFilter;
 use \Adnduweb\Ci4Core\Filters\JWTAuthenticationFilter;
+use \Adnduweb\Ci4Pages\Filters\OnlineCheck;
 
 
 class Filters extends BaseConfig
@@ -34,6 +35,8 @@ class Filters extends BaseConfig
 		'permission'    => PermissionFilter::class,          // Applicate Route
 		'cors'          => CorsFilter::class,
 		'auth'          => JWTAuthenticationFilter::class,   // add this line
+		'online'          => OnlineCheck::class,   // add this line
+		
 	];
 
 	/**
@@ -44,6 +47,7 @@ class Filters extends BaseConfig
 	 */
 	public $globals = [
 		'before' => [
+			'online',
 			'csrf' => [
                 'except' => ['api/*'],
 			],

@@ -88,6 +88,7 @@ class SettingsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControl
             (!isset($core['addSignature']))     ? $core['addSignature']     = 0 :  $core['addSignature']     = true;
             (!isset($core['manifest']))         ? $core['manifest']         = 0 :  $core['manifest']         = true;
             (!isset($core['servicesWworkers'])) ? $core['servicesWworkers'] = 0 :  $core['servicesWworkers'] = true;
+            (!isset($core['ModeMaintenance']))  ? $core['ModeMaintenance']  = 0 :  $core['ModeMaintenance']  = true;
 
             foreach ($core as $k => $v) {
                 

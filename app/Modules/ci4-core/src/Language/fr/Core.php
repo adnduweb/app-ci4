@@ -189,7 +189,10 @@ return [
 	'traffic'                                                              => 'Traffics',
 	'Connexions'                                                           => 'Connexions',
 	'Files'                                                                => 'Fichiers',
-	'search_users'                                                         => 'Rechercher un utilisateur'
+	'search_users'                                                         => 'Rechercher un utilisateur',
+	'displayManifest'                                                      => 'Activer le manifest',
+	'displayServicesWworkers'                                              => 'Activer le mode worker sur le front',
+	'ModeMaintenance'                                                      => 'Activer le mode maintenance',
 
 ];
 
