@@ -1,6 +1,6 @@
 <!-- Global Theme JS Bundle (used by all pages)  -->
-<?php foreach (Config('ThemeFO')->layout['assets']['js'] as $script) { ?>
-<script type="text/javascript" src="<?= assetFront($script); ?>?v=<?= Config('ThemeFO')->version; ?>&t<?= filemtime(env('DOCUMENT_ROOT') . '/frontend/themes/'.$theme_front . '/' . $script); ?>"></script>
+<?php foreach (Config('ThemeFo')->layout['assets']['js'] as $script) { ?>
+<script type="text/javascript" src="<?= assetFront($script); ?>?v=<?= Config('ThemeFo')->version; ?>&t<?= filemtime(env('DOCUMENT_ROOT') . '/frontend/themes/'.$theme_front . '/' . $script); ?>"></script>
 <?php } ?> 
 
 <?= $this->renderSection('FrontBeforeExtraJs') ?>
