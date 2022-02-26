@@ -193,6 +193,8 @@ return [
 	'displayManifest'                                                      => 'Activer le manifest',
 	'displayServicesWworkers'                                              => 'Activer le mode worker sur le front',
 	'ModeMaintenance'                                                      => 'Activer le mode maintenance',
+	'deleteSelected'                                                       => 'Suppression sélectionnée',
+	'selected'                                                             => 'Selections'
 
 ];
 

@@ -98,40 +98,4 @@ class Toolbar extends BaseConfig
 	 * @var integer
 	 */
 	public $maxQueries = 100;
-
-	/**
- * -------------------------------------------------------------
- * Query Theme
- * -------------------------------------------------------------
- * 
- * Configuration for light and dark mode SQL syntax highlighter.
- *
- * @var array
- */
-public $queryTheme = [
-    'light' => 'default',
-    'dark'  => 'dark'
-];
-
-/**
- * -------------------------------------------------------------
- * Bottom Margin Between Diplayed Query in Toolbar
- * -------------------------------------------------------------
- * 
- * Value in px
- * 
- * @var int
- */
-public $queryMarginBottom = 4;
-
-/**
- * -------------------------------------------------------------
- * Log Queries
- * -------------------------------------------------------------
- *
- * Need to set threshold to minimum 7 at app/Config/Logger.php
- *
- * @var boolean
- */
-public $logger = false;
 }
