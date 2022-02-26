@@ -51,7 +51,7 @@
 <div class="form-group form-group-sm row  mb-10">
     <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.displayManifest')); ?></label>
     <div class="col-lg-8">
-        <div class="form-check form-switch form-check-custom form-check-solid">
+        <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
             <input class="form-check-input" type="checkbox" <?= service('settings')->get('App.core', 'manifest') == true ? 'checked="checked"' : ''; ?> name="core[manifest]" value="1">
             <label class="form-check-label" for="flexCheckDefault"></label>
         </div>
@@ -61,7 +61,7 @@
 <div class="form-group form-group-sm row mb-10 ">
     <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.displayServicesWworkers')); ?></label>
     <div class="col-lg-8">
-        <div class="form-check form-switch form-check-custom form-check-solid">
+        <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
             <input class="form-check-input" type="checkbox" <?= ( service('settings')->get('App.core', 'servicesWworkers') == true) ? 'checked="checked"' : ''; ?> name="core[servicesWworkers]" value="1"> 
             <label class="form-check-label" for="flexCheckDefault"></label>
         </div>
@@ -71,7 +71,7 @@
 <div class="form-group form-group-sm row mb-10 ">
     <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.ModeMaintenance')); ?></label>
     <div class="col-lg-8">
-        <div class="form-check form-switch form-check-custom form-check-solid">
+        <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
             <input class="form-check-input" type="checkbox" <?= ( service('settings')->get('App.core', 'ModeMaintenance') == true) ? 'checked="checked"' : ''; ?> name="core[ModeMaintenance]" value="1"> 
             <label class="form-check-label" for="flexCheckDefault"></label>
         </div>

@@ -72,10 +72,26 @@ class RenderImage extends \CodeIgniter\Controller
 
     }
 
-    public function getSizeDefault(string $file){
+    public function module(...$param){
 
+        print_r($param); exit;
+
+        $file = new \CodeIgniter\Files\File(WRITEPATH.'medias' . DIRECTORY_SEPARATOR . $directory. DIRECTORY_SEPARATOR . $secondDirectory . DIRECTORY_SEPARATOR . $file);
+        $this->image = @file_get_contents($file->getPathname());
+
+         $mimeType = $file->getMimeType();
+         
+         $this->response
+             ->setStatusCode(200)
+             ->setContentType($mimeType)
+             ->setBody($this->image)
+             ->send();
+    }
+
+    public function getSizeDefault(string $file){
         if(!$this->filename = model(\Adnduweb\Ci4Medias\Models\MediaModel::class)->getMediaByFilename($file))
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+           
 
         if(($this->image = @file_get_contents(WRITEPATH.'medias/'.$this->directory.'/'.$this->filename)) === FALSE)
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();

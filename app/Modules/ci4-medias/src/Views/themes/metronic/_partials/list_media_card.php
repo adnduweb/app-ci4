@@ -2,7 +2,7 @@
 	<?php if (empty($medias)): ?>
 	<p><?= lang('Medias.No medias to display'); ?></p>
 	<?php else: ?>
-	<div class="card-deck d-flex row">
+	<div id="card-deck" class="card-deck d-flex row">
 
 		<?php foreach ($medias as $media): ?>
 		<div class="cardImage mb-4 col-lg-1 media-item" data-kt-filemanager="selectMedia" data-kt-filemanager-uuid-media="<?= $media->getUUID() ; ?>" data-kt-filemanager-id-media="<?= $media->getID() ; ?>" data-kt-filemanager-url-image="<?= $media->getUrlMedia('medium') ; ?>"> 
@@ -18,7 +18,7 @@
 									<i class="la la-close icon-nm"></i>
 								</a>
 							</div>
-							<img data-uuid-media="<?= $media->uuid ; ?>" src="<?= img_data($media->getThumbnail()) ?>" class="card-img-top img-thumbnail select-image" alt="<?= $media->medianame ?>">
+							<img data-uuid-media="<?= $media->uuid ; ?>" src="<?= $media->getThumbnail() ?>" class="card-img-top img-thumbnail select-image" alt="<?= $media->medianame ?>">
 						</div>
 						<?php if ($media->getName()) { ?>
 								<div class="namemedia"><?= $media->getName(); ?></div>

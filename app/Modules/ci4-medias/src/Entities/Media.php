@@ -25,19 +25,11 @@ class Media extends UuidEntity
 		'deleted_at',
 	];
 
-	/**
-	 * Resolved path to the default thumbnail
-	 *
-	 * @var string|null
-	 */
-	protected static $defaultThumbnail;
+    /**
+     * Resolved path to the default thumbnail
+     */
+    protected static ?string $defaultThumbnail = null;
 
-	/**
-	 * Resolved path to the default thumbnail
-	 *
-	 * @var string|null
-	 */
-	protected static $defaultThumbnailDoc;
 
 	public function getID(){
         return isset($this->attributes['id']) ? ucfirst($this->attributes['id']) : '';
@@ -63,12 +55,6 @@ class Media extends UuidEntity
 		return $this->attributes['filename'] ?? null;
 	}
 
-
-	// public function getExtension()
-	// {
-	// 	return $this->attributes['ext'] ?? null;
-	// }
-
 	public function getName(){
         return isset($this->attributes['titre']) ? ucfirst($this->attributes['titre']) : lang('Core.Pas de titre');
 	}
@@ -91,20 +77,9 @@ class Media extends UuidEntity
 		return $orientation;
 	}
 
-	// public function getUrlMedia()
-	// {
-	// 	$pathOriginal = config('Medias')->getPath() . 'original' . DIRECTORY_SEPARATOR . ($this->attributes['localname'] ?? '');
-	// 	if (!is_file($pathOriginal)) {
-	// 		$pathOriginal = self::locateDefaultThumbnail();
-	// 	}
-
-	// 	$pathOriginal = str_replace( ROOTPATH . 'public' , '', $pathOriginal);
-
-	// 	return base_url($pathOriginal);
-	// }
-
 	public function getUrlMedia(string $dir, $width = false, $height = false)
 	{
+		// echo $this->attributes['id']; exit;
 		$pathOriginal = config('Medias')->getPath() . $dir . DIRECTORY_SEPARATOR . ($this->attributes['localname'] ?? '');
 		if (!is_file($pathOriginal)) {
 			$pathOriginal = self::locateDefaultThumbnail();
@@ -112,7 +87,7 @@ class Media extends UuidEntity
 			$pathOriginal = config('Medias')->segementUrl . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $this->attributes['filename'];
 		}
 
-
+		
 		if($dir == 'custom'){
 			list($filename, $extension) = explode('.', $this->attributes['filename']);
 			$pathOriginal =  config('Medias')->segementUrl . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $filename . '-' . $width . 'x' . $height . '.'. $extension;
@@ -122,16 +97,15 @@ class Media extends UuidEntity
 	}
 
 
-	public function nameFile()
-	{
+	public function nameFile(){
+
 		return $this->attributes['localname'] ?? null;
 	}
 
 
-	public function getPath(string $dir)
-	{
-		$path = config('Medias')->getPath() . $dir . '/' . $this->attributes['localname'];
+	public function getPath( string $directory){
 
+		$path = config('Medias')->getPath()  . DIRECTORY_SEPARATOR  .  $directory . DIRECTORY_SEPARATOR  .  $this->attributes['localname'];
         return realpath($path) ?: $path;
 	}
 
@@ -145,39 +119,19 @@ class Media extends UuidEntity
 	 */
 	public static function locateDefaultThumbnail(): string
 	{
-		// If the path has not been resolved yet then try to now
-		if (is_null(self::$defaultThumbnail)) {
-			$path = config('Medias')->defaultThumbnail;
-			$ext  = pathinfo($path, PATHINFO_EXTENSION);
 
-			if (!self::$defaultThumbnail = service('locator')->locateFile($path, null, $ext)) {
-				throw new FileNotFoundException('Could not locate default thumbnail: ' . $path);
-			}
-		}
+    	 // If the path has not been resolved yet then try to now
+		 if (null === self::$defaultThumbnail) {
+            $path = WRITEPATH . config('Medias')->defaultThumbnail;
+            $ext  = pathinfo($path, PATHINFO_EXTENSION);
 
-		return (string) self::$defaultThumbnail;
-	}
+            if (! self::$defaultThumbnail = file_exists($path)) {
+                throw new FileNotFoundException('Could not locate default thumbnail: ' . $path);
+            }
+        }
 
-	/**
-	 * Returns the absolute path to the configured default thumbnail
-	 *
-	 * @return string
-	 *
-	 * @throws FileNotFoundException
-	 */
-	public static function locateDefaultVignetteDoc(): string
-	{
-		// If the path has not been resolved yet then try to now
-		if (is_null(self::$defaultThumbnailDoc)) {
-			$path = config('Medias')->defaultThumbnailDoc;
-			$ext  = pathinfo($path, PATHINFO_EXTENSION);
-
-			if (!self::$defaultThumbnailDoc = service('locator')->locateFile($path, null, $ext)) {
-				throw new FileNotFoundException('Could not locate default thumbnail: ' . $path);
-			}
-		}
-
-		return (string) self::$defaultThumbnailDoc;
+		return (string)  site_url(config('Medias')->defaultThumbnail);
+		
 	}
 
 	//--------------------------------------------------------------------
@@ -189,19 +143,13 @@ class Media extends UuidEntity
      */
     public function getExtension($method = ''): string
     {
-        if ($this->attributes['type'] !== 'application/octet-stream') {
-            if (! $method || $method === 'type') {
-                if ($extension = Mimes::guessExtensionFromType($this->attributes['type'])) {
-                    return $extension;
-                }
+		if ($this->attributes['type'] !== 'application/octet-stream') {
+            if ((! $method || $method === 'type') && ($extension = Mimes::guessExtensionFromType($this->attributes['type']))) {
+                return $extension;
             }
 
-            if (! $method || $method === 'mime') {
-                if ($file = $this->getObject()) {
-                    if ($extension = $file->guessExtension()) {
-                        return $extension;
-                    }
-                }
+            if ((! $method || $method === 'mime') && ($file = $this->getObject()) && ($extension = $file->guessExtension())) {
+                return $extension;
             }
         }
 
@@ -223,36 +171,12 @@ class Media extends UuidEntity
 	public function getObject(): ?MediaObject
 	{
 		try {
-			return new MediaObject($this->getPath(), true);
+			return new MediaObject($this->getPath('thumbnails'), true);
 		} catch (FileNotFoundException $e) {
 			return null;
 		}
 	}
 
-	/**
-	 * Returns class names of Exports applicable to this file's extension
-	 *
-	 * @param boolean $asterisk Whether to include generic "*" extensions
-	 *
-	 * @return string[]
-	 */
-	public function getExports($asterisk = true): array
-	{
-		$exports = [];
-
-		if ($extension = $this->getExtension()) {
-			$exports = handlers('Exports')->where(['extensions has' => $extension])->findAll();
-		}
-
-		if ($asterisk) {
-			$exports = array_merge(
-				$exports,
-				handlers('Exports')->where(['extensions' => '*'])->findAll()
-			);
-		}
-
-		return $exports;
-	}
 
 	/**
 	 * Returns the path to this file's thumbnail, or the default from config.
@@ -263,22 +187,18 @@ class Media extends UuidEntity
 	public function getThumbnail(): string
 	{
 		$path = config('Medias')->getPath() . 'thumbnails' . DIRECTORY_SEPARATOR . ($this->attributes['thumbnail'] ?? '');
-		//$pathOriginal = config('Medias')->getPath() . 'original' . DIRECTORY_SEPARATOR . ($this->attributes['localname'] ?? '');
-
-		if (in_array($this->getExtension(), config('Medias')->extensionDoc )) {
-			$path = self::locateDefaultVignetteDoc();
-		} else {
-			if (!is_file($path)) {
-				$path = self::locateDefaultThumbnail();
-			}
+			
+		if (!is_file($path)) {
+            $setThumbnail = self::locateDefaultThumbnail();
+        }else{
+			$setThumbnail = site_url(config('Medias')->segementUrl . DIRECTORY_SEPARATOR . 'thumbnails' . DIRECTORY_SEPARATOR . $this->attributes['filename']);
 		}
 
-		return realpath($path) ?: $path;
+		return $setThumbnail;
 	}
 
-
 	/**
-	 * Returns the path to this file's thumbnail, or the default from config.
+	 * Returns the path to this file's original, or the default from config.
 	 * Should always return a path to a valid file to be safe for img_data()
 	 *
 	 * @return string
@@ -286,17 +206,18 @@ class Media extends UuidEntity
 	public function getOriginal(): string
 	{
 		$path = config('Medias')->getPath() . 'original' . DIRECTORY_SEPARATOR . ($this->attributes['thumbnail'] ?? '');
-
+			
 		if (!is_file($path)) {
-			$path = self::locateDefaultThumbnail();
+            $setThumbnail = self::locateDefaultThumbnail();
+        }else{
+			$setThumbnail = site_url(config('Medias')->segementUrl . DIRECTORY_SEPARATOR . 'original' . DIRECTORY_SEPARATOR . $this->attributes['filename']);
 		}
 
-		return realpath($path) ?: $path;
+		return $setThumbnail;
 	}
-	
 
-		/**
-	 * Returns the path to this file's thumbnail, or the default from config.
+	/**
+	 * Returns the path to this file's medium, or the default from config.
 	 * Should always return a path to a valid file to be safe for img_data()
 	 *
 	 * @return string
@@ -304,35 +225,21 @@ class Media extends UuidEntity
 	public function getMedium(): string
 	{
 		$path = config('Medias')->getPath() . 'medium' . DIRECTORY_SEPARATOR . ($this->attributes['thumbnail'] ?? '');
-
+			
 		if (!is_file($path)) {
-			$path = self::locateDefaultThumbnail();
+            $setThumbnail = self::locateDefaultThumbnail();
+        }else{
+			$setThumbnail = site_url(config('Medias')->segementUrl . DIRECTORY_SEPARATOR . 'medium' . DIRECTORY_SEPARATOR . $this->attributes['filename']);
 		}
 
-		return realpath($path) ?: $path;
+		return $setThumbnail;
 	}
 
-	/**
-	 * Returns the path to this file's thumbnail, or the default from config.
-	 * Should always return a path to a valid file to be safe for img_data()
-	 *
-	 * @return string
-	 */
-	public function getUrl(string $dir): string
-	{
-
-		$segement = site_url('/medias/'. $dir . '/' . $this->attributes['localname']);
-		//$path = config('Medias')->getPath() . $dir . DIRECTORY_SEPARATOR . ($this->attributes['thumbnail'] ?? '');
-
-		if (!is_file($segement)) {
-			$path = self::locateDefaultThumbnail();
-		}
-
-		return $segement;
-	}
+	
 
 	public function getAllDimensions($all = true){
 
+		helper('medias');
 		$dimensions = [];
 		$dimensionsCustom = [];
 		foreach(config('Medias')->sizeDefault as $sizeDefault){
@@ -395,4 +302,5 @@ class Media extends UuidEntity
 		}
 			
 	}
+
 }

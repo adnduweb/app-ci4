@@ -124,6 +124,19 @@ class SettingsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminControl
             }
         }
 
+        if ($rgpd = $this->request->getPost('rgpd')) {
+            (!isset($rgpd['rgpdYoutube']))            ? $rgpd['rgpdYoutube']            = 0 :  $rgpd['rgpdYoutube']            = true;
+            (!isset($rgpd['rgpdFacebook']))           ? $rgpd['rgpdFacebook']           = 0 :  $rgpd['rgpdFacebook']           = true;
+            (!isset($rgpd['rgpdTwitter']))            ? $rgpd['rgpdTwitter']            = 0 :  $rgpd['rgpdTwitter']            = true;
+            (!isset($rgpd['rgpdStoreCookieConsent'])) ? $rgpd['rgpdStoreCookieConsent'] = 0 :  $rgpd['rgpdStoreCookieConsent'] = true;
+
+            if(!empty($rgpd)){
+                foreach ($rgpd as $k => $v) {
+                    service('settings')->set('App.rgpd', $v, $k);
+                }
+            }
+    }
+
 
         $this->activateManifest(); // activate manifest
         $this->activateServicesWorkers(); // Activate Service Workers

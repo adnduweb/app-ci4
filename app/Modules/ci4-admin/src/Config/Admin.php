@@ -8,6 +8,8 @@ class Admin extends BaseConfig
 {
 	public $name = 'doudouTony';
 
+	public $natif = true;
+
 	/**
 	 * Directory to store files (with trailing slash)
 	 *

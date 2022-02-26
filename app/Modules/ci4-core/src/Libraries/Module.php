@@ -39,13 +39,13 @@ class Module
                     }
                 }
 
-
+                list($one, $two) = explode('-', $module);
                 $this->items[strtolower($module)] = (object)[
                     'path'         => $modules_path . $module,
                     'class'        => $class,
                     'name'         => strtolower(str_replace('-', '', $module)),
                     'handle'       => strtolower($module),
-                    'is_natif'     => 0,
+                    'is_natif'     => (property_exists(config(ucfirst($two)), 'natif')) ? 1 : 0,
                     'is_installed' => 0,
                     'active'       => 0
                 ];

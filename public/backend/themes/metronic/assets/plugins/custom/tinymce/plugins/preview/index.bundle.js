@@ -1,1 +1,191 @@
-(()=>{var e={84185:()=>{!function(){"use strict";var e=tinymce.util.Tools.resolve("tinymce.PluginManager"),t=tinymce.util.Tools.resolve("tinymce.Env"),n=tinymce.util.Tools.resolve("tinymce.util.Tools"),r=function(e){var r=function(e){var r="",o=e.dom.encode,i=function(e){return e.getParam("content_style","","string")}(e);r+='<base href="'+o(e.documentBaseURI.getURI())+'">';var a=function(e){return e.getParam("content_css_cors",!1,"boolean")}(e)?' crossorigin="anonymous"':"";n.each(e.contentCSS,(function(t){r+='<link type="text/css" rel="stylesheet" href="'+o(e.documentBaseURI.toAbsolute(t))+'"'+a+">"})),i&&(r+='<style type="text/css">'+i+"</style>");var c=function(e){var t=e.getParam("body_id","tinymce","string");return-1===t.indexOf("=")?t:function(e){var t=e.getParam("body_id","","hash");return t[e.id]||t}(e)}(e),s=function(e){var t=e.getParam("body_class","","string");return-1===t.indexOf("=")?t:function(e){return e.getParam("body_class","","hash")[e.id]||""}(e)}(e),d='<script>document.addEventListener && document.addEventListener("click", function(e) {for (var elm = e.target; elm; elm = elm.parentNode) {if (elm.nodeName === "A" && !('+(t.mac?"e.metaKey":"e.ctrlKey && !e.altKey")+")) {e.preventDefault();}}}, false);<\/script> ",u=e.getBody().dir,l=u?' dir="'+o(u)+'"':"";return"<!DOCTYPE html><html><head>"+r+'</head><body id="'+o(c)+'" class="mce-content-body '+o(s)+'"'+l+">"+e.getContent()+d+"</body></html>"}(e);e.windowManager.open({title:"Preview",size:"large",body:{type:"panel",items:[{name:"preview",type:"iframe",sandboxed:!0}]},buttons:[{type:"cancel",name:"close",text:"Close",primary:!0}],initialData:{preview:r}}).focus("close")};e.add("preview",(function(e){!function(e){e.addCommand("mcePreview",(function(){r(e)}))}(e),function(e){var t=function(){return e.execCommand("mcePreview")};e.ui.registry.addButton("preview",{icon:"preview",tooltip:"Preview",onAction:t}),e.ui.registry.addMenuItem("preview",{icon:"preview",text:"Preview",onAction:t})}(e)}))}()}},t={};function n(r){var o=t[r];if(void 0!==o)return o.exports;var i=t[r]={exports:{}};return e[r](i,i.exports,n),i.exports}n(84185)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/backend/core/plugins/custom/tinymce/plugins/preview/plugin.js":
+/*!*********************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/preview/plugin.js ***!
+  \*********************************************************************************/
+/***/ (() => {
+
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.0 (2021-10-11)
+ */
+(function () {
+  'use strict';
+
+  var global$2 = tinymce.util.Tools.resolve('tinymce.PluginManager');
+  var global$1 = tinymce.util.Tools.resolve('tinymce.Env');
+  var global = tinymce.util.Tools.resolve('tinymce.util.Tools');
+
+  var getContentStyle = function getContentStyle(editor) {
+    return editor.getParam('content_style', '', 'string');
+  };
+
+  var shouldUseContentCssCors = function shouldUseContentCssCors(editor) {
+    return editor.getParam('content_css_cors', false, 'boolean');
+  };
+
+  var getBodyClassByHash = function getBodyClassByHash(editor) {
+    var bodyClass = editor.getParam('body_class', '', 'hash');
+    return bodyClass[editor.id] || '';
+  };
+
+  var getBodyClass = function getBodyClass(editor) {
+    var bodyClass = editor.getParam('body_class', '', 'string');
+
+    if (bodyClass.indexOf('=') === -1) {
+      return bodyClass;
+    } else {
+      return getBodyClassByHash(editor);
+    }
+  };
+
+  var getBodyIdByHash = function getBodyIdByHash(editor) {
+    var bodyId = editor.getParam('body_id', '', 'hash');
+    return bodyId[editor.id] || bodyId;
+  };
+
+  var getBodyId = function getBodyId(editor) {
+    var bodyId = editor.getParam('body_id', 'tinymce', 'string');
+
+    if (bodyId.indexOf('=') === -1) {
+      return bodyId;
+    } else {
+      return getBodyIdByHash(editor);
+    }
+  };
+
+  var getPreviewHtml = function getPreviewHtml(editor) {
+    var headHtml = '';
+    var encode = editor.dom.encode;
+    var contentStyle = getContentStyle(editor);
+    headHtml += '<base href="' + encode(editor.documentBaseURI.getURI()) + '">';
+    var cors = shouldUseContentCssCors(editor) ? ' crossorigin="anonymous"' : '';
+    global.each(editor.contentCSS, function (url) {
+      headHtml += '<link type="text/css" rel="stylesheet" href="' + encode(editor.documentBaseURI.toAbsolute(url)) + '"' + cors + '>';
+    });
+
+    if (contentStyle) {
+      headHtml += '<style type="text/css">' + contentStyle + '</style>';
+    }
+
+    var bodyId = getBodyId(editor);
+    var bodyClass = getBodyClass(editor);
+    var isMetaKeyPressed = global$1.mac ? 'e.metaKey' : 'e.ctrlKey && !e.altKey';
+    var preventClicksOnLinksScript = '<script>' + 'document.addEventListener && document.addEventListener("click", function(e) {' + 'for (var elm = e.target; elm; elm = elm.parentNode) {' + 'if (elm.nodeName === "A" && !(' + isMetaKeyPressed + ')) {' + 'e.preventDefault();' + '}' + '}' + '}, false);' + '</script> ';
+    var directionality = editor.getBody().dir;
+    var dirAttr = directionality ? ' dir="' + encode(directionality) + '"' : '';
+    var previewHtml = '<!DOCTYPE html>' + '<html>' + '<head>' + headHtml + '</head>' + '<body id="' + encode(bodyId) + '" class="mce-content-body ' + encode(bodyClass) + '"' + dirAttr + '>' + editor.getContent() + preventClicksOnLinksScript + '</body>' + '</html>';
+    return previewHtml;
+  };
+
+  var open = function open(editor) {
+    var content = getPreviewHtml(editor);
+    var dataApi = editor.windowManager.open({
+      title: 'Preview',
+      size: 'large',
+      body: {
+        type: 'panel',
+        items: [{
+          name: 'preview',
+          type: 'iframe',
+          sandboxed: true
+        }]
+      },
+      buttons: [{
+        type: 'cancel',
+        name: 'close',
+        text: 'Close',
+        primary: true
+      }],
+      initialData: {
+        preview: content
+      }
+    });
+    dataApi.focus('close');
+  };
+
+  var register$1 = function register$1(editor) {
+    editor.addCommand('mcePreview', function () {
+      open(editor);
+    });
+  };
+
+  var register = function register(editor) {
+    var onAction = function onAction() {
+      return editor.execCommand('mcePreview');
+    };
+
+    editor.ui.registry.addButton('preview', {
+      icon: 'preview',
+      tooltip: 'Preview',
+      onAction: onAction
+    });
+    editor.ui.registry.addMenuItem('preview', {
+      icon: 'preview',
+      text: 'Preview',
+      onAction: onAction
+    });
+  };
+
+  function Plugin() {
+    global$2.add('preview', function (editor) {
+      register$1(editor);
+      register(editor);
+    });
+  }
+
+  Plugin();
+})();
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!********************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/preview/index.js ***!
+  \********************************************************************************/
+// Exports the "preview" plugin for usage with module loaders
+// Usage:
+//   CommonJS:
+//     require('tinymce/plugins/preview')
+//   ES2015:
+//     import 'tinymce/plugins/preview'
+__webpack_require__(/*! ./plugin.js */ "./resources/backend/core/plugins/custom/tinymce/plugins/preview/plugin.js");
+})();
+
+/******/ })()
+;

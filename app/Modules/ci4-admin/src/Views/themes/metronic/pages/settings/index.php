@@ -77,6 +77,9 @@
                         <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel">
                             <?= $this->include('Adnduweb\Ci4Admin\themes\metronic\pages\settings\__form_section\security') ?>
                         </div>
+                        <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel">
+                            <?= $this->include('Adnduweb\Ci4Admin\themes\metronic\pages\settings\__form_section\analitycs_rgpd') ?>
+                        </div>
  
 
                         

@@ -14,4 +14,15 @@
 <?php } ?>
  <!-- <link href="<?= assetFront('/css/front.css'); ?>" rel="stylesheet" type="text/css" /> -->
 
- <?= service('theme_fo')::css(); ?>
+ <?php if (service('settings')->get('Pages.consent', 'requireConsent') == 1){ ?>
+    <link href="<?= site_url(); ?>/frontend/themes/default/plugins/tarteaucitron/css/tarteaucitron.css" rel="stylesheet" type="text/css">
+ <?php } ?>
+ <?= service('theme_fo')::css(); ?> 
+
+ <?php if(!empty($page->getPageBuilder())){ ?>
+       <style> <?= $page->getPageBuilder()->css; ?></style>
+    <?php } ?>
+
+
+ <?= $this->renderSection('displayInHeadTag') ?>
+

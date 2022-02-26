@@ -3,7 +3,7 @@
 
 					<div class="col-md-9">
 						<div class="mb-3 image_container">
-							<img class="image-upload" id="image-upload" data-input="<?= $input; ?>" data-only="<?= $only; ?>" data-crop_width="<?= $crop_width; ?>" data-crop_height="<?= $crop_height; ?>" data-field="<?= $field; ?>" data-extension="<?= $extension; ?>" data-mine="<?= $mine; ?>" data-uuid="<?= $uuid; ?>" src="<?= img_data($media->getOriginal()); ?>" alt="">
+							<img class="image-upload" id="image-upload" data-input="<?= $input; ?>" data-only="<?= $only; ?>" data-crop_width="<?= $crop_width; ?>" data-crop_height="<?= $crop_height; ?>" data-field="<?= $field; ?>" data-extension="<?= $extension; ?>" data-mine="<?= $mine; ?>" data-uuid="<?= $uuid; ?>" src="<?= $media->getOriginal(); ?>" alt="">
 						</div>
 
 

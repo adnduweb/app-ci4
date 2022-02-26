@@ -1,1 +1,221 @@
-!function(){"use strict";var e=Object.hasOwnProperty,t=tinymce.util.Tools.resolve("tinymce.PluginManager"),n=tinymce.util.Tools.resolve("tinymce.Env"),i=tinymce.util.Tools.resolve("tinymce.util.Delay"),o=function(e){return e.getParam("min_height",e.getElement().offsetHeight,"number")},r=function e(t,n,o,r,u){i.setEditorTimeout(t,(function(){s(t,n),o--?e(t,n,o,r,u):u&&u()}),r)},u=function(e,t){var n=e.getBody();n&&(n.style.overflowY=t?"":"hidden",t||(n.scrollTop=0))},a=function(e,t,n,i){var o=parseInt(e.getStyle(t,n,i),10);return isNaN(o)?0:o},s=function e(t,i,r){var s=t.dom,c=t.getDoc();if(c)if(function(e){return e.plugins.fullscreen&&e.plugins.fullscreen.isFullscreen()}(t))u(t,!0);else{var f=c.documentElement,l=function(e){return e.getParam("autoresize_bottom_margin",50,"number")}(t),g=o(t),m=a(s,f,"margin-top",!0),d=a(s,f,"margin-bottom",!0),h=f.offsetHeight+m+d+l;h<0&&(h=0);var v=t.getContainer().offsetHeight-t.getContentAreaContainer().offsetHeight;h+v>o(t)&&(g=h+v);var y=function(e){return e.getParam("max_height",0,"number")}(t);if(y&&g>y?(g=y,u(t,!0)):u(t,!1),g!==i.get()){var p=g-i.get();if(s.setStyle(t.getContainer(),"height",g+"px"),i.set(g),function(e){e.fire("ResizeEditor")}(t),n.browser.isSafari()&&n.mac){var b=t.getWin();b.scrollTo(b.pageXOffset,b.pageYOffset)}t.hasFocus()&&function(e){if("setcontent"===(null==e?void 0:e.type.toLowerCase())){var t=e;return!0===t.selection||!0===t.paste}return!1}(r)&&t.selection.scrollIntoView(),n.webkit&&p<0&&e(t,i,r)}}};t.add("autoresize",(function(t){var n,i,o;if(n=t.settings,i="resize",e.call(n,i)||(t.settings.resize=!1),!t.inline){var u=(o=0,{get:function(){return o},set:function(e){o=e}});!function(e,t){e.addCommand("mceAutoResize",(function(){s(e,t)}))}(t,u),function(e,t){e.on("init",(function(){var t=function(e){return e.getParam("autoresize_overflow_padding",1,"number")}(e),n=e.dom;n.setStyles(e.getDoc().documentElement,{height:"auto"}),n.setStyles(e.getBody(),{paddingLeft:t,paddingRight:t,"min-height":0})})),e.on("NodeChange SetContent keyup FullscreenStateChanged ResizeContent",(function(n){s(e,t,n)})),function(e){return e.getParam("autoresize_on_init",!0,"boolean")}(e)&&e.on("init",(function(){r(e,t,20,100,(function(){r(e,t,5,1e3)}))}))}(t,u)}}))}();
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!************************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/autoresize/plugin.js ***!
+  \************************************************************************************/
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.0 (2021-10-11)
+ */
+(function () {
+  'use strict';
+
+  var Cell = function Cell(initial) {
+    var value = initial;
+
+    var get = function get() {
+      return value;
+    };
+
+    var set = function set(v) {
+      value = v;
+    };
+
+    return {
+      get: get,
+      set: set
+    };
+  };
+
+  var hasOwnProperty = Object.hasOwnProperty;
+
+  var has = function has(obj, key) {
+    return hasOwnProperty.call(obj, key);
+  };
+
+  var global$2 = tinymce.util.Tools.resolve('tinymce.PluginManager');
+  var global$1 = tinymce.util.Tools.resolve('tinymce.Env');
+  var global = tinymce.util.Tools.resolve('tinymce.util.Delay');
+
+  var fireResizeEditor = function fireResizeEditor(editor) {
+    return editor.fire('ResizeEditor');
+  };
+
+  var getAutoResizeMinHeight = function getAutoResizeMinHeight(editor) {
+    return editor.getParam('min_height', editor.getElement().offsetHeight, 'number');
+  };
+
+  var getAutoResizeMaxHeight = function getAutoResizeMaxHeight(editor) {
+    return editor.getParam('max_height', 0, 'number');
+  };
+
+  var getAutoResizeOverflowPadding = function getAutoResizeOverflowPadding(editor) {
+    return editor.getParam('autoresize_overflow_padding', 1, 'number');
+  };
+
+  var getAutoResizeBottomMargin = function getAutoResizeBottomMargin(editor) {
+    return editor.getParam('autoresize_bottom_margin', 50, 'number');
+  };
+
+  var shouldAutoResizeOnInit = function shouldAutoResizeOnInit(editor) {
+    return editor.getParam('autoresize_on_init', true, 'boolean');
+  };
+
+  var isFullscreen = function isFullscreen(editor) {
+    return editor.plugins.fullscreen && editor.plugins.fullscreen.isFullscreen();
+  };
+
+  var wait = function wait(editor, oldSize, times, interval, callback) {
+    global.setEditorTimeout(editor, function () {
+      resize(editor, oldSize);
+
+      if (times--) {
+        wait(editor, oldSize, times, interval, callback);
+      } else if (callback) {
+        callback();
+      }
+    }, interval);
+  };
+
+  var toggleScrolling = function toggleScrolling(editor, state) {
+    var body = editor.getBody();
+
+    if (body) {
+      body.style.overflowY = state ? '' : 'hidden';
+
+      if (!state) {
+        body.scrollTop = 0;
+      }
+    }
+  };
+
+  var parseCssValueToInt = function parseCssValueToInt(dom, elm, name, computed) {
+    var value = parseInt(dom.getStyle(elm, name, computed), 10);
+    return isNaN(value) ? 0 : value;
+  };
+
+  var shouldScrollIntoView = function shouldScrollIntoView(trigger) {
+    if ((trigger === null || trigger === void 0 ? void 0 : trigger.type.toLowerCase()) === 'setcontent') {
+      var setContentEvent = trigger;
+      return setContentEvent.selection === true || setContentEvent.paste === true;
+    } else {
+      return false;
+    }
+  };
+
+  var resize = function resize(editor, oldSize, trigger) {
+    var dom = editor.dom;
+    var doc = editor.getDoc();
+
+    if (!doc) {
+      return;
+    }
+
+    if (isFullscreen(editor)) {
+      toggleScrolling(editor, true);
+      return;
+    }
+
+    var docEle = doc.documentElement;
+    var resizeBottomMargin = getAutoResizeBottomMargin(editor);
+    var resizeHeight = getAutoResizeMinHeight(editor);
+    var marginTop = parseCssValueToInt(dom, docEle, 'margin-top', true);
+    var marginBottom = parseCssValueToInt(dom, docEle, 'margin-bottom', true);
+    var contentHeight = docEle.offsetHeight + marginTop + marginBottom + resizeBottomMargin;
+
+    if (contentHeight < 0) {
+      contentHeight = 0;
+    }
+
+    var containerHeight = editor.getContainer().offsetHeight;
+    var contentAreaHeight = editor.getContentAreaContainer().offsetHeight;
+    var chromeHeight = containerHeight - contentAreaHeight;
+
+    if (contentHeight + chromeHeight > getAutoResizeMinHeight(editor)) {
+      resizeHeight = contentHeight + chromeHeight;
+    }
+
+    var maxHeight = getAutoResizeMaxHeight(editor);
+
+    if (maxHeight && resizeHeight > maxHeight) {
+      resizeHeight = maxHeight;
+      toggleScrolling(editor, true);
+    } else {
+      toggleScrolling(editor, false);
+    }
+
+    if (resizeHeight !== oldSize.get()) {
+      var deltaSize = resizeHeight - oldSize.get();
+      dom.setStyle(editor.getContainer(), 'height', resizeHeight + 'px');
+      oldSize.set(resizeHeight);
+      fireResizeEditor(editor);
+
+      if (global$1.browser.isSafari() && global$1.mac) {
+        var win = editor.getWin();
+        win.scrollTo(win.pageXOffset, win.pageYOffset);
+      }
+
+      if (editor.hasFocus() && shouldScrollIntoView(trigger)) {
+        editor.selection.scrollIntoView();
+      }
+
+      if (global$1.webkit && deltaSize < 0) {
+        resize(editor, oldSize, trigger);
+      }
+    }
+  };
+
+  var setup = function setup(editor, oldSize) {
+    editor.on('init', function () {
+      var overflowPadding = getAutoResizeOverflowPadding(editor);
+      var dom = editor.dom;
+      dom.setStyles(editor.getDoc().documentElement, {
+        height: 'auto'
+      });
+      dom.setStyles(editor.getBody(), {
+        'paddingLeft': overflowPadding,
+        'paddingRight': overflowPadding,
+        'min-height': 0
+      });
+    });
+    editor.on('NodeChange SetContent keyup FullscreenStateChanged ResizeContent', function (e) {
+      resize(editor, oldSize, e);
+    });
+
+    if (shouldAutoResizeOnInit(editor)) {
+      editor.on('init', function () {
+        wait(editor, oldSize, 20, 100, function () {
+          wait(editor, oldSize, 5, 1000);
+        });
+      });
+    }
+  };
+
+  var register = function register(editor, oldSize) {
+    editor.addCommand('mceAutoResize', function () {
+      resize(editor, oldSize);
+    });
+  };
+
+  function Plugin() {
+    global$2.add('autoresize', function (editor) {
+      if (!has(editor.settings, 'resize')) {
+        editor.settings.resize = false;
+      }
+
+      if (!editor.inline) {
+        var oldSize = Cell(0);
+        register(editor, oldSize);
+        setup(editor, oldSize);
+      }
+    });
+  }
+
+  Plugin();
+})();
+/******/ })()
+;

@@ -39,3 +39,5 @@ $routes->group(CI_AREA_ADMIN . '/medias', $options, function ($routes)
 });
 
 $routes->match(['get', 'post'], 'medias/(:segment)/(:segment)', '\Adnduweb\Ci4Medias\Controllers\RenderImage::index/$1/$2');
+$routes->match(['get', 'post'], 'medias/(:segment)/(:segment)/(:segment)', '\Adnduweb\Ci4Medias\Controllers\RenderImage::module/$1/$2/$3');
+$routes->match(['get', 'post'], 'medias/(:segment)/(:segment)/(:segment)/(:segment)', '\Adnduweb\Ci4Medias\Controllers\RenderImage::module/$1/$2/$3/$4');

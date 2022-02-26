@@ -24,7 +24,6 @@ class Medias extends BaseConfig
         'dropzone' => 'Adnduweb\Ci4Medias\Views\themes\metronic\Dropzone\config',
     ];
 
-
 	//--------------------------------------------------------------------
     // Display Preferences
     //--------------------------------------------------------------------
@@ -78,7 +77,13 @@ class Medias extends BaseConfig
      *
      * @var string
      */
-	public $segementUrl = 'medias';
+    public $segementUrl = 'medias';
+    
+
+    /**
+     * Path to the default thumbnail file
+     */
+    public string $defaultThumbnail = 'medias' . DIRECTORY_SEPARATOR . 'thumbnails/default.jpg';
 
 
 	/**
@@ -148,56 +153,7 @@ class Medias extends BaseConfig
     {
         $this->path = $path;
 	}
-	
-	
-	// /**
-	//  * Directory to store files (with trailing slash)
-	//  *
-	//  * @var string
-	//  */
-	// public $storagePath = WRITEPATH . 'uploads/medias';
 
-	// /**
-	//  * Whether to include routes to the Files Controller.
-	//  *
-	//  * @var boolean
-	//  */
-	// public $routeFiles = true;
-
-	// /**
-	//  * Layouts to use for general access and for administration
-	//  *
-	//  * @var array<string, string>
-	//  */
-	// public $layouts = [
-	// 	'public' => 'Adnduweb\Ci4Medias\Views\themes\metronic',
-	// 	'manage' => 'Adnduweb\Ci4Medias\Views\themes\metronic',
-	// ];
-
-	// /**
-	//  * View file aliases
-	//  *
-	//  * @var string[]
-	//  */
-	// public $views = [
-	// 	'dropzone' => 'Adnduweb\Ci4Medias\Views\themes\metronic\Dropzone\config',
-	// ];
-
-	// /**
-	//  * Default display format; built in are 'cards', 'list', 'select'
-	//  *
-	//  * @var string
-	//  */
-	// public $defaultFormat = 'cards';
-
-	/**
-	 * Path to the default thumbnail file
-	 *
-	 * @var string
-	 */
-	public $defaultThumbnail = 'Adnduweb\Ci4Medias\Assets\Unavailable.jpg';
-
-	public $defaultThumbnailDoc = 'Adnduweb\Ci4Medias\Assets\Document.png';
 
 	public $extensionImage =  'jpg,jpeg,png,gif,xbm,xpm,wbmp,webp,bmp';
 

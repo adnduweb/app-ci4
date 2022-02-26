@@ -36,3 +36,6 @@ Find more details in the [docs folder](_docs).
 - npm run watch --front
 - npm run watch --front
 - npm run production --admin --dark_mode
+
+## Test apps
+php -d memory_limit=-1 vendor/bin/phpunit --path-coverage tests/system/Database/BaseQueryTest.php --coverage-html build/coverage

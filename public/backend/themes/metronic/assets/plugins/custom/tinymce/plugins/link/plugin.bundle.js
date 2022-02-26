@@ -1,1 +1,1491 @@
-(()=>{function t(n){return t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},t(n)}!function(){"use strict";var n,e,r,o=tinymce.util.Tools.resolve("tinymce.PluginManager"),i=tinymce.util.Tools.resolve("tinymce.util.VK"),u=function(n){return function(e){return o=t(r=e),(null===r?"null":"object"===o&&(Array.prototype.isPrototypeOf(r)||r.constructor&&"Array"===r.constructor.name)?"array":"object"===o&&(String.prototype.isPrototypeOf(r)||r.constructor&&"String"===r.constructor.name)?"string":o)===n;var r,o}},a=function(n){return function(e){return t(e)===n}},c=u("string"),l=u("array"),f=(n=null,function(t){return n===t}),s=a("boolean"),g=a("function"),m=function(){},d=function(t){return function(){return t}},h=function(t){return t},v=function(t,n){return t===n},p=d(!1),y=d(!0),k=function(){return x},x={fold:function(t,n){return t()},isSome:p,isNone:y,getOr:r=h,getOrThunk:e=function(t){return t()},getOrDie:function(t){throw new Error(t||"error: getOrDie called on none.")},getOrNull:d(null),getOrUndefined:d(void 0),or:r,orThunk:e,map:k,each:m,bind:k,exists:p,forall:y,filter:function(){return k()},toArray:function(){return[]},toString:d("none()")},b=function t(n){var e=d(n),r=function(){return i},o=function(t){return t(n)},i={fold:function(t,e){return e(n)},isSome:y,isNone:p,getOr:e,getOrThunk:e,getOrDie:e,getOrNull:e,getOrUndefined:e,or:r,orThunk:r,map:function(e){return t(e(n))},each:function(t){t(n)},bind:o,exists:o,forall:o,filter:function(t){return t(n)?i:x},toArray:function(){return[n]},toString:function(){return"some("+n+")"}};return i},O=b,w=k,C=function(t){return null==t?x:b(t)},S=Array.prototype.indexOf,N=Array.prototype.push,A=function(t,n){return function(t,n){return S.call(t,n)}(t,n)>-1},T=function(t){for(var n=[],e=0,r=t.length;e<r;++e){if(!l(t[e]))throw new Error("Arr.flatten item "+e+" was not an array, input: "+t);N.apply(n,t[e])}return n},P=function(t,n){return T(function(t,n){for(var e=t.length,r=new Array(e),o=0;o<e;o++){var i=t[o];r[o]=n(i,o)}return r}(t,n))},_=function(t,n){for(var e=0;e<t.length;e++){var r=n(t[e],e);if(r.isSome())return r}return w()},R=function(t,n,e){return void 0===e&&(e=v),t.exists((function(t){return e(t,n)}))},D=function(t){for(var n=[],e=function(t){n.push(t)},r=0;r<t.length;r++)t[r].each(e);return n},L=function(t,n){return t?O(n):w()},E=function(t){var n=t.getParam("link_assume_external_targets",!1);return s(n)&&n?1:!c(n)||"http"!==n&&"https"!==n?0:n},M=function(t){return t.getParam("default_link_target")},U=function(t){return t.getParam("target_list",!0)},B=function(t){return t.getParam("rel_list",[],"array")},I=function(t){return t.getParam("link_title",!0,"boolean")},K=function(t){return t.getParam("allow_unsafe_link_target",!1,"boolean")},z=function(t){return t.getParam("link_default_protocol","http","string")},j=tinymce.util.Tools.resolve("tinymce.util.Tools"),V=function(t){return c(t.value)?t.value:""},q=function t(n,e){var r=[];return j.each(n,(function(n){var o=function(t){return c(t.text)?t.text:c(t.title)?t.title:""}(n);if(void 0!==n.menu){var i=t(n.menu,e);r.push({text:o,items:i})}else{var u=e(n);r.push({text:o,value:u})}})),r},F=function(t){return void 0===t&&(t=V),function(n){return C(n).map((function(n){return q(n,t)}))}},W={sanitize:function(t){return F(V)(t)},sanitizeWith:F,createUi:function(t,n){return function(e){return{name:t,type:"listbox",label:n,items:e}}},getValue:V},H=function(){return H=Object.assign||function(t){for(var n,e=1,r=arguments.length;e<r;e++)for(var o in n=arguments[e])Object.prototype.hasOwnProperty.call(n,o)&&(t[o]=n[o]);return t},H.apply(this,arguments)},G=Object.keys,J=Object.hasOwnProperty,X=function(t,n,e,r){return function(t,n){for(var e=G(t),r=0,o=e.length;r<o;r++){var i=e[r];n(t[i],i)}}(t,(function(t,o){(n(t,o)?e:r)(t,o)})),{}},$=function(t,n){return J.call(t,n)},Q=tinymce.util.Tools.resolve("tinymce.dom.TreeWalker"),Y=tinymce.util.Tools.resolve("tinymce.util.URI"),Z=function(t){return t&&"a"===t.nodeName.toLowerCase()},tt=function(t){return Z(t)&&!!rt(t)},nt=function(t,n){if(t.collapsed)return[];var e=t.cloneContents(),r=new Q(e.firstChild,e),o=[],i=e.firstChild;do{n(i)&&o.push(i)}while(i=r.next());return o},et=function(t){return/^\w+:/i.test(t)},rt=function(t){var n=t.getAttribute("data-mce-href");return n||t.getAttribute("href")},ot=function(t,n){var e=["noopener"],r=t?t.split(/\s+/):[],o=function(t){return t.filter((function(t){return-1===j.inArray(e,t)}))},i=n?function(t){return(t=o(t)).length>0?t.concat(e):e}(r):o(r);return i.length>0?function(t){return j.trim(t.sort().join(" "))}(i):""},it=function(t,n){return n=n||t.selection.getNode(),lt(n)?t.dom.select("a[href]",n)[0]:t.dom.getParent(n,"a[href]")},ut=function(t,n){return function(t){return t.replace(/\uFEFF/g,"")}(n?n.innerText||n.textContent:t.getContent({format:"text"}))},at=function(t){return j.grep(t,tt).length>0},ct=function(t){var n=t.schema.getTextInlineElements();return 0===nt(t.selection.getRng(),(function(t){return 1===t.nodeType&&!Z(t)&&!$(n,t.nodeName.toLowerCase())})).length},lt=function(t){return t&&"FIGURE"===t.nodeName&&/\bimage\b/i.test(t.className)},ft=function(t,n){var e=H({},n);if(!(B(t).length>0)&&!1===K(t)){var r=ot(e.rel,"_blank"===e.target);e.rel=r||null}return C(e.target).isNone()&&!1===U(t)&&(e.target=M(t)),e.href=function(t,n){return"http"!==n&&"https"!==n||et(t)?t:n+"://"+t}(e.href,E(t)),e},st=function(t,n,e){var r=t.selection.getNode(),o=it(t,r),i=ft(t,function(t){var n,e,r;return n=["title","rel","class","target"],e=function(n,e){return t[e].each((function(t){n[e]=t.length>0?t:null})),n},r={href:t.href},function(t,n){for(var e=0,r=t.length;e<r;e++)n(t[e],e)}(n,(function(t,n){r=e(r,t,n)})),r}(e));t.undoManager.transact((function(){e.href===n.href&&n.attach(),o?(t.focus(),function(t,n,e,r){e.each((function(t){$(n,"innerText")?n.innerText=t:n.textContent=t})),t.dom.setAttribs(n,r),t.selection.select(n)}(t,o,e.text,i)):function(t,n,e,r){lt(n)?vt(t,n,r):e.fold((function(){t.execCommand("mceInsertLink",!1,r)}),(function(n){t.insertContent(t.dom.createHTML("a",r,t.dom.encode(n)))}))}(t,r,e.text,i)}))},gt=function(t){var n=t.class,e=t.href,r=t.rel,o=t.target,i=t.text,u=t.title;return function(t,n){var e,r={};return X(t,n,(e=r,function(t,n){e[n]=t}),m),r}({class:n.getOrNull(),href:e,rel:r.getOrNull(),target:o.getOrNull(),text:i.getOrNull(),title:u.getOrNull()},(function(t,n){return!1===f(t)}))},mt=function(t,n,e){var r=function(t,n){var e=n.href;return H(H({},n),{href:Y.isDomSafe(e,"a",t.settings)?e:""})}(t,e);t.hasPlugin("rtc",!0)?t.execCommand("createlink",!1,gt(r)):st(t,n,r)},dt=function(t){t.hasPlugin("rtc",!0)?t.execCommand("unlink"):function(t){t.undoManager.transact((function(){var n=t.selection.getNode();lt(n)?ht(t,n):function(t){var n=t.dom,e=t.selection,r=e.getBookmark(),o=e.getRng().cloneRange(),i=n.getParent(o.startContainer,"a[href]",t.getBody()),u=n.getParent(o.endContainer,"a[href]",t.getBody());i&&o.setStartBefore(i),u&&o.setEndAfter(u),e.setRng(o),t.execCommand("unlink"),e.moveToBookmark(r)}(t),t.focus()}))}(t)},ht=function(t,n){var e=t.dom.select("img",n)[0];if(e){var r=t.dom.getParents(e,"a[href]",n)[0];r&&(r.parentNode.insertBefore(e,r),t.dom.remove(r))}},vt=function(t,n,e){var r=t.dom.select("img",n)[0];if(r){var o=t.dom.create("a",e);r.parentNode.insertBefore(o,r),o.appendChild(r)}},pt=function(t){return $(n=t,e="items")&&void 0!==n[e]&&null!==n[e];var n,e},yt=function t(n,e){return _(e,(function(e){return pt(e)?t(n,e.items):L(e.value===n,e)}))},kt=function(t,n,e,r){var o=r[n],i=t.length>0;return void 0!==o?yt(o,e).map((function(n){return{url:{value:n.value,meta:{text:i?t:n.text,attach:m}},text:i?t:n.text}})):w()},xt=function(t,n){var e={text:t.text,title:t.title},r=function(t){var n,r=(n=t.url,L(e.text.length<=0,C(n.meta.text).getOr(n.value))),o=function(t){return L(e.title.length<=0,C(t.meta.title).getOr(""))}(t.url);return r.isSome()||o.isSome()?O(H(H({},r.map((function(t){return{text:t}})).getOr({})),o.map((function(t){return{title:t}})).getOr({}))):w()},o=function(t,r){var o,i,u=(o=n,i=r.name,"link"===i?o.link:"anchor"===i?o.anchor:w()).getOr([]);return kt(e.text,r.name,u,t)};return{onChange:function(t,n){var i=n.name;return"url"===i?r(t()):A(["anchor","link"],i)?o(t(),n):"text"===i||"title"===i?(e[i]=t()[i],w()):w()}}},bt=tinymce.util.Tools.resolve("tinymce.util.Delay"),Ot=tinymce.util.Tools.resolve("tinymce.util.Promise"),wt=function(t){var n=t.href;return n.indexOf("@")>0&&-1===n.indexOf("/")&&-1===n.indexOf("mailto:")?O({message:"The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?",preprocess:function(t){return H(H({},t),{href:"mailto:"+n})}}):w()},Ct=function(t,n){return function(e){var r=e.href;return 1===t&&!et(r)||0===t&&/^\s*www(\.|\d\.)/i.test(r)?O({message:"The URL you entered seems to be an external link. Do you want to add the required "+n+":// prefix?",preprocess:function(t){return H(H({},t),{href:n+"://"+r})}}):w()}},St=function(t,n){return _([wt,Ct(E(t),z(t))],(function(t){return t(n)})).fold((function(){return Ot.resolve(n)}),(function(e){return new Ot((function(r){!function(t,n,e){var r=t.selection.getRng();bt.setEditorTimeout(t,(function(){t.windowManager.confirm(n,(function(n){t.selection.setRng(r),e(n)}))}))}(t,e.message,(function(t){r(t?e.preprocess(n):n)}))}))}))},Nt=function(t){var n=t.dom.select("a:not([href])"),e=P(n,(function(t){var n=t.name||t.id;return n?[{text:n,value:"#"+n}]:[]}));return e.length>0?O([{text:"None",value:""}].concat(e)):w()},At=function(t){var n=function(t){return t.getParam("link_class_list",[],"array")}(t);return n.length>0?W.sanitize(n):w()},Tt=tinymce.util.Tools.resolve("tinymce.util.XHR"),Pt=function(t){var n=function(n){return t.convertURL(n.value||n.url,"href")},e=function(t){return t.getParam("link_list")}(t);return new Ot((function(t){c(e)?Tt.send({url:e,success:function(n){return t(function(t){try{return O(JSON.parse(t))}catch(t){return w()}}(n))},error:function(n){return t(w())}}):g(e)?e((function(n){return t(O(n))})):t(C(e))})).then((function(t){return t.bind(W.sanitizeWith(n)).map((function(t){if(t.length>0){return[{text:"None",value:""}].concat(t)}return t}))}))},_t=function(t,n){var e=B(t);if(e.length>0){var r=R(n,"_blank");return(!1===K(t)?W.sanitizeWith((function(t){return ot(W.getValue(t),r)})):W.sanitize)(e)}return w()},Rt=[{text:"Current window",value:""},{text:"New window",value:"_blank"}],Dt=function(t){var n=U(t);return l(n)?W.sanitize(n).orThunk((function(){return O(Rt)})):!1===n?w():O(Rt)},Lt=function(t,n,e){var r=t.getAttrib(n,e);return null!==r&&r.length>0?O(r):w()},Et=function(t,n){return Pt(t).then((function(e){var r=function(t,n){var e=t.dom,r=ct(t)?O(ut(t.selection,n)):w(),o=n?O(e.getAttrib(n,"href")):w(),i=n?C(e.getAttrib(n,"target")):w(),u=Lt(e,n,"rel"),a=Lt(e,n,"class");return{url:o,text:r,title:Lt(e,n,"title"),target:i,rel:u,linkClass:a}}(t,n);return{anchor:r,catalogs:{targets:Dt(t),rels:_t(t,r.target),classes:At(t),anchor:Nt(t),link:e},optNode:C(n),flags:{titleEnabled:I(t)}}}))},Mt=function(t){var n=function(t){var n=it(t);return Et(t,n)}(t);n.then((function(n){var e=function(t,n){return function(e){var r=e.getData();if(!r.url.value)return dt(t),void e.close();var o=function(t){return C(r[t]).filter((function(e){return!R(n.anchor[t],e)}))},i={href:r.url.value,text:o("text"),target:o("target"),rel:o("rel"),class:o("linkClass"),title:o("title")},u={href:r.url.value,attach:void 0!==r.url.meta&&r.url.meta.attach?r.url.meta.attach:m};St(t,i).then((function(n){mt(t,u,n)})),e.close()}}(t,n);return function(t,n,e){var r=t.anchor.text.map((function(){return{name:"text",type:"input",label:"Text to display"}})).toArray(),o=t.flags.titleEnabled?[{name:"title",type:"input",label:"Title"}]:[],i=function(t,n){var e=t.anchor,r=e.url.getOr("");return{url:{value:r,meta:{original:{value:r}}},text:e.text.getOr(""),title:e.title.getOr(""),anchor:r,link:r,rel:e.rel.getOr(""),target:e.target.or(n).getOr(""),linkClass:e.linkClass.getOr("")}}(t,C(M(e))),u=t.catalogs,a=xt(i,u);return{title:"Insert/Edit Link",size:"normal",body:{type:"panel",items:T([[{name:"url",type:"urlinput",filetype:"file",label:"URL"}],r,o,D([u.anchor.map(W.createUi("anchor","Anchors")),u.rels.map(W.createUi("rel","Rel")),u.targets.map(W.createUi("target","Open link in...")),u.link.map(W.createUi("link","Link list")),u.classes.map(W.createUi("linkClass","Class"))])])},buttons:[{type:"cancel",name:"cancel",text:"Cancel"},{type:"submit",name:"save",text:"Save",primary:!0}],initialData:i,onChange:function(t,n){var e=n.name;a.onChange(t.getData,{name:e}).each((function(n){t.setData(n)}))},onSubmit:n}}(n,e,t)})).then((function(n){t.windowManager.open(n)}))},Ut=function(t){var n=document.createElement("a");n.target="_blank",n.href=t,n.rel="noreferrer noopener";var e=document.createEvent("MouseEvents");e.initMouseEvent("click",!0,!0,window,0,0,0,0,0,!1,!1,!1,!1,0,null),function(t,n){document.body.appendChild(t),t.dispatchEvent(n),document.body.removeChild(t)}(n,e)},Bt=function(t,n){return t.dom.getParent(n,"a[href]")},It=function(t){return Bt(t,t.selection.getStart())},Kt=function(t,n){if(n){var e=rt(n);if(/^#/.test(e)){var r=t.$(e);r.length&&t.selection.scrollIntoView(r[0],!0)}else Ut(n.href)}},zt=function(t){return function(){Mt(t)}},jt=function(t){return function(){Kt(t,It(t))}},Vt=function(t,n){return t.on("NodeChange",n),function(){return t.off("NodeChange",n)}},qt=function(t){return function(n){var e=function(){return n.setActive(!t.mode.isReadOnly()&&null!==it(t,t.selection.getNode()))};return e(),Vt(t,e)}},Ft=function(t){return function(n){var e=function(){return n.setDisabled(null===it(t,t.selection.getNode()))};return e(),Vt(t,e)}},Wt=function(t){return function(n){var e=function(n){return at(n)||(e=t.selection.getRng(),nt(e,tt).length>0);var e},r=t.dom.getParents(t.selection.getStart());return n.setDisabled(!e(r)),Vt(t,(function(t){return n.setDisabled(!e(t.parents))}))}},Ht=function(t){var n=function(n){var e=t.selection.getNode();return n.setDisabled(!it(t,e)),m};t.ui.registry.addContextForm("quicklink",{launch:{type:"contextformtogglebutton",icon:"link",tooltip:"Link",onSetup:qt(t)},label:"Link",predicate:function(n){return!!it(t,n)&&function(t){return t.getParam("link_context_toolbar",!1,"boolean")}(t)},initValue:function(){var n=it(t);return n?rt(n):""},commands:[{type:"contextformtogglebutton",icon:"link",tooltip:"Link",primary:!0,onSetup:function(n){var e=t.selection.getNode();return n.setActive(!!it(t,e)),qt(t)(n)},onAction:function(n){var e=n.getValue(),r=function(n){var e=it(t),r=ct(t);if(!e&&r){var o=ut(t.selection,e);return O(o.length>0?o:n)}return w()}(e);mt(t,{href:e,attach:m},{href:e,text:r,title:w(),rel:w(),target:w(),class:w()}),function(t){t.selection.collapse(!1)}(t),n.hide()}},{type:"contextformbutton",icon:"unlink",tooltip:"Remove link",onSetup:n,onAction:function(n){dt(t),n.hide()}},{type:"contextformbutton",icon:"new-tab",tooltip:"Open link",onSetup:n,onAction:function(n){jt(t)(),n.hide()}}]})};o.add("link",(function(t){!function(t){t.ui.registry.addToggleButton("link",{icon:"link",tooltip:"Insert/edit link",onAction:zt(t),onSetup:qt(t)}),t.ui.registry.addButton("openlink",{icon:"new-tab",tooltip:"Open link",onAction:jt(t),onSetup:Ft(t)}),t.ui.registry.addButton("unlink",{icon:"unlink",tooltip:"Remove link",onAction:function(){return dt(t)},onSetup:Wt(t)})}(t),function(t){t.ui.registry.addMenuItem("openlink",{text:"Open link",icon:"new-tab",onAction:jt(t),onSetup:Ft(t)}),t.ui.registry.addMenuItem("link",{icon:"link",text:"Link...",shortcut:"Meta+K",onAction:zt(t)}),t.ui.registry.addMenuItem("unlink",{icon:"unlink",text:"Remove link",onAction:function(){return dt(t)},onSetup:Wt(t)})}(t),function(t){t.ui.registry.addContextMenu("link",{update:function(n){return at(t.dom.getParents(n,"a"))?"link unlink openlink":"link"}})}(t),Ht(t),function(t){t.on("click",(function(n){var e=Bt(t,n.target);e&&i.metaKeyPressed(n)&&(n.preventDefault(),Kt(t,e))})),t.on("keydown",(function(n){var e=It(t);e&&13===n.keyCode&&function(t){return!0===t.altKey&&!1===t.shiftKey&&!1===t.ctrlKey&&!1===t.metaKey}(n)&&(n.preventDefault(),Kt(t,e))}))}(t),function(t){t.addCommand("mceLink",(function(){!function(t){return t.getParam("link_quicklink",!1,"boolean")}(t)?zt(t)():t.fire("contexttoolbar-show",{toolbarKey:"quicklink"})}))}(t),function(t){t.addShortcut("Meta+K","",(function(){t.execCommand("mceLink")}))}(t)}))}()})();
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!******************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/link/plugin.js ***!
+  \******************************************************************************/
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.0 (2021-10-11)
+ */
+(function () {
+  'use strict';
+
+  var global$7 = tinymce.util.Tools.resolve('tinymce.PluginManager');
+  var global$6 = tinymce.util.Tools.resolve('tinymce.util.VK');
+
+  var typeOf = function typeOf(x) {
+    var t = _typeof(x);
+
+    if (x === null) {
+      return 'null';
+    } else if (t === 'object' && (Array.prototype.isPrototypeOf(x) || x.constructor && x.constructor.name === 'Array')) {
+      return 'array';
+    } else if (t === 'object' && (String.prototype.isPrototypeOf(x) || x.constructor && x.constructor.name === 'String')) {
+      return 'string';
+    } else {
+      return t;
+    }
+  };
+
+  var isType = function isType(type) {
+    return function (value) {
+      return typeOf(value) === type;
+    };
+  };
+
+  var isSimpleType = function isSimpleType(type) {
+    return function (value) {
+      return _typeof(value) === type;
+    };
+  };
+
+  var eq = function eq(t) {
+    return function (a) {
+      return t === a;
+    };
+  };
+
+  var isString = isType('string');
+  var isArray = isType('array');
+  var isNull = eq(null);
+  var isBoolean = isSimpleType('boolean');
+  var isFunction = isSimpleType('function');
+
+  var noop = function noop() {};
+
+  var constant = function constant(value) {
+    return function () {
+      return value;
+    };
+  };
+
+  var identity = function identity(x) {
+    return x;
+  };
+
+  var tripleEquals = function tripleEquals(a, b) {
+    return a === b;
+  };
+
+  var never = constant(false);
+  var always = constant(true);
+
+  var none = function none() {
+    return NONE;
+  };
+
+  var NONE = function () {
+    var call = function call(thunk) {
+      return thunk();
+    };
+
+    var id = identity;
+    var me = {
+      fold: function fold(n, _s) {
+        return n();
+      },
+      isSome: never,
+      isNone: always,
+      getOr: id,
+      getOrThunk: call,
+      getOrDie: function getOrDie(msg) {
+        throw new Error(msg || 'error: getOrDie called on none.');
+      },
+      getOrNull: constant(null),
+      getOrUndefined: constant(undefined),
+      or: id,
+      orThunk: call,
+      map: none,
+      each: noop,
+      bind: none,
+      exists: never,
+      forall: always,
+      filter: function filter() {
+        return none();
+      },
+      toArray: function toArray() {
+        return [];
+      },
+      toString: constant('none()')
+    };
+    return me;
+  }();
+
+  var some = function some(a) {
+    var constant_a = constant(a);
+
+    var self = function self() {
+      return me;
+    };
+
+    var bind = function bind(f) {
+      return f(a);
+    };
+
+    var me = {
+      fold: function fold(n, s) {
+        return s(a);
+      },
+      isSome: always,
+      isNone: never,
+      getOr: constant_a,
+      getOrThunk: constant_a,
+      getOrDie: constant_a,
+      getOrNull: constant_a,
+      getOrUndefined: constant_a,
+      or: self,
+      orThunk: self,
+      map: function map(f) {
+        return some(f(a));
+      },
+      each: function each(f) {
+        f(a);
+      },
+      bind: bind,
+      exists: bind,
+      forall: bind,
+      filter: function filter(f) {
+        return f(a) ? me : NONE;
+      },
+      toArray: function toArray() {
+        return [a];
+      },
+      toString: function toString() {
+        return 'some(' + a + ')';
+      }
+    };
+    return me;
+  };
+
+  var from = function from(value) {
+    return value === null || value === undefined ? NONE : some(value);
+  };
+
+  var Optional = {
+    some: some,
+    none: none,
+    from: from
+  };
+  var nativeIndexOf = Array.prototype.indexOf;
+  var nativePush = Array.prototype.push;
+
+  var rawIndexOf = function rawIndexOf(ts, t) {
+    return nativeIndexOf.call(ts, t);
+  };
+
+  var contains = function contains(xs, x) {
+    return rawIndexOf(xs, x) > -1;
+  };
+
+  var map = function map(xs, f) {
+    var len = xs.length;
+    var r = new Array(len);
+
+    for (var i = 0; i < len; i++) {
+      var x = xs[i];
+      r[i] = f(x, i);
+    }
+
+    return r;
+  };
+
+  var each$1 = function each$1(xs, f) {
+    for (var i = 0, len = xs.length; i < len; i++) {
+      var x = xs[i];
+      f(x, i);
+    }
+  };
+
+  var foldl = function foldl(xs, f, acc) {
+    each$1(xs, function (x, i) {
+      acc = f(acc, x, i);
+    });
+    return acc;
+  };
+
+  var flatten = function flatten(xs) {
+    var r = [];
+
+    for (var i = 0, len = xs.length; i < len; ++i) {
+      if (!isArray(xs[i])) {
+        throw new Error('Arr.flatten item ' + i + ' was not an array, input: ' + xs);
+      }
+
+      nativePush.apply(r, xs[i]);
+    }
+
+    return r;
+  };
+
+  var bind = function bind(xs, f) {
+    return flatten(map(xs, f));
+  };
+
+  var findMap = function findMap(arr, f) {
+    for (var i = 0; i < arr.length; i++) {
+      var r = f(arr[i], i);
+
+      if (r.isSome()) {
+        return r;
+      }
+    }
+
+    return Optional.none();
+  };
+
+  var is = function is(lhs, rhs, comparator) {
+    if (comparator === void 0) {
+      comparator = tripleEquals;
+    }
+
+    return lhs.exists(function (left) {
+      return comparator(left, rhs);
+    });
+  };
+
+  var cat = function cat(arr) {
+    var r = [];
+
+    var push = function push(x) {
+      r.push(x);
+    };
+
+    for (var i = 0; i < arr.length; i++) {
+      arr[i].each(push);
+    }
+
+    return r;
+  };
+
+  var someIf = function someIf(b, a) {
+    return b ? Optional.some(a) : Optional.none();
+  };
+
+  var assumeExternalTargets = function assumeExternalTargets(editor) {
+    var externalTargets = editor.getParam('link_assume_external_targets', false);
+
+    if (isBoolean(externalTargets) && externalTargets) {
+      return 1;
+    } else if (isString(externalTargets) && (externalTargets === 'http' || externalTargets === 'https')) {
+      return externalTargets;
+    }
+
+    return 0;
+  };
+
+  var hasContextToolbar = function hasContextToolbar(editor) {
+    return editor.getParam('link_context_toolbar', false, 'boolean');
+  };
+
+  var getLinkList = function getLinkList(editor) {
+    return editor.getParam('link_list');
+  };
+
+  var getDefaultLinkTarget = function getDefaultLinkTarget(editor) {
+    return editor.getParam('default_link_target');
+  };
+
+  var getTargetList = function getTargetList(editor) {
+    return editor.getParam('target_list', true);
+  };
+
+  var getRelList = function getRelList(editor) {
+    return editor.getParam('rel_list', [], 'array');
+  };
+
+  var getLinkClassList = function getLinkClassList(editor) {
+    return editor.getParam('link_class_list', [], 'array');
+  };
+
+  var shouldShowLinkTitle = function shouldShowLinkTitle(editor) {
+    return editor.getParam('link_title', true, 'boolean');
+  };
+
+  var allowUnsafeLinkTarget = function allowUnsafeLinkTarget(editor) {
+    return editor.getParam('allow_unsafe_link_target', false, 'boolean');
+  };
+
+  var useQuickLink = function useQuickLink(editor) {
+    return editor.getParam('link_quicklink', false, 'boolean');
+  };
+
+  var getDefaultLinkProtocol = function getDefaultLinkProtocol(editor) {
+    return editor.getParam('link_default_protocol', 'http', 'string');
+  };
+
+  var global$5 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+
+  var getValue = function getValue(item) {
+    return isString(item.value) ? item.value : '';
+  };
+
+  var getText = function getText(item) {
+    if (isString(item.text)) {
+      return item.text;
+    } else if (isString(item.title)) {
+      return item.title;
+    } else {
+      return '';
+    }
+  };
+
+  var sanitizeList = function sanitizeList(list, extractValue) {
+    var out = [];
+    global$5.each(list, function (item) {
+      var text = getText(item);
+
+      if (item.menu !== undefined) {
+        var items = sanitizeList(item.menu, extractValue);
+        out.push({
+          text: text,
+          items: items
+        });
+      } else {
+        var value = extractValue(item);
+        out.push({
+          text: text,
+          value: value
+        });
+      }
+    });
+    return out;
+  };
+
+  var sanitizeWith = function sanitizeWith(extracter) {
+    if (extracter === void 0) {
+      extracter = getValue;
+    }
+
+    return function (list) {
+      return Optional.from(list).map(function (list) {
+        return sanitizeList(list, extracter);
+      });
+    };
+  };
+
+  var sanitize = function sanitize(list) {
+    return sanitizeWith(getValue)(list);
+  };
+
+  var createUi = function createUi(name, label) {
+    return function (items) {
+      return {
+        name: name,
+        type: 'listbox',
+        label: label,
+        items: items
+      };
+    };
+  };
+
+  var ListOptions = {
+    sanitize: sanitize,
+    sanitizeWith: sanitizeWith,
+    createUi: createUi,
+    getValue: getValue
+  };
+
+  var _assign = function __assign() {
+    _assign = Object.assign || function __assign(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+
+        for (var p in s) {
+          if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+      }
+
+      return t;
+    };
+
+    return _assign.apply(this, arguments);
+  };
+
+  var keys = Object.keys;
+  var hasOwnProperty = Object.hasOwnProperty;
+
+  var each = function each(obj, f) {
+    var props = keys(obj);
+
+    for (var k = 0, len = props.length; k < len; k++) {
+      var i = props[k];
+      var x = obj[i];
+      f(x, i);
+    }
+  };
+
+  var objAcc = function objAcc(r) {
+    return function (x, i) {
+      r[i] = x;
+    };
+  };
+
+  var internalFilter = function internalFilter(obj, pred, onTrue, onFalse) {
+    var r = {};
+    each(obj, function (x, i) {
+      (pred(x, i) ? onTrue : onFalse)(x, i);
+    });
+    return r;
+  };
+
+  var filter = function filter(obj, pred) {
+    var t = {};
+    internalFilter(obj, pred, objAcc(t), noop);
+    return t;
+  };
+
+  var has = function has(obj, key) {
+    return hasOwnProperty.call(obj, key);
+  };
+
+  var hasNonNullableKey = function hasNonNullableKey(obj, key) {
+    return has(obj, key) && obj[key] !== undefined && obj[key] !== null;
+  };
+
+  var global$4 = tinymce.util.Tools.resolve('tinymce.dom.TreeWalker');
+  var global$3 = tinymce.util.Tools.resolve('tinymce.util.URI');
+
+  var isAnchor = function isAnchor(elm) {
+    return elm && elm.nodeName.toLowerCase() === 'a';
+  };
+
+  var isLink = function isLink(elm) {
+    return isAnchor(elm) && !!getHref(elm);
+  };
+
+  var collectNodesInRange = function collectNodesInRange(rng, predicate) {
+    if (rng.collapsed) {
+      return [];
+    } else {
+      var contents = rng.cloneContents();
+      var walker = new global$4(contents.firstChild, contents);
+      var elements = [];
+      var current = contents.firstChild;
+
+      do {
+        if (predicate(current)) {
+          elements.push(current);
+        }
+      } while (current = walker.next());
+
+      return elements;
+    }
+  };
+
+  var hasProtocol = function hasProtocol(url) {
+    return /^\w+:/i.test(url);
+  };
+
+  var getHref = function getHref(elm) {
+    var href = elm.getAttribute('data-mce-href');
+    return href ? href : elm.getAttribute('href');
+  };
+
+  var applyRelTargetRules = function applyRelTargetRules(rel, isUnsafe) {
+    var rules = ['noopener'];
+    var rels = rel ? rel.split(/\s+/) : [];
+
+    var toString = function toString(rels) {
+      return global$5.trim(rels.sort().join(' '));
+    };
+
+    var addTargetRules = function addTargetRules(rels) {
+      rels = removeTargetRules(rels);
+      return rels.length > 0 ? rels.concat(rules) : rules;
+    };
+
+    var removeTargetRules = function removeTargetRules(rels) {
+      return rels.filter(function (val) {
+        return global$5.inArray(rules, val) === -1;
+      });
+    };
+
+    var newRels = isUnsafe ? addTargetRules(rels) : removeTargetRules(rels);
+    return newRels.length > 0 ? toString(newRels) : '';
+  };
+
+  var trimCaretContainers = function trimCaretContainers(text) {
+    return text.replace(/\uFEFF/g, '');
+  };
+
+  var getAnchorElement = function getAnchorElement(editor, selectedElm) {
+    selectedElm = selectedElm || editor.selection.getNode();
+
+    if (isImageFigure(selectedElm)) {
+      return editor.dom.select('a[href]', selectedElm)[0];
+    } else {
+      return editor.dom.getParent(selectedElm, 'a[href]');
+    }
+  };
+
+  var getAnchorText = function getAnchorText(selection, anchorElm) {
+    var text = anchorElm ? anchorElm.innerText || anchorElm.textContent : selection.getContent({
+      format: 'text'
+    });
+    return trimCaretContainers(text);
+  };
+
+  var hasLinks = function hasLinks(elements) {
+    return global$5.grep(elements, isLink).length > 0;
+  };
+
+  var hasLinksInSelection = function hasLinksInSelection(rng) {
+    return collectNodesInRange(rng, isLink).length > 0;
+  };
+
+  var isOnlyTextSelected = function isOnlyTextSelected(editor) {
+    var inlineTextElements = editor.schema.getTextInlineElements();
+
+    var isElement = function isElement(elm) {
+      return elm.nodeType === 1 && !isAnchor(elm) && !has(inlineTextElements, elm.nodeName.toLowerCase());
+    };
+
+    var elements = collectNodesInRange(editor.selection.getRng(), isElement);
+    return elements.length === 0;
+  };
+
+  var isImageFigure = function isImageFigure(elm) {
+    return elm && elm.nodeName === 'FIGURE' && /\bimage\b/i.test(elm.className);
+  };
+
+  var getLinkAttrs = function getLinkAttrs(data) {
+    var attrs = ['title', 'rel', 'class', 'target'];
+    return foldl(attrs, function (acc, key) {
+      data[key].each(function (value) {
+        acc[key] = value.length > 0 ? value : null;
+      });
+      return acc;
+    }, {
+      href: data.href
+    });
+  };
+
+  var handleExternalTargets = function handleExternalTargets(href, assumeExternalTargets) {
+    if ((assumeExternalTargets === 'http' || assumeExternalTargets === 'https') && !hasProtocol(href)) {
+      return assumeExternalTargets + '://' + href;
+    }
+
+    return href;
+  };
+
+  var applyLinkOverrides = function applyLinkOverrides(editor, linkAttrs) {
+    var newLinkAttrs = _assign({}, linkAttrs);
+
+    if (!(getRelList(editor).length > 0) && allowUnsafeLinkTarget(editor) === false) {
+      var newRel = applyRelTargetRules(newLinkAttrs.rel, newLinkAttrs.target === '_blank');
+      newLinkAttrs.rel = newRel ? newRel : null;
+    }
+
+    if (Optional.from(newLinkAttrs.target).isNone() && getTargetList(editor) === false) {
+      newLinkAttrs.target = getDefaultLinkTarget(editor);
+    }
+
+    newLinkAttrs.href = handleExternalTargets(newLinkAttrs.href, assumeExternalTargets(editor));
+    return newLinkAttrs;
+  };
+
+  var updateLink = function updateLink(editor, anchorElm, text, linkAttrs) {
+    text.each(function (text) {
+      if (has(anchorElm, 'innerText')) {
+        anchorElm.innerText = text;
+      } else {
+        anchorElm.textContent = text;
+      }
+    });
+    editor.dom.setAttribs(anchorElm, linkAttrs);
+    editor.selection.select(anchorElm);
+  };
+
+  var createLink = function createLink(editor, selectedElm, text, linkAttrs) {
+    if (isImageFigure(selectedElm)) {
+      linkImageFigure(editor, selectedElm, linkAttrs);
+    } else {
+      text.fold(function () {
+        editor.execCommand('mceInsertLink', false, linkAttrs);
+      }, function (text) {
+        editor.insertContent(editor.dom.createHTML('a', linkAttrs, editor.dom.encode(text)));
+      });
+    }
+  };
+
+  var linkDomMutation = function linkDomMutation(editor, attachState, data) {
+    var selectedElm = editor.selection.getNode();
+    var anchorElm = getAnchorElement(editor, selectedElm);
+    var linkAttrs = applyLinkOverrides(editor, getLinkAttrs(data));
+    editor.undoManager.transact(function () {
+      if (data.href === attachState.href) {
+        attachState.attach();
+      }
+
+      if (anchorElm) {
+        editor.focus();
+        updateLink(editor, anchorElm, data.text, linkAttrs);
+      } else {
+        createLink(editor, selectedElm, data.text, linkAttrs);
+      }
+    });
+  };
+
+  var unlinkSelection = function unlinkSelection(editor) {
+    var dom = editor.dom,
+        selection = editor.selection;
+    var bookmark = selection.getBookmark();
+    var rng = selection.getRng().cloneRange();
+    var startAnchorElm = dom.getParent(rng.startContainer, 'a[href]', editor.getBody());
+    var endAnchorElm = dom.getParent(rng.endContainer, 'a[href]', editor.getBody());
+
+    if (startAnchorElm) {
+      rng.setStartBefore(startAnchorElm);
+    }
+
+    if (endAnchorElm) {
+      rng.setEndAfter(endAnchorElm);
+    }
+
+    selection.setRng(rng);
+    editor.execCommand('unlink');
+    selection.moveToBookmark(bookmark);
+  };
+
+  var unlinkDomMutation = function unlinkDomMutation(editor) {
+    editor.undoManager.transact(function () {
+      var node = editor.selection.getNode();
+
+      if (isImageFigure(node)) {
+        unlinkImageFigure(editor, node);
+      } else {
+        unlinkSelection(editor);
+      }
+
+      editor.focus();
+    });
+  };
+
+  var unwrapOptions = function unwrapOptions(data) {
+    var cls = data["class"],
+        href = data.href,
+        rel = data.rel,
+        target = data.target,
+        text = data.text,
+        title = data.title;
+    return filter({
+      "class": cls.getOrNull(),
+      href: href,
+      rel: rel.getOrNull(),
+      target: target.getOrNull(),
+      text: text.getOrNull(),
+      title: title.getOrNull()
+    }, function (v, _k) {
+      return isNull(v) === false;
+    });
+  };
+
+  var sanitizeData = function sanitizeData(editor, data) {
+    var href = data.href;
+    return _assign(_assign({}, data), {
+      href: global$3.isDomSafe(href, 'a', editor.settings) ? href : ''
+    });
+  };
+
+  var link = function link(editor, attachState, data) {
+    var sanitizedData = sanitizeData(editor, data);
+    editor.hasPlugin('rtc', true) ? editor.execCommand('createlink', false, unwrapOptions(sanitizedData)) : linkDomMutation(editor, attachState, sanitizedData);
+  };
+
+  var unlink = function unlink(editor) {
+    editor.hasPlugin('rtc', true) ? editor.execCommand('unlink') : unlinkDomMutation(editor);
+  };
+
+  var unlinkImageFigure = function unlinkImageFigure(editor, fig) {
+    var img = editor.dom.select('img', fig)[0];
+
+    if (img) {
+      var a = editor.dom.getParents(img, 'a[href]', fig)[0];
+
+      if (a) {
+        a.parentNode.insertBefore(img, a);
+        editor.dom.remove(a);
+      }
+    }
+  };
+
+  var linkImageFigure = function linkImageFigure(editor, fig, attrs) {
+    var img = editor.dom.select('img', fig)[0];
+
+    if (img) {
+      var a = editor.dom.create('a', attrs);
+      img.parentNode.insertBefore(a, img);
+      a.appendChild(img);
+    }
+  };
+
+  var isListGroup = function isListGroup(item) {
+    return hasNonNullableKey(item, 'items');
+  };
+
+  var findTextByValue = function findTextByValue(value, catalog) {
+    return findMap(catalog, function (item) {
+      if (isListGroup(item)) {
+        return findTextByValue(value, item.items);
+      } else {
+        return someIf(item.value === value, item);
+      }
+    });
+  };
+
+  var getDelta = function getDelta(persistentText, fieldName, catalog, data) {
+    var value = data[fieldName];
+    var hasPersistentText = persistentText.length > 0;
+    return value !== undefined ? findTextByValue(value, catalog).map(function (i) {
+      return {
+        url: {
+          value: i.value,
+          meta: {
+            text: hasPersistentText ? persistentText : i.text,
+            attach: noop
+          }
+        },
+        text: hasPersistentText ? persistentText : i.text
+      };
+    }) : Optional.none();
+  };
+
+  var findCatalog = function findCatalog(catalogs, fieldName) {
+    if (fieldName === 'link') {
+      return catalogs.link;
+    } else if (fieldName === 'anchor') {
+      return catalogs.anchor;
+    } else {
+      return Optional.none();
+    }
+  };
+
+  var init = function init(initialData, linkCatalog) {
+    var persistentData = {
+      text: initialData.text,
+      title: initialData.title
+    };
+
+    var getTitleFromUrlChange = function getTitleFromUrlChange(url) {
+      return someIf(persistentData.title.length <= 0, Optional.from(url.meta.title).getOr(''));
+    };
+
+    var getTextFromUrlChange = function getTextFromUrlChange(url) {
+      return someIf(persistentData.text.length <= 0, Optional.from(url.meta.text).getOr(url.value));
+    };
+
+    var onUrlChange = function onUrlChange(data) {
+      var text = getTextFromUrlChange(data.url);
+      var title = getTitleFromUrlChange(data.url);
+
+      if (text.isSome() || title.isSome()) {
+        return Optional.some(_assign(_assign({}, text.map(function (text) {
+          return {
+            text: text
+          };
+        }).getOr({})), title.map(function (title) {
+          return {
+            title: title
+          };
+        }).getOr({})));
+      } else {
+        return Optional.none();
+      }
+    };
+
+    var onCatalogChange = function onCatalogChange(data, change) {
+      var catalog = findCatalog(linkCatalog, change.name).getOr([]);
+      return getDelta(persistentData.text, change.name, catalog, data);
+    };
+
+    var onChange = function onChange(getData, change) {
+      var name = change.name;
+
+      if (name === 'url') {
+        return onUrlChange(getData());
+      } else if (contains(['anchor', 'link'], name)) {
+        return onCatalogChange(getData(), change);
+      } else if (name === 'text' || name === 'title') {
+        persistentData[name] = getData()[name];
+        return Optional.none();
+      } else {
+        return Optional.none();
+      }
+    };
+
+    return {
+      onChange: onChange
+    };
+  };
+
+  var DialogChanges = {
+    init: init,
+    getDelta: getDelta
+  };
+  var global$2 = tinymce.util.Tools.resolve('tinymce.util.Delay');
+  var global$1 = tinymce.util.Tools.resolve('tinymce.util.Promise');
+
+  var delayedConfirm = function delayedConfirm(editor, message, callback) {
+    var rng = editor.selection.getRng();
+    global$2.setEditorTimeout(editor, function () {
+      editor.windowManager.confirm(message, function (state) {
+        editor.selection.setRng(rng);
+        callback(state);
+      });
+    });
+  };
+
+  var tryEmailTransform = function tryEmailTransform(data) {
+    var url = data.href;
+    var suggestMailTo = url.indexOf('@') > 0 && url.indexOf('/') === -1 && url.indexOf('mailto:') === -1;
+    return suggestMailTo ? Optional.some({
+      message: 'The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?',
+      preprocess: function preprocess(oldData) {
+        return _assign(_assign({}, oldData), {
+          href: 'mailto:' + url
+        });
+      }
+    }) : Optional.none();
+  };
+
+  var tryProtocolTransform = function tryProtocolTransform(assumeExternalTargets, defaultLinkProtocol) {
+    return function (data) {
+      var url = data.href;
+      var suggestProtocol = assumeExternalTargets === 1 && !hasProtocol(url) || assumeExternalTargets === 0 && /^\s*www(\.|\d\.)/i.test(url);
+      return suggestProtocol ? Optional.some({
+        message: 'The URL you entered seems to be an external link. Do you want to add the required ' + defaultLinkProtocol + ':// prefix?',
+        preprocess: function preprocess(oldData) {
+          return _assign(_assign({}, oldData), {
+            href: defaultLinkProtocol + '://' + url
+          });
+        }
+      }) : Optional.none();
+    };
+  };
+
+  var preprocess = function preprocess(editor, data) {
+    return findMap([tryEmailTransform, tryProtocolTransform(assumeExternalTargets(editor), getDefaultLinkProtocol(editor))], function (f) {
+      return f(data);
+    }).fold(function () {
+      return global$1.resolve(data);
+    }, function (transform) {
+      return new global$1(function (callback) {
+        delayedConfirm(editor, transform.message, function (state) {
+          callback(state ? transform.preprocess(data) : data);
+        });
+      });
+    });
+  };
+
+  var DialogConfirms = {
+    preprocess: preprocess
+  };
+
+  var getAnchors = function getAnchors(editor) {
+    var anchorNodes = editor.dom.select('a:not([href])');
+    var anchors = bind(anchorNodes, function (anchor) {
+      var id = anchor.name || anchor.id;
+      return id ? [{
+        text: id,
+        value: '#' + id
+      }] : [];
+    });
+    return anchors.length > 0 ? Optional.some([{
+      text: 'None',
+      value: ''
+    }].concat(anchors)) : Optional.none();
+  };
+
+  var AnchorListOptions = {
+    getAnchors: getAnchors
+  };
+
+  var getClasses = function getClasses(editor) {
+    var list = getLinkClassList(editor);
+
+    if (list.length > 0) {
+      return ListOptions.sanitize(list);
+    }
+
+    return Optional.none();
+  };
+
+  var ClassListOptions = {
+    getClasses: getClasses
+  };
+  var global = tinymce.util.Tools.resolve('tinymce.util.XHR');
+
+  var parseJson = function parseJson(text) {
+    try {
+      return Optional.some(JSON.parse(text));
+    } catch (err) {
+      return Optional.none();
+    }
+  };
+
+  var getLinks = function getLinks(editor) {
+    var extractor = function extractor(item) {
+      return editor.convertURL(item.value || item.url, 'href');
+    };
+
+    var linkList = getLinkList(editor);
+    return new global$1(function (callback) {
+      if (isString(linkList)) {
+        global.send({
+          url: linkList,
+          success: function success(text) {
+            return callback(parseJson(text));
+          },
+          error: function error(_) {
+            return callback(Optional.none());
+          }
+        });
+      } else if (isFunction(linkList)) {
+        linkList(function (output) {
+          return callback(Optional.some(output));
+        });
+      } else {
+        callback(Optional.from(linkList));
+      }
+    }).then(function (optItems) {
+      return optItems.bind(ListOptions.sanitizeWith(extractor)).map(function (items) {
+        if (items.length > 0) {
+          var noneItem = [{
+            text: 'None',
+            value: ''
+          }];
+          return noneItem.concat(items);
+        } else {
+          return items;
+        }
+      });
+    });
+  };
+
+  var LinkListOptions = {
+    getLinks: getLinks
+  };
+
+  var getRels = function getRels(editor, initialTarget) {
+    var list = getRelList(editor);
+
+    if (list.length > 0) {
+      var isTargetBlank_1 = is(initialTarget, '_blank');
+      var enforceSafe = allowUnsafeLinkTarget(editor) === false;
+
+      var safeRelExtractor = function safeRelExtractor(item) {
+        return applyRelTargetRules(ListOptions.getValue(item), isTargetBlank_1);
+      };
+
+      var sanitizer = enforceSafe ? ListOptions.sanitizeWith(safeRelExtractor) : ListOptions.sanitize;
+      return sanitizer(list);
+    }
+
+    return Optional.none();
+  };
+
+  var RelOptions = {
+    getRels: getRels
+  };
+  var fallbacks = [{
+    text: 'Current window',
+    value: ''
+  }, {
+    text: 'New window',
+    value: '_blank'
+  }];
+
+  var getTargets = function getTargets(editor) {
+    var list = getTargetList(editor);
+
+    if (isArray(list)) {
+      return ListOptions.sanitize(list).orThunk(function () {
+        return Optional.some(fallbacks);
+      });
+    } else if (list === false) {
+      return Optional.none();
+    }
+
+    return Optional.some(fallbacks);
+  };
+
+  var TargetOptions = {
+    getTargets: getTargets
+  };
+
+  var nonEmptyAttr = function nonEmptyAttr(dom, elem, name) {
+    var val = dom.getAttrib(elem, name);
+    return val !== null && val.length > 0 ? Optional.some(val) : Optional.none();
+  };
+
+  var extractFromAnchor = function extractFromAnchor(editor, anchor) {
+    var dom = editor.dom;
+    var onlyText = isOnlyTextSelected(editor);
+    var text = onlyText ? Optional.some(getAnchorText(editor.selection, anchor)) : Optional.none();
+    var url = anchor ? Optional.some(dom.getAttrib(anchor, 'href')) : Optional.none();
+    var target = anchor ? Optional.from(dom.getAttrib(anchor, 'target')) : Optional.none();
+    var rel = nonEmptyAttr(dom, anchor, 'rel');
+    var linkClass = nonEmptyAttr(dom, anchor, 'class');
+    var title = nonEmptyAttr(dom, anchor, 'title');
+    return {
+      url: url,
+      text: text,
+      title: title,
+      target: target,
+      rel: rel,
+      linkClass: linkClass
+    };
+  };
+
+  var collect = function collect(editor, linkNode) {
+    return LinkListOptions.getLinks(editor).then(function (links) {
+      var anchor = extractFromAnchor(editor, linkNode);
+      return {
+        anchor: anchor,
+        catalogs: {
+          targets: TargetOptions.getTargets(editor),
+          rels: RelOptions.getRels(editor, anchor.target),
+          classes: ClassListOptions.getClasses(editor),
+          anchor: AnchorListOptions.getAnchors(editor),
+          link: links
+        },
+        optNode: Optional.from(linkNode),
+        flags: {
+          titleEnabled: shouldShowLinkTitle(editor)
+        }
+      };
+    });
+  };
+
+  var DialogInfo = {
+    collect: collect
+  };
+
+  var handleSubmit = function handleSubmit(editor, info) {
+    return function (api) {
+      var data = api.getData();
+
+      if (!data.url.value) {
+        unlink(editor);
+        api.close();
+        return;
+      }
+
+      var getChangedValue = function getChangedValue(key) {
+        return Optional.from(data[key]).filter(function (value) {
+          return !is(info.anchor[key], value);
+        });
+      };
+
+      var changedData = {
+        href: data.url.value,
+        text: getChangedValue('text'),
+        target: getChangedValue('target'),
+        rel: getChangedValue('rel'),
+        "class": getChangedValue('linkClass'),
+        title: getChangedValue('title')
+      };
+      var attachState = {
+        href: data.url.value,
+        attach: data.url.meta !== undefined && data.url.meta.attach ? data.url.meta.attach : noop
+      };
+      DialogConfirms.preprocess(editor, changedData).then(function (pData) {
+        link(editor, attachState, pData);
+      });
+      api.close();
+    };
+  };
+
+  var collectData = function collectData(editor) {
+    var anchorNode = getAnchorElement(editor);
+    return DialogInfo.collect(editor, anchorNode);
+  };
+
+  var getInitialData = function getInitialData(info, defaultTarget) {
+    var anchor = info.anchor;
+    var url = anchor.url.getOr('');
+    return {
+      url: {
+        value: url,
+        meta: {
+          original: {
+            value: url
+          }
+        }
+      },
+      text: anchor.text.getOr(''),
+      title: anchor.title.getOr(''),
+      anchor: url,
+      link: url,
+      rel: anchor.rel.getOr(''),
+      target: anchor.target.or(defaultTarget).getOr(''),
+      linkClass: anchor.linkClass.getOr('')
+    };
+  };
+
+  var makeDialog = function makeDialog(settings, onSubmit, editor) {
+    var urlInput = [{
+      name: 'url',
+      type: 'urlinput',
+      filetype: 'file',
+      label: 'URL'
+    }];
+    var displayText = settings.anchor.text.map(function () {
+      return {
+        name: 'text',
+        type: 'input',
+        label: 'Text to display'
+      };
+    }).toArray();
+    var titleText = settings.flags.titleEnabled ? [{
+      name: 'title',
+      type: 'input',
+      label: 'Title'
+    }] : [];
+    var defaultTarget = Optional.from(getDefaultLinkTarget(editor));
+    var initialData = getInitialData(settings, defaultTarget);
+    var catalogs = settings.catalogs;
+    var dialogDelta = DialogChanges.init(initialData, catalogs);
+    var body = {
+      type: 'panel',
+      items: flatten([urlInput, displayText, titleText, cat([catalogs.anchor.map(ListOptions.createUi('anchor', 'Anchors')), catalogs.rels.map(ListOptions.createUi('rel', 'Rel')), catalogs.targets.map(ListOptions.createUi('target', 'Open link in...')), catalogs.link.map(ListOptions.createUi('link', 'Link list')), catalogs.classes.map(ListOptions.createUi('linkClass', 'Class'))])])
+    };
+    return {
+      title: 'Insert/Edit Link',
+      size: 'normal',
+      body: body,
+      buttons: [{
+        type: 'cancel',
+        name: 'cancel',
+        text: 'Cancel'
+      }, {
+        type: 'submit',
+        name: 'save',
+        text: 'Save',
+        primary: true
+      }],
+      initialData: initialData,
+      onChange: function onChange(api, _a) {
+        var name = _a.name;
+        dialogDelta.onChange(api.getData, {
+          name: name
+        }).each(function (newData) {
+          api.setData(newData);
+        });
+      },
+      onSubmit: onSubmit
+    };
+  };
+
+  var open$1 = function open$1(editor) {
+    var data = collectData(editor);
+    data.then(function (info) {
+      var onSubmit = handleSubmit(editor, info);
+      return makeDialog(info, onSubmit, editor);
+    }).then(function (spec) {
+      editor.windowManager.open(spec);
+    });
+  };
+
+  var appendClickRemove = function appendClickRemove(link, evt) {
+    document.body.appendChild(link);
+    link.dispatchEvent(evt);
+    document.body.removeChild(link);
+  };
+
+  var open = function open(url) {
+    var link = document.createElement('a');
+    link.target = '_blank';
+    link.href = url;
+    link.rel = 'noreferrer noopener';
+    var evt = document.createEvent('MouseEvents');
+    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    appendClickRemove(link, evt);
+  };
+
+  var getLink = function getLink(editor, elm) {
+    return editor.dom.getParent(elm, 'a[href]');
+  };
+
+  var getSelectedLink = function getSelectedLink(editor) {
+    return getLink(editor, editor.selection.getStart());
+  };
+
+  var hasOnlyAltModifier = function hasOnlyAltModifier(e) {
+    return e.altKey === true && e.shiftKey === false && e.ctrlKey === false && e.metaKey === false;
+  };
+
+  var gotoLink = function gotoLink(editor, a) {
+    if (a) {
+      var href = getHref(a);
+
+      if (/^#/.test(href)) {
+        var targetEl = editor.$(href);
+
+        if (targetEl.length) {
+          editor.selection.scrollIntoView(targetEl[0], true);
+        }
+      } else {
+        open(a.href);
+      }
+    }
+  };
+
+  var openDialog = function openDialog(editor) {
+    return function () {
+      open$1(editor);
+    };
+  };
+
+  var gotoSelectedLink = function gotoSelectedLink(editor) {
+    return function () {
+      gotoLink(editor, getSelectedLink(editor));
+    };
+  };
+
+  var setupGotoLinks = function setupGotoLinks(editor) {
+    editor.on('click', function (e) {
+      var link = getLink(editor, e.target);
+
+      if (link && global$6.metaKeyPressed(e)) {
+        e.preventDefault();
+        gotoLink(editor, link);
+      }
+    });
+    editor.on('keydown', function (e) {
+      var link = getSelectedLink(editor);
+
+      if (link && e.keyCode === 13 && hasOnlyAltModifier(e)) {
+        e.preventDefault();
+        gotoLink(editor, link);
+      }
+    });
+  };
+
+  var toggleState = function toggleState(editor, toggler) {
+    editor.on('NodeChange', toggler);
+    return function () {
+      return editor.off('NodeChange', toggler);
+    };
+  };
+
+  var toggleActiveState = function toggleActiveState(editor) {
+    return function (api) {
+      var updateState = function updateState() {
+        return api.setActive(!editor.mode.isReadOnly() && getAnchorElement(editor, editor.selection.getNode()) !== null);
+      };
+
+      updateState();
+      return toggleState(editor, updateState);
+    };
+  };
+
+  var toggleEnabledState = function toggleEnabledState(editor) {
+    return function (api) {
+      var updateState = function updateState() {
+        return api.setDisabled(getAnchorElement(editor, editor.selection.getNode()) === null);
+      };
+
+      updateState();
+      return toggleState(editor, updateState);
+    };
+  };
+
+  var toggleUnlinkState = function toggleUnlinkState(editor) {
+    return function (api) {
+      var hasLinks$1 = function hasLinks$1(parents) {
+        return hasLinks(parents) || hasLinksInSelection(editor.selection.getRng());
+      };
+
+      var parents = editor.dom.getParents(editor.selection.getStart());
+      api.setDisabled(!hasLinks$1(parents));
+      return toggleState(editor, function (e) {
+        return api.setDisabled(!hasLinks$1(e.parents));
+      });
+    };
+  };
+
+  var register = function register(editor) {
+    editor.addCommand('mceLink', function () {
+      if (useQuickLink(editor)) {
+        editor.fire('contexttoolbar-show', {
+          toolbarKey: 'quicklink'
+        });
+      } else {
+        openDialog(editor)();
+      }
+    });
+  };
+
+  var setup = function setup(editor) {
+    editor.addShortcut('Meta+K', '', function () {
+      editor.execCommand('mceLink');
+    });
+  };
+
+  var setupButtons = function setupButtons(editor) {
+    editor.ui.registry.addToggleButton('link', {
+      icon: 'link',
+      tooltip: 'Insert/edit link',
+      onAction: openDialog(editor),
+      onSetup: toggleActiveState(editor)
+    });
+    editor.ui.registry.addButton('openlink', {
+      icon: 'new-tab',
+      tooltip: 'Open link',
+      onAction: gotoSelectedLink(editor),
+      onSetup: toggleEnabledState(editor)
+    });
+    editor.ui.registry.addButton('unlink', {
+      icon: 'unlink',
+      tooltip: 'Remove link',
+      onAction: function onAction() {
+        return unlink(editor);
+      },
+      onSetup: toggleUnlinkState(editor)
+    });
+  };
+
+  var setupMenuItems = function setupMenuItems(editor) {
+    editor.ui.registry.addMenuItem('openlink', {
+      text: 'Open link',
+      icon: 'new-tab',
+      onAction: gotoSelectedLink(editor),
+      onSetup: toggleEnabledState(editor)
+    });
+    editor.ui.registry.addMenuItem('link', {
+      icon: 'link',
+      text: 'Link...',
+      shortcut: 'Meta+K',
+      onAction: openDialog(editor)
+    });
+    editor.ui.registry.addMenuItem('unlink', {
+      icon: 'unlink',
+      text: 'Remove link',
+      onAction: function onAction() {
+        return unlink(editor);
+      },
+      onSetup: toggleUnlinkState(editor)
+    });
+  };
+
+  var setupContextMenu = function setupContextMenu(editor) {
+    var inLink = 'link unlink openlink';
+    var noLink = 'link';
+    editor.ui.registry.addContextMenu('link', {
+      update: function update(element) {
+        return hasLinks(editor.dom.getParents(element, 'a')) ? inLink : noLink;
+      }
+    });
+  };
+
+  var setupContextToolbars = function setupContextToolbars(editor) {
+    var collapseSelectionToEnd = function collapseSelectionToEnd(editor) {
+      editor.selection.collapse(false);
+    };
+
+    var onSetupLink = function onSetupLink(buttonApi) {
+      var node = editor.selection.getNode();
+      buttonApi.setDisabled(!getAnchorElement(editor, node));
+      return noop;
+    };
+
+    var getLinkText = function getLinkText(value) {
+      var anchor = getAnchorElement(editor);
+      var onlyText = isOnlyTextSelected(editor);
+
+      if (!anchor && onlyText) {
+        var text = getAnchorText(editor.selection, anchor);
+        return Optional.some(text.length > 0 ? text : value);
+      } else {
+        return Optional.none();
+      }
+    };
+
+    editor.ui.registry.addContextForm('quicklink', {
+      launch: {
+        type: 'contextformtogglebutton',
+        icon: 'link',
+        tooltip: 'Link',
+        onSetup: toggleActiveState(editor)
+      },
+      label: 'Link',
+      predicate: function predicate(node) {
+        return !!getAnchorElement(editor, node) && hasContextToolbar(editor);
+      },
+      initValue: function initValue() {
+        var elm = getAnchorElement(editor);
+        return !!elm ? getHref(elm) : '';
+      },
+      commands: [{
+        type: 'contextformtogglebutton',
+        icon: 'link',
+        tooltip: 'Link',
+        primary: true,
+        onSetup: function onSetup(buttonApi) {
+          var node = editor.selection.getNode();
+          buttonApi.setActive(!!getAnchorElement(editor, node));
+          return toggleActiveState(editor)(buttonApi);
+        },
+        onAction: function onAction(formApi) {
+          var value = formApi.getValue();
+          var text = getLinkText(value);
+          var attachState = {
+            href: value,
+            attach: noop
+          };
+          link(editor, attachState, {
+            href: value,
+            text: text,
+            title: Optional.none(),
+            rel: Optional.none(),
+            target: Optional.none(),
+            "class": Optional.none()
+          });
+          collapseSelectionToEnd(editor);
+          formApi.hide();
+        }
+      }, {
+        type: 'contextformbutton',
+        icon: 'unlink',
+        tooltip: 'Remove link',
+        onSetup: onSetupLink,
+        onAction: function onAction(formApi) {
+          unlink(editor);
+          formApi.hide();
+        }
+      }, {
+        type: 'contextformbutton',
+        icon: 'new-tab',
+        tooltip: 'Open link',
+        onSetup: onSetupLink,
+        onAction: function onAction(formApi) {
+          gotoSelectedLink(editor)();
+          formApi.hide();
+        }
+      }]
+    });
+  };
+
+  function Plugin() {
+    global$7.add('link', function (editor) {
+      setupButtons(editor);
+      setupMenuItems(editor);
+      setupContextMenu(editor);
+      setupContextToolbars(editor);
+      setupGotoLinks(editor);
+      register(editor);
+      setup(editor);
+    });
+  }
+
+  Plugin();
+})();
+/******/ })()
+;

@@ -367,17 +367,15 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 		$data['clientname'] = $data['clientname'] ?? $upload->getClientName();
 		$data['uuid']       = $uuid;
 
-
 		// Accept the file
 		$file = $this->model->createFromPath($path ?? $upload->getRealPath(), $data);
-
+		
 		// Trigger the Event with the new File
         Events::trigger('upload', $file);
 
 		if ($this->request->isAJAX()) {
 
-			$html = view('Adnduweb\Ci4Medias\themes\/'. $this->theme .'/\Forms\files', $this->dataImageManager());
-			$response = ['success' => ['code' => 200, 'message' => lang('Medias.deleteSuccess')], 'error' => false, 'html' => $html, csrf_token() => csrf_hash()];
+			$response = ['success' => ['code' => 200, 'message' => lang('Medias.deleteSuccess')], 'error' => false, csrf_token() => csrf_hash()];
 			return $this->respond($response,  200);
 
 		}
@@ -973,7 +971,6 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
     public function saveSettings()
     {
 
-
         //print_r($this->request->getPost());exit;
         if ($format =  $this->request->getPost('format')) {
 
@@ -1019,9 +1016,7 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 				return false;
 			}
 
-		}
-
-	
+		}	
 
         // Success!
         Theme::set_message('success', lang('Core.save_data'), lang('Core.cool_success'));
@@ -1039,6 +1034,7 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 				unlink($file);
 		}
 		rmdir(config('Medias')->getPath() . $dir);
+		config('Medias')->getPath();
 	}
 
 	public function getCropTemplate(){
@@ -1063,15 +1059,16 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 			$this->viewData['only'] = (isset($value['only'])) ? $value['only'] : false;
 			$this->viewData['input'] = '';
 			$this->viewData['media'] = $media;
-	
+
 			$html = view('Adnduweb\Ci4Medias\themes\/'. $this->theme .'/\cropImage', $this->viewData);
+			//echo 'fghdfh'; exit;
 			//return $this->respond(['status' => true, 'type' => 'success', 'path' => site_url('public/uploads/' . $newName)], 200);
 			$return = [
 				'status' => true,
 				'type' => 'success',
 				'crop' => true,
 				'cropImage' => $html,
-				'path' => img_data($this->viewData['media']->getThumbnail())
+				'path' => $this->viewData['media']->getThumbnail()
 			];
 			return $this->response->setJSON($return);
 		}
@@ -1144,10 +1141,12 @@ class Medias extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
 
 		if ($this->request->isAJAX()) {
 			$response = json_decode($this->request->getBody());
+			//var_dump($response); exit;
 
 			$this->viewData['medias'] = model(MediaModel::class)->getMedias(false, false, false, false, $response->type);
 			//print_r($this->viewData['medias']); exit;
 			$listMedia = view('Adnduweb\Ci4Medias\themes\/'. $this->theme .'/\_partials\list_media_card', ['medias' => $this->viewData['medias']]);
+			//print_r($listMedia); exit;
 			return $this->getResponse(['success' => lang('Core.deleteSuccess')], 200, ['listMedia' => $listMedia]);
 		}
 

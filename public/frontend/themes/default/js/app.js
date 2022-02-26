@@ -494,6 +494,59 @@ var ADW = function() {
         });
     }
 
+    var _siemItem = function() {
+
+        if ($('.slider-wrapper').length > 0) {
+
+            Siema.prototype.addPagination = function() {
+                var e = this;
+                e.selector.parentNode.querySelectorAll(".dots").length < 1 && setTimeout((function() {
+                    var t = document.createElement("div");
+                    t.className = "dots";
+                    for (var o = function(o) {
+                            var n = document.createElement("button");
+                            n.className = "dot", n.textContent = o, n.addEventListener("click", (function() { return e.goTo(o) })), t.appendChild(n)
+                        }, n = e.innerElements.length - e.perPage + 1, r = 0; r < n; r++) o(r);
+                    e.selector.parentNode.appendChild(t), e.selector.parentNode.querySelectorAll(".dot")[0].className = "dot active"
+                }), 100)
+            };
+
+
+            var h = function() {
+                var e = this.selector.parentNode,
+                    t = e.querySelectorAll(".dot");
+                if (t.length > 0) {
+                    t.forEach((function(e) { e.className = "dot" }));
+                    var o = this.currentSlide;
+                    o < 0 && (o = this.innerElements.length + o);
+                    var n = e.querySelectorAll(".dot")[o];
+                    n && (n.className = "dot active")
+                }
+            };
+
+            let duration = ($(this).data('duration')) ? (this).data('duration') : 400;
+            let perPage = ($(this).data('perPage')) ? (this).data('perPage') : 1;
+
+            // New siema instance
+            const mySiema = new Siema({
+                selector: ".slider-wrapper",
+                duration: duration,
+                easing: 'ease-out',
+                perPage: perPage,
+                startIndex: 0,
+                draggable: !0,
+                multipleDrag: !0,
+                threshold: 20,
+                loop: !0,
+                rtl: !1,
+                onInit: function() {
+                    this.addPagination()
+                },
+                onChange: h,
+            });
+        }
+    }
+
 
     var checkStickyMenu = function() {
 
@@ -596,9 +649,12 @@ var ADW = function() {
     return {
         init: function() {
             _init();
-            if ($('body').attr('id') == 'home') {
-                _siemHome();
-            }
+            // if ($('body').attr('id') == 'home') {
+            //     _siemHome();
+            // }
+
+            _siemItem();
+
             owlCarousel()
                 /**
                  * Centre les images
@@ -638,3 +694,22 @@ var ADW = function() {
 KTUtil.onDOMContentLoaded(function() {
     ADW.init();
 });
+
+var lazyLoadInstance = new window.Lazyload({
+    // Your custom settings go here
+});
+
+// Set the options globally
+// to make LazyLoad self-initialize
+window.lazyLoadOptions = {
+    // Your custom settings go here
+};
+// Listen to the initialization event
+// and get the instance of LazyLoad
+window.addEventListener(
+    "LazyLoad::Initialized",
+    function(event) {
+        window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+);

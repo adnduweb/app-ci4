@@ -154,7 +154,13 @@
 	'ValueIsNotAValidEmail' => ' Votre adresse mail n\'est pas valide',
 	'SorryErrorsDetected' => 'Désolé, il semble qu\'il y ait des erreurs, veuillez réessayer.',
 	'Fermer' => 'Fermer',
-	'JetonNotConforme' => 'Votre jeton est non conforme' 
+	'JetonNotConforme' => 'Votre jeton est non conforme',
+	'password_is_required' => 'Votre mot de passse est requis',
+	'Showing' => 'Montrer',
+	'to' => 'de',
+	'of' => 'à',
+	'ShowingNoRecords' => 'pas d\'enregistrement',
+	'NoDataAvailableInTable' => 'Aucune donnée disponible',
 ];
 
-/* write : 18/01/2022 18:11:36 */
+/* write : 31/01/2022 12:29:26 */

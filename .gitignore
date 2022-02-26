@@ -127,6 +127,7 @@ public/backend/themes/metronic/cache/*
 public/frontend/themes/metronic/cache/*
 app/Modules/ci4-vassorts/*
 app/Modules/ci4-pages/*
+app/Modules/ci4-carousels/*
 fonts/*
 
 # Visual Studio Code

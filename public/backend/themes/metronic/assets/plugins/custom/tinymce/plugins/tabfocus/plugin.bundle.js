@@ -1,1 +1,151 @@
-!function(){"use strict";var e=tinymce.util.Tools.resolve("tinymce.PluginManager"),t=tinymce.util.Tools.resolve("tinymce.dom.DOMUtils"),n=tinymce.util.Tools.resolve("tinymce.EditorManager"),i=tinymce.util.Tools.resolve("tinymce.Env"),o=tinymce.util.Tools.resolve("tinymce.util.Delay"),l=tinymce.util.Tools.resolve("tinymce.util.Tools"),r=tinymce.util.Tools.resolve("tinymce.util.VK"),u=t.DOM,a=function(e){e.keyCode!==r.TAB||e.ctrlKey||e.altKey||e.metaKey||e.preventDefault()};e.add("tabfocus",(function(e){!function(e){var t=function(t){var a;if(!(t.keyCode!==r.TAB||t.ctrlKey||t.altKey||t.metaKey||t.isDefaultPrevented())){var c,s=function(i){var o=u.select(":input:enabled,*[tabindex]:not(iframe)"),r=function e(t){var n=t;return"BODY"===t.nodeName||"hidden"!==n.type&&"none"!==n.style.display&&"hidden"!==n.style.visibility&&e(t.parentNode)},c=function(e){return/INPUT|TEXTAREA|BUTTON/.test(e.tagName)&&n.get(t.id)&&-1!==e.tabIndex&&r(e)};if(l.each(o,(function(t,n){if(t.id===e.id)return a=n,!1})),i>0){for(var s=a+1;s<o.length;s++)if(c(o[s]))return o[s]}else for(s=a-1;s>=0;s--)if(c(o[s]))return o[s];return null},y=l.explode(function(e){return e.getParam("tab_focus",function(e){return e.getParam("tabfocus_elements",":prev,:next")}(e))}(e));if(1===y.length&&(y[1]=y[0],y[0]=":prev"),c=t.shiftKey?":prev"===y[0]?s(-1):u.get(y[0]):":next"===y[1]?s(1):u.get(y[1])){var f=n.get(c.id||c.name);c.id&&f?f.focus():o.setTimeout((function(){i.webkit||window.focus(),c.focus()}),10),t.preventDefault()}}};e.on("init",(function(){e.inline&&u.setAttrib(e.getBody(),"tabIndex",null),e.on("keyup",a),i.gecko?e.on("keypress keydown",t):e.on("keydown",t)}))}(e)}))}();
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**********************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/tabfocus/plugin.js ***!
+  \**********************************************************************************/
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.0 (2021-10-11)
+ */
+(function () {
+  'use strict';
+
+  var global$6 = tinymce.util.Tools.resolve('tinymce.PluginManager');
+  var global$5 = tinymce.util.Tools.resolve('tinymce.dom.DOMUtils');
+  var global$4 = tinymce.util.Tools.resolve('tinymce.EditorManager');
+  var global$3 = tinymce.util.Tools.resolve('tinymce.Env');
+  var global$2 = tinymce.util.Tools.resolve('tinymce.util.Delay');
+  var global$1 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+  var global = tinymce.util.Tools.resolve('tinymce.util.VK');
+
+  var getTabFocusElements = function getTabFocusElements(editor) {
+    return editor.getParam('tabfocus_elements', ':prev,:next');
+  };
+
+  var getTabFocus = function getTabFocus(editor) {
+    return editor.getParam('tab_focus', getTabFocusElements(editor));
+  };
+
+  var DOM = global$5.DOM;
+
+  var tabCancel = function tabCancel(e) {
+    if (e.keyCode === global.TAB && !e.ctrlKey && !e.altKey && !e.metaKey) {
+      e.preventDefault();
+    }
+  };
+
+  var setup = function setup(editor) {
+    var tabHandler = function tabHandler(e) {
+      var x;
+
+      if (e.keyCode !== global.TAB || e.ctrlKey || e.altKey || e.metaKey || e.isDefaultPrevented()) {
+        return;
+      }
+
+      var find = function find(direction) {
+        var el = DOM.select(':input:enabled,*[tabindex]:not(iframe)');
+
+        var canSelectRecursive = function canSelectRecursive(e) {
+          var castElem = e;
+          return e.nodeName === 'BODY' || castElem.type !== 'hidden' && castElem.style.display !== 'none' && castElem.style.visibility !== 'hidden' && canSelectRecursive(e.parentNode);
+        };
+
+        var canSelect = function canSelect(el) {
+          return /INPUT|TEXTAREA|BUTTON/.test(el.tagName) && global$4.get(e.id) && el.tabIndex !== -1 && canSelectRecursive(el);
+        };
+
+        global$1.each(el, function (e, i) {
+          if (e.id === editor.id) {
+            x = i;
+            return false;
+          }
+        });
+
+        if (direction > 0) {
+          for (var i = x + 1; i < el.length; i++) {
+            if (canSelect(el[i])) {
+              return el[i];
+            }
+          }
+        } else {
+          for (var i = x - 1; i >= 0; i--) {
+            if (canSelect(el[i])) {
+              return el[i];
+            }
+          }
+        }
+
+        return null;
+      };
+
+      var v = global$1.explode(getTabFocus(editor));
+
+      if (v.length === 1) {
+        v[1] = v[0];
+        v[0] = ':prev';
+      }
+
+      var el;
+
+      if (e.shiftKey) {
+        if (v[0] === ':prev') {
+          el = find(-1);
+        } else {
+          el = DOM.get(v[0]);
+        }
+      } else {
+        if (v[1] === ':next') {
+          el = find(1);
+        } else {
+          el = DOM.get(v[1]);
+        }
+      }
+
+      if (el) {
+        var focusEditor = global$4.get(el.id || el.name);
+
+        if (el.id && focusEditor) {
+          focusEditor.focus();
+        } else {
+          global$2.setTimeout(function () {
+            if (!global$3.webkit) {
+              window.focus();
+            }
+
+            el.focus();
+          }, 10);
+        }
+
+        e.preventDefault();
+      }
+    };
+
+    editor.on('init', function () {
+      if (editor.inline) {
+        DOM.setAttrib(editor.getBody(), 'tabIndex', null);
+      }
+
+      editor.on('keyup', tabCancel);
+
+      if (global$3.gecko) {
+        editor.on('keypress keydown', tabHandler);
+      } else {
+        editor.on('keydown', tabHandler);
+      }
+    });
+  };
+
+  function Plugin() {
+    global$6.add('tabfocus', function (editor) {
+      setup(editor);
+    });
+  }
+
+  Plugin();
+})();
+/******/ })()
+;

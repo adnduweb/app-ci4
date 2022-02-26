@@ -5216,7 +5216,8 @@ body.nav-open .body-wrapper {
     width: 26px
 }
 
-.mobile-nav-overlay .social-links a.facebook:before {
+
+/* .mobile-nav-overlay .social-links a.facebook:before {
     content: "";
     position: absolute;
     top: 50%;
@@ -5282,7 +5283,7 @@ body.nav-open .body-wrapper {
     background-size: 18px 18px;
     height: 18px;
     width: 18px
-}
+} */
 
 .footer {
     color: #6d6c6c
@@ -5501,7 +5502,8 @@ body.nav-open .body-wrapper {
     align-items: center;
 }
 
-.footer .social-links a.twitter:before {
+
+/* .footer .social-links a.twitter:before {
     content: "";
     position: absolute;
     top: 50%;
@@ -5516,7 +5518,7 @@ body.nav-open .body-wrapper {
     background-size: 16px 16px;
     height: 16px;
     width: 16px
-}
+} */
 
 @media (min-width:768px) {
     .footer .social-links a.twitter i {
@@ -5532,7 +5534,8 @@ body.nav-open .body-wrapper {
     align-items: center;
 }
 
-.footer .social-links a.linkedin:before {
+
+/* .footer .social-links a.linkedin:before {
     content: "";
     position: absolute;
     top: 50%;
@@ -5547,7 +5550,7 @@ body.nav-open .body-wrapper {
     background-size: 14px 14px;
     height: 14px;
     width: 14px
-}
+} */
 
 @media (min-width:768px) {
     .footer .social-links a.linkedin i {
@@ -7205,65 +7208,65 @@ iframe {
     visibility: hidden
 }
 
-.home-slider {
+.slider {
     overflow: hidden;
     padding: 30px 0 20px;
     text-align: center
 }
 
-.home-slider .home-slider-wrapper {
+.slider .slider-wrapper {
     margin: 0 -20px
 }
 
 @media (min-width:768px) {
-    .home-slider .home-slider-wrapper {
+    .slider .slider-wrapper {
         margin: 0
     }
 }
 
-.home-slider .home-slider-wrapper .home-slider-item {
+.slider .slider-wrapper .slider-item {
     display: none;
     margin: 0 20px
 }
 
 @media (min-width:768px) {
-    .home-slider .home-slider-wrapper .home-slider-item {
+    .slider .slider-wrapper .slider-item {
         margin: 0
     }
 }
 
-.home-slider .home-slider-wrapper .home-slider-item:first-child {
+.slider .slider-wrapper .slider-item:first-child {
     display: block
 }
 
 @media (min-width:768px) {
-    .home-slider .home-slider-wrapper .home-slider-item .section-title {
+    .slider .slider-wrapper .slider-item .section-title {
         margin-top: 40px
     }
 }
 
 @media (min-width:768px) {
-    .home-slider {
+    .slider {
         padding: 60px 0 40px;
         text-align: left
     }
 }
 
-.home-slider p {
+.slider p {
     margin: 5px 0 0
 }
 
 @media (min-width:768px) {
-    .home-slider p {
+    .slider p {
         margin: 15px 0 0
     }
 }
 
-.comment-respond .home-slider .submit,
-.commentlist .home-slider .comment-reply-link,
-.home-slider .btn,
-.home-slider .comment-respond .submit,
-.home-slider .commentlist .comment-reply-link {
+.comment-respond .slider .submit,
+.commentlist .slider .comment-reply-link,
+.slider .btn,
+.slider .comment-respond .submit,
+.slider .commentlist .comment-reply-link {
     color: #b26159;
     border-color: #b26159;
     margin: 20px 0 0;
@@ -7273,30 +7276,30 @@ iframe {
 }
 
 @media (min-width:768px) {
-    .comment-respond .home-slider .submit,
-    .commentlist .home-slider .comment-reply-link,
-    .home-slider .btn,
-    .home-slider .comment-respond .submit,
-    .home-slider .commentlist .comment-reply-link {
+    .comment-respond .slider .submit,
+    .commentlist .slider .comment-reply-link,
+    .slider .btn,
+    .slider .comment-respond .submit,
+    .slider .commentlist .comment-reply-link {
         margin: 40px 0 0
     }
 }
 
-.comment-respond .home-slider .submit:hover,
-.commentlist .home-slider .comment-reply-link:hover,
-.home-slider .btn:hover,
-.home-slider .comment-respond .submit:hover,
-.home-slider .commentlist .comment-reply-link:hover {
+.comment-respond .slider .submit:hover,
+.commentlist .slider .comment-reply-link:hover,
+.slider .btn:hover,
+.slider .comment-respond .submit:hover,
+.slider .commentlist .comment-reply-link:hover {
     background-color: #b26159;
     color: #fff
 }
 
-.home-slider .home-slider-visual {
+.slider .slider-visual {
     margin: 0 0 20px
 }
 
 @media (min-width:768px) {
-    .home-slider .home-slider-visual {
+    .slider .slider-visual {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -7307,21 +7310,21 @@ iframe {
     }
 }
 
-.home-slider .home-slider-visual img,
-.home-slider .home-slider-visual picture {
+.slider .slider-visual img,
+.slider .slider-visual picture {
     height: auto;
     max-height: 200px
 }
 
 @media (min-width:768px) {
-    .home-slider .home-slider-visual img,
-    .home-slider .home-slider-visual picture {
+    .slider .slider-visual img,
+    .slider .slider-visual picture {
         max-height: 340px;
         max-width: 100%
     }
 }
 
-.home-slider .dots {
+.slider .dots {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -7332,12 +7335,12 @@ iframe {
 }
 
 @media (min-width:768px) {
-    .home-slider .dots {
+    .slider .dots {
         margin: 30px 0 0
     }
 }
 
-.home-slider .dots .dot {
+.slider .dots .dot {
     font: 0/0 a;
     color: transparent;
     text-shadow: none;
@@ -7358,7 +7361,7 @@ iframe {
     width: 10px
 }
 
-.home-slider .dots .dot.active {
+.slider .dots .dot.active {
     background-color: #b26159;
     border-color: #b26159
 }
@@ -11130,6 +11133,8 @@ only screen and (min-width:992px) and (min-resolution:1.25dppx) {
     background-color: #55acee
 }
 
+
+/* 
 .blog-sidebar .social-links a.twitter:before {
     content: "";
     position: absolute;
@@ -11145,7 +11150,7 @@ only screen and (min-width:992px) and (min-resolution:1.25dppx) {
     background-size: 16px 16px;
     height: 16px;
     width: 16px
-}
+} */
 
 @media (min-width:768px) {
     .blog-sidebar .social-links a.twitter:before {
@@ -11159,7 +11164,8 @@ only screen and (min-width:992px) and (min-resolution:1.25dppx) {
     background-color: #007ab9
 }
 
-.blog-sidebar .social-links a.linkedin:before {
+
+/* .blog-sidebar .social-links a.linkedin:before {
     content: "";
     position: absolute;
     top: 50%;
@@ -11174,7 +11180,7 @@ only screen and (min-width:992px) and (min-resolution:1.25dppx) {
     background-size: 14px 14px;
     height: 14px;
     width: 14px
-}
+} */
 
 @media (min-width:768px) {
     .blog-sidebar .social-links a.linkedin:before {
@@ -16804,4 +16810,9 @@ p.color-violet a.color-violet {
 .owl-carousel .owl-item img {
     display: block;
     width: auto;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
 }

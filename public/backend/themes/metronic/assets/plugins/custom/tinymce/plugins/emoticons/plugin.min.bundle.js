@@ -1,1 +1,490 @@
-!function(){"use strict";function t(){}function n(t){return function(){return t}}function e(t){return t}function o(){return c}var r=tinymce.util.Tools.resolve("tinymce.PluginManager"),i=n(!1),a=n(!0),c={fold:function(t,n){return t()},isSome:i,isNone:a,getOr:e,getOrThunk:u,getOrDie:function(t){throw new Error(t||"error: getOrDie called on none.")},getOrNull:n(null),getOrUndefined:n(void 0),or:e,orThunk:u,map:o,each:t,bind:o,exists:i,forall:a,filter:function(){return c},toArray:function(){return[]},toString:n("none()")};function u(t){return t()}function l(t){var n=t;return{get:function(){return n},set:function(t){n=t}}}function s(t,n){for(var e=w(t),o=0,r=e.length;o<r;o++){var i=e[o];n(t[i],i)}}function f(t,n){return O.call(t,n)}function m(){var n,e,o=(n=t,e=l(p.none()),{clear:function(){r(),e.set(p.none())},isSet:function(){return e.get().isSome()},get:function(){return e.get()},set:function(t){r(),e.set(p.some(t))}});function r(){return e.get().each(n)}return b(b({},o),{on:function(t){return o.get().each(t)}})}function g(t,n){return-1!==t.indexOf(n)}function d(t,n,e){var o=m(),r=m(),i=t.getParam("emoticons_images_url","https://twemoji.maxcdn.com/v/13.0.1/72x72/","string");function a(){return r.get().getOr([])}function c(){return o.isSet()&&r.isSet()}return t.on("init",(function(){k.load(e,n).then((function(n){var e,a,c,u,l,m=(e=t.getParam("emoticons_append",{},"object"),a=function(t){return b({keywords:[],category:"user"},t)},C(e,(function(t,n){return{k:n,v:a(t)}})));c=function(){for(var t=[],n=0;n<arguments.length;n++)t[n]=arguments[n];if(0===t.length)throw new Error("Can't merge zero objects");for(var e={},o=0;o<t.length;o++){var r,i=t[o];for(r in i)f(i,r)&&(e[r]=(e[r],i[r]))}return e}(n,m),u={},l=[],s(c,(function(t,n){var e,o,r,a,c,s={title:n,keywords:t.keywords,char:(a=(r=t).char).length>=(c="<img").length&&a.substr(0,0+c.length)===c?r.char.replace(/src="([^"]+)"/,(function(t,n){return'src="'+i+n+'"'})):r.char,category:f(e=T,o=t.category)?e[o]:o},m=void 0!==u[s.category]?u[s.category]:[];u[s.category]=m.concat([s]),l.push(s)})),o.set(u),r.set(l)}),(function(t){console.log("Failed to load emoticons: "+t),o.set({}),r.set([])}))})),{listCategories:function(){return[_].concat(w(o.get().getOr({})))},hasLoaded:c,waitForLoad:function(){return c()?A.resolve(!0):new A((function(t,e){var o=15,r=j.setInterval((function(){c()?(j.clearInterval(r),t(!0)):--o<0&&(console.log("Could not load emojis from url: "+n),j.clearInterval(r),e(!1))}),100)}))},listAll:a,listCategory:function(t){return t===_?a():o.get().bind((function(n){return p.from(n[t])})).getOr([])}}}function h(t,n,e){for(var o,r,a=[],c=n.toLowerCase(),u=e.fold((function(){return i}),(function(t){return function(n){return t<=n}})),l=0;l<t.length&&(0!==n.length&&(o=t[l],r=c,!g(o.title.toLowerCase(),r)&&!function(t){for(var n=0,e=t.length;n<e;n++)if(g(t[n].toLowerCase(),r))return 1}(o.keywords))||(a.push({value:t[l].char,text:t[l].title,icon:t[l].char}),!u(a.length)));l++);return a}function v(t,n){var e,o,r={pattern:"",results:h(n.listAll(),"",p.some(300))},i=l(_),a=(e=function(t){var e,o=(e=t).getData(),r=i.get(),a=h(n.listCategory(r),o[x],r===_?p.some(300):p.none());e.setData({results:a})},o=null,{cancel:c,throttle:function(){for(var t=[],n=0;n<arguments.length;n++)t[n]=arguments[n];c(),o=setTimeout((function(){o=null,e.apply(null,t)}),200)}});function c(){null===o||(clearTimeout(o),o=null)}function u(){return{title:"Emoticons",size:"normal",body:{type:"tabpanel",tabs:function(t){for(var n=t.length,e=new Array(n),o=0;o<n;o++){var r=t[o];e[o]={title:r,name:r,items:[s,f]}}return e}(n.listCategories())},initialData:r,onTabChange:function(t,n){i.set(n.newTabName),a.throttle(t)},onChange:a.throttle,onAction:function(n,e){var o;"results"===e.name&&(o=e.value,t.insertContent(o),n.close())},buttons:[{type:"cancel",text:"Close",primary:!0}]}}var s={label:"Search",type:"input",name:x},f={type:"collection",name:"results"},m=t.windowManager.open(u());m.focus(x),n.hasLoaded()||(m.block("Loading emoticons..."),n.waitForLoad().then((function(){m.redial(u()),a.throttle(m),m.focus(x),m.unblock()})).catch((function(t){m.redial({title:"Emoticons",body:{type:"panel",items:[{type:"alertbanner",level:"error",icon:"warning",text:"<p>Could not load emoticons</p>"}]},buttons:[{type:"cancel",text:"Close",primary:!0}],initialData:{pattern:"",results:[]}}),m.focus(x),m.unblock()})))}var y=function t(e){function o(){return l}function r(t){return t(e)}var u=n(e),l={fold:function(t,n){return n(e)},isSome:a,isNone:i,getOr:u,getOrThunk:u,getOrDie:u,getOrNull:u,getOrUndefined:u,or:o,orThunk:o,map:function(n){return t(n(e))},each:function(t){t(e)},bind:r,exists:r,forall:r,filter:function(t){return t(e)?l:c},toArray:function(){return[e]},toString:function(){return"some("+e+")"}};return l},p={some:y,none:o,from:function(t){return null==t?c:y(t)}},b=function(){return(b=Object.assign||function(t){for(var n,e=1,o=arguments.length;e<o;e++)for(var r in n=arguments[e])Object.prototype.hasOwnProperty.call(n,r)&&(t[r]=n[r]);return t}).apply(this,arguments)},w=Object.keys,O=Object.hasOwnProperty,C=function(t,n){var e={};return s(t,(function(t,o){var r=n(t,o);e[r.k]=r.v})),e},k=tinymce.util.Tools.resolve("tinymce.Resource"),j=tinymce.util.Tools.resolve("tinymce.util.Delay"),A=tinymce.util.Tools.resolve("tinymce.util.Promise"),_="All",T={symbols:"Symbols",people:"People",animals_and_nature:"Animals and Nature",food_and_drink:"Food and Drink",activity:"Activity",travel_and_places:"Travel and Places",objects:"Objects",flags:"Flags",user:"User Defined"},x="pattern";r.add("emoticons",(function(t,n){var e,o,r,i,a,c,u,l,s=(o=n,r=(e=t).getParam("emoticons_database","emojis","string"),e.getParam("emoticons_database_url",o+"/js/"+r+e.suffix+".js","string")),f=t.getParam("emoticons_database_id","tinymce.plugins.emoticons","string"),m=d(t,s,f);function g(){return c.execCommand("mceEmoticons")}a=m,(i=t).addCommand("mceEmoticons",(function(){return v(i,a)})),(c=t).ui.registry.addButton("emoticons",{tooltip:"Emoticons",icon:"emoji",onAction:g}),c.ui.registry.addMenuItem("emoticons",{text:"Emoticons...",icon:"emoji",onAction:g}),l=m,(u=t).ui.registry.addAutocompleter("emoticons",{ch:":",columns:"auto",minChars:2,fetch:function(t,n){return l.waitForLoad().then((function(){return h(l.listAll(),t,p.some(n))}))},onAction:function(t,n,e){u.selection.setRng(n),u.insertContent(e),t.hide()}}),function(t){t.on("PreInit",(function(){t.parser.addAttributeFilter("data-emoticon",(function(t){!function(t){for(var n,e=0,o=t.length;e<o;e++)(n=t[e]).attr("data-mce-resize","false"),n.attr("data-mce-placeholder","1")}(t)}))}))}(t)}))}();
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!***************************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/emoticons/plugin.min.js ***!
+  \***************************************************************************************/
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.0 (2021-10-11)
+ */
+!function () {
+  "use strict";
+
+  function r() {}
+
+  function i(t) {
+    return function () {
+      return t;
+    };
+  }
+
+  function t(t) {
+    return t;
+  }
+
+  function n() {
+    return c;
+  }
+
+  var m,
+      e = tinymce.util.Tools.resolve("tinymce.PluginManager"),
+      l = i(!1),
+      a = i(!(m = null)),
+      c = {
+    fold: function fold(t, n) {
+      return t();
+    },
+    isSome: l,
+    isNone: a,
+    getOr: t,
+    getOrThunk: o,
+    getOrDie: function getOrDie(t) {
+      throw new Error(t || "error: getOrDie called on none.");
+    },
+    getOrNull: i(null),
+    getOrUndefined: i(void 0),
+    or: t,
+    orThunk: o,
+    map: n,
+    each: r,
+    bind: n,
+    exists: l,
+    forall: a,
+    filter: function filter() {
+      return c;
+    },
+    toArray: function toArray() {
+      return [];
+    },
+    toString: i("none()")
+  };
+
+  function o(t) {
+    return t();
+  }
+
+  function g(t) {
+    var n = t;
+    return {
+      get: function get() {
+        return n;
+      },
+      set: function set(t) {
+        n = t;
+      }
+    };
+  }
+
+  function d(t, n) {
+    for (var e = k(t), o = 0, r = e.length; o < r; o++) {
+      var i = e[o];
+      n(t[i], i);
+    }
+  }
+
+  function h(t, n) {
+    return j.call(t, n);
+  }
+
+  function s() {
+    var t,
+        n,
+        e = (t = r, n = g(O.none()), {
+      clear: function clear() {
+        o(), n.set(O.none());
+      },
+      isSet: function isSet() {
+        return n.get().isSome();
+      },
+      get: function get() {
+        return n.get();
+      },
+      set: function set(t) {
+        o(), n.set(O.some(t));
+      }
+    });
+
+    function o() {
+      return n.get().each(t);
+    }
+
+    return _C(_C({}, e), {
+      on: function on(t) {
+        return e.get().each(t);
+      }
+    });
+  }
+
+  function f(t, n) {
+    return -1 !== t.indexOf(n);
+  }
+
+  function v(i, r, t) {
+    var a = s(),
+        c = s(),
+        f = i.getParam("emoticons_images_url", "https://twemoji.maxcdn.com/v/13.0.1/72x72/", "string");
+    i.on("init", function () {
+      _.load(t, r).then(function (t) {
+        var n,
+            e,
+            o,
+            l,
+            s,
+            r = (n = i.getParam("emoticons_append", {}, "object"), e = function e(t) {
+          return _C({
+            keywords: [],
+            category: "user"
+          }, t);
+        }, A(n, function (t, n) {
+          return {
+            k: n,
+            v: e(t)
+          };
+        }));
+        o = w(t, r), l = {}, s = [], d(o, function (t, n) {
+          var e,
+              o,
+              r,
+              i,
+              a,
+              c = {
+            title: n,
+            keywords: t.keywords,
+            "char": (i = (r = t)["char"]).length >= (a = "<img").length && i.substr(0, 0 + a.length) === a ? r["char"].replace(/src="([^"]+)"/, function (t, n) {
+              return 'src="' + f + n + '"';
+            }) : r["char"],
+            category: h(e = D, o = t.category) ? e[o] : o
+          },
+              u = void 0 !== l[c.category] ? l[c.category] : [];
+          l[c.category] = u.concat([c]), s.push(c);
+        }), a.set(l), c.set(s);
+      }, function (t) {
+        console.log("Failed to load emoticons: " + t), a.set({}), c.set([]);
+      });
+    });
+
+    function e() {
+      return c.get().getOr([]);
+    }
+
+    function u() {
+      return a.isSet() && c.isSet();
+    }
+
+    return {
+      listCategories: function listCategories() {
+        return [P].concat(k(a.get().getOr({})));
+      },
+      hasLoaded: u,
+      waitForLoad: function waitForLoad() {
+        return u() ? x.resolve(!0) : new x(function (t, n) {
+          var e = 15,
+              o = T.setInterval(function () {
+            u() ? (T.clearInterval(o), t(!0)) : --e < 0 && (console.log("Could not load emojis from url: " + r), T.clearInterval(o), n(!1));
+          }, 100);
+        });
+      },
+      listAll: e,
+      listCategory: function listCategory(n) {
+        return n === P ? e() : a.get().bind(function (t) {
+          return O.from(t[n]);
+        }).getOr([]);
+      }
+    };
+  }
+
+  function y(t, n, e) {
+    for (var o, r, i = [], a = n.toLowerCase(), c = e.fold(function () {
+      return l;
+    }, function (n) {
+      return function (t) {
+        return n <= t;
+      };
+    }), u = 0; u < t.length && (0 !== n.length && (o = t[u], r = a, !f(o.title.toLowerCase(), r) && !function (t) {
+      for (var n = 0, e = t.length; n < e; n++) {
+        if (f(t[n].toLowerCase(), r)) return 1;
+      }
+    }(o.keywords)) || (i.push({
+      value: t[u]["char"],
+      text: t[u].title,
+      icon: t[u]["char"]
+    }), !c(i.length))); u++) {
+      ;
+    }
+
+    return i;
+  }
+
+  function p(o, i) {
+    var e,
+        r,
+        t = {
+      pattern: "",
+      results: y(i.listAll(), "", O.some(300))
+    },
+        a = g(P),
+        c = (e = function e(t) {
+      var n,
+          e = (n = t).getData(),
+          o = a.get(),
+          r = y(i.listCategory(o), e[S], o === P ? O.some(300) : O.none());
+      n.setData({
+        results: r
+      });
+    }, r = null, {
+      cancel: u,
+      throttle: function throttle() {
+        for (var t = [], n = 0; n < arguments.length; n++) {
+          t[n] = arguments[n];
+        }
+
+        u(), r = setTimeout(function () {
+          r = null, e.apply(null, t);
+        }, 200);
+      }
+    });
+
+    function u() {
+      m === r || (clearTimeout(r), r = null);
+    }
+
+    function n() {
+      return {
+        title: "Emoticons",
+        size: "normal",
+        body: {
+          type: "tabpanel",
+          tabs: function (t) {
+            for (var n = t.length, e = new Array(n), o = 0; o < n; o++) {
+              var r = t[o];
+              e[o] = {
+                title: r,
+                name: r,
+                items: [l, s]
+              };
+            }
+
+            return e;
+          }(i.listCategories())
+        },
+        initialData: t,
+        onTabChange: function onTabChange(t, n) {
+          a.set(n.newTabName), c.throttle(t);
+        },
+        onChange: c.throttle,
+        onAction: function onAction(t, n) {
+          var e;
+          "results" === n.name && (e = n.value, o.insertContent(e), t.close());
+        },
+        buttons: [{
+          type: "cancel",
+          text: "Close",
+          primary: !0
+        }]
+      };
+    }
+
+    var l = {
+      label: "Search",
+      type: "input",
+      name: S
+    },
+        s = {
+      type: "collection",
+      name: "results"
+    },
+        f = o.windowManager.open(n());
+    f.focus(S), i.hasLoaded() || (f.block("Loading emoticons..."), i.waitForLoad().then(function () {
+      f.redial(n()), c.throttle(f), f.focus(S), f.unblock();
+    })["catch"](function (t) {
+      f.redial({
+        title: "Emoticons",
+        body: {
+          type: "panel",
+          items: [{
+            type: "alertbanner",
+            level: "error",
+            icon: "warning",
+            text: "<p>Could not load emoticons</p>"
+          }]
+        },
+        buttons: [{
+          type: "cancel",
+          text: "Close",
+          primary: !0
+        }],
+        initialData: {
+          pattern: "",
+          results: []
+        }
+      }), f.focus(S), f.unblock();
+    }));
+  }
+
+  function b(t) {
+    t.on("PreInit", function () {
+      t.parser.addAttributeFilter("data-emoticon", function (t) {
+        !function (t) {
+          for (var n, e = 0, o = t.length; e < o; e++) {
+            (n = t[e]).attr("data-mce-resize", "false"), n.attr("data-mce-placeholder", "1");
+          }
+        }(t);
+      });
+    });
+  }
+
+  function w() {
+    for (var t = [], n = 0; n < arguments.length; n++) {
+      t[n] = arguments[n];
+    }
+
+    if (0 === t.length) throw new Error("Can't merge zero objects");
+
+    for (var e = {}, o = 0; o < t.length; o++) {
+      var r,
+          i = t[o];
+
+      for (r in i) {
+        h(i, r) && (e[r] = (e[r], i[r]));
+      }
+    }
+
+    return e;
+  }
+
+  var u = function u(e) {
+    function t() {
+      return r;
+    }
+
+    function n(t) {
+      return t(e);
+    }
+
+    var o = i(e),
+        r = {
+      fold: function fold(t, n) {
+        return n(e);
+      },
+      isSome: a,
+      isNone: l,
+      getOr: o,
+      getOrThunk: o,
+      getOrDie: o,
+      getOrNull: o,
+      getOrUndefined: o,
+      or: t,
+      orThunk: t,
+      map: function map(t) {
+        return u(t(e));
+      },
+      each: function each(t) {
+        t(e);
+      },
+      bind: n,
+      exists: n,
+      forall: n,
+      filter: function filter(t) {
+        return t(e) ? r : c;
+      },
+      toArray: function toArray() {
+        return [e];
+      },
+      toString: function toString() {
+        return "some(" + e + ")";
+      }
+    };
+    return r;
+  },
+      O = {
+    some: u,
+    none: n,
+    from: function from(t) {
+      return null == t ? c : u(t);
+    }
+  },
+      _C = function C() {
+    return (_C = Object.assign || function (t) {
+      for (var n, e = 1, o = arguments.length; e < o; e++) {
+        for (var r in n = arguments[e]) {
+          Object.prototype.hasOwnProperty.call(n, r) && (t[r] = n[r]);
+        }
+      }
+
+      return t;
+    }).apply(this, arguments);
+  },
+      k = Object.keys,
+      j = Object.hasOwnProperty,
+      A = function A(t, o) {
+    var r = {};
+    return d(t, function (t, n) {
+      var e = o(t, n);
+      r[e.k] = e.v;
+    }), r;
+  },
+      _ = tinymce.util.Tools.resolve("tinymce.Resource"),
+      T = tinymce.util.Tools.resolve("tinymce.util.Delay"),
+      x = tinymce.util.Tools.resolve("tinymce.util.Promise"),
+      P = "All",
+      D = {
+    symbols: "Symbols",
+    people: "People",
+    animals_and_nature: "Animals and Nature",
+    food_and_drink: "Food and Drink",
+    activity: "Activity",
+    travel_and_places: "Travel and Places",
+    objects: "Objects",
+    flags: "Flags",
+    user: "User Defined"
+  },
+      S = "pattern";
+
+  e.add("emoticons", function (t, n) {
+    var e,
+        o,
+        r,
+        i,
+        a,
+        c,
+        u,
+        l,
+        s = (o = n, r = (e = t).getParam("emoticons_database", "emojis", "string"), e.getParam("emoticons_database_url", o + "/js/" + r + e.suffix + ".js", "string")),
+        f = t.getParam("emoticons_database_id", "tinymce.plugins.emoticons", "string"),
+        m = v(t, s, f);
+
+    function g() {
+      return c.execCommand("mceEmoticons");
+    }
+
+    a = m, (i = t).addCommand("mceEmoticons", function () {
+      return p(i, a);
+    }), (c = t).ui.registry.addButton("emoticons", {
+      tooltip: "Emoticons",
+      icon: "emoji",
+      onAction: g
+    }), c.ui.registry.addMenuItem("emoticons", {
+      text: "Emoticons...",
+      icon: "emoji",
+      onAction: g
+    }), l = m, (u = t).ui.registry.addAutocompleter("emoticons", {
+      ch: ":",
+      columns: "auto",
+      minChars: 2,
+      fetch: function fetch(t, n) {
+        return l.waitForLoad().then(function () {
+          return y(l.listAll(), t, O.some(n));
+        });
+      },
+      onAction: function onAction(t, n, e) {
+        u.selection.setRng(n), u.insertContent(e), t.hide();
+      }
+    }), b(t);
+  });
+}();
+/******/ })()
+;

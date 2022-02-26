@@ -73,10 +73,9 @@
         <?= $this->include('Adnduweb\Ci4Admin\themes\metronic\pages\users\__modals\_entantque') ?> 
         <!-- end::Modal En tant que -->
      <?php } ?>
+     <?= $this->renderSection('AdminModal') ?>
 
     <?= $this->include('\Themes\backend\/'.$theme_admin.'/\partials\javascript') ?>
-
-    <?= $this->renderSection('AdminModal') ?>
     
 </body>
 

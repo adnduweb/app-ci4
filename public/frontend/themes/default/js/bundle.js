@@ -3148,6 +3148,16 @@ function within(min, value, max) {
 
 /***/ }),
 
+/***/ "./node_modules/aos/dist/aos.js":
+/*!**************************************!*\
+  !*** ./node_modules/aos/dist/aos.js ***!
+  \**************************************/
+/***/ (function(module) {
+
+!function(e,t){ true?module.exports=t():0}(this,function(){return function(e){function t(o){if(n[o])return n[o].exports;var i=n[o]={exports:{},id:o,loaded:!1};return e[o].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var n={};return t.m=e,t.c=n,t.p="dist/",t(0)}([function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{default:e}}var i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},r=n(1),a=(o(r),n(6)),u=o(a),c=n(7),s=o(c),f=n(8),d=o(f),l=n(9),p=o(l),m=n(10),b=o(m),v=n(11),y=o(v),g=n(14),h=o(g),w=[],k=!1,x={offset:120,delay:0,easing:"ease",duration:400,disable:!1,once:!1,startEvent:"DOMContentLoaded",throttleDelay:99,debounceDelay:50,disableMutationObserver:!1},j=function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(e&&(k=!0),k)return w=(0,y.default)(w,x),(0,b.default)(w,x.once),w},O=function(){w=(0,h.default)(),j()},M=function(){w.forEach(function(e,t){e.node.removeAttribute("data-aos"),e.node.removeAttribute("data-aos-easing"),e.node.removeAttribute("data-aos-duration"),e.node.removeAttribute("data-aos-delay")})},S=function(e){return e===!0||"mobile"===e&&p.default.mobile()||"phone"===e&&p.default.phone()||"tablet"===e&&p.default.tablet()||"function"==typeof e&&e()===!0},_=function(e){x=i(x,e),w=(0,h.default)();var t=document.all&&!window.atob;return S(x.disable)||t?M():(x.disableMutationObserver||d.default.isSupported()||(console.info('\n      aos: MutationObserver is not supported on this browser,\n      code mutations observing has been disabled.\n      You may have to call "refreshHard()" by yourself.\n    '),x.disableMutationObserver=!0),document.querySelector("body").setAttribute("data-aos-easing",x.easing),document.querySelector("body").setAttribute("data-aos-duration",x.duration),document.querySelector("body").setAttribute("data-aos-delay",x.delay),"DOMContentLoaded"===x.startEvent&&["complete","interactive"].indexOf(document.readyState)>-1?j(!0):"load"===x.startEvent?window.addEventListener(x.startEvent,function(){j(!0)}):document.addEventListener(x.startEvent,function(){j(!0)}),window.addEventListener("resize",(0,s.default)(j,x.debounceDelay,!0)),window.addEventListener("orientationchange",(0,s.default)(j,x.debounceDelay,!0)),window.addEventListener("scroll",(0,u.default)(function(){(0,b.default)(w,x.once)},x.throttleDelay)),x.disableMutationObserver||d.default.ready("[data-aos]",O),w)};e.exports={init:_,refresh:j,refreshHard:O}},function(e,t){},,,,,function(e,t){(function(t){"use strict";function n(e,t,n){function o(t){var n=b,o=v;return b=v=void 0,k=t,g=e.apply(o,n)}function r(e){return k=e,h=setTimeout(f,t),M?o(e):g}function a(e){var n=e-w,o=e-k,i=t-n;return S?j(i,y-o):i}function c(e){var n=e-w,o=e-k;return void 0===w||n>=t||n<0||S&&o>=y}function f(){var e=O();return c(e)?d(e):void(h=setTimeout(f,a(e)))}function d(e){return h=void 0,_&&b?o(e):(b=v=void 0,g)}function l(){void 0!==h&&clearTimeout(h),k=0,b=w=v=h=void 0}function p(){return void 0===h?g:d(O())}function m(){var e=O(),n=c(e);if(b=arguments,v=this,w=e,n){if(void 0===h)return r(w);if(S)return h=setTimeout(f,t),o(w)}return void 0===h&&(h=setTimeout(f,t)),g}var b,v,y,g,h,w,k=0,M=!1,S=!1,_=!0;if("function"!=typeof e)throw new TypeError(s);return t=u(t)||0,i(n)&&(M=!!n.leading,S="maxWait"in n,y=S?x(u(n.maxWait)||0,t):y,_="trailing"in n?!!n.trailing:_),m.cancel=l,m.flush=p,m}function o(e,t,o){var r=!0,a=!0;if("function"!=typeof e)throw new TypeError(s);return i(o)&&(r="leading"in o?!!o.leading:r,a="trailing"in o?!!o.trailing:a),n(e,t,{leading:r,maxWait:t,trailing:a})}function i(e){var t="undefined"==typeof e?"undefined":c(e);return!!e&&("object"==t||"function"==t)}function r(e){return!!e&&"object"==("undefined"==typeof e?"undefined":c(e))}function a(e){return"symbol"==("undefined"==typeof e?"undefined":c(e))||r(e)&&k.call(e)==d}function u(e){if("number"==typeof e)return e;if(a(e))return f;if(i(e)){var t="function"==typeof e.valueOf?e.valueOf():e;e=i(t)?t+"":t}if("string"!=typeof e)return 0===e?e:+e;e=e.replace(l,"");var n=m.test(e);return n||b.test(e)?v(e.slice(2),n?2:8):p.test(e)?f:+e}var c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},s="Expected a function",f=NaN,d="[object Symbol]",l=/^\s+|\s+$/g,p=/^[-+]0x[0-9a-f]+$/i,m=/^0b[01]+$/i,b=/^0o[0-7]+$/i,v=parseInt,y="object"==("undefined"==typeof t?"undefined":c(t))&&t&&t.Object===Object&&t,g="object"==("undefined"==typeof self?"undefined":c(self))&&self&&self.Object===Object&&self,h=y||g||Function("return this")(),w=Object.prototype,k=w.toString,x=Math.max,j=Math.min,O=function(){return h.Date.now()};e.exports=o}).call(t,function(){return this}())},function(e,t){(function(t){"use strict";function n(e,t,n){function i(t){var n=b,o=v;return b=v=void 0,O=t,g=e.apply(o,n)}function r(e){return O=e,h=setTimeout(f,t),M?i(e):g}function u(e){var n=e-w,o=e-O,i=t-n;return S?x(i,y-o):i}function s(e){var n=e-w,o=e-O;return void 0===w||n>=t||n<0||S&&o>=y}function f(){var e=j();return s(e)?d(e):void(h=setTimeout(f,u(e)))}function d(e){return h=void 0,_&&b?i(e):(b=v=void 0,g)}function l(){void 0!==h&&clearTimeout(h),O=0,b=w=v=h=void 0}function p(){return void 0===h?g:d(j())}function m(){var e=j(),n=s(e);if(b=arguments,v=this,w=e,n){if(void 0===h)return r(w);if(S)return h=setTimeout(f,t),i(w)}return void 0===h&&(h=setTimeout(f,t)),g}var b,v,y,g,h,w,O=0,M=!1,S=!1,_=!0;if("function"!=typeof e)throw new TypeError(c);return t=a(t)||0,o(n)&&(M=!!n.leading,S="maxWait"in n,y=S?k(a(n.maxWait)||0,t):y,_="trailing"in n?!!n.trailing:_),m.cancel=l,m.flush=p,m}function o(e){var t="undefined"==typeof e?"undefined":u(e);return!!e&&("object"==t||"function"==t)}function i(e){return!!e&&"object"==("undefined"==typeof e?"undefined":u(e))}function r(e){return"symbol"==("undefined"==typeof e?"undefined":u(e))||i(e)&&w.call(e)==f}function a(e){if("number"==typeof e)return e;if(r(e))return s;if(o(e)){var t="function"==typeof e.valueOf?e.valueOf():e;e=o(t)?t+"":t}if("string"!=typeof e)return 0===e?e:+e;e=e.replace(d,"");var n=p.test(e);return n||m.test(e)?b(e.slice(2),n?2:8):l.test(e)?s:+e}var u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},c="Expected a function",s=NaN,f="[object Symbol]",d=/^\s+|\s+$/g,l=/^[-+]0x[0-9a-f]+$/i,p=/^0b[01]+$/i,m=/^0o[0-7]+$/i,b=parseInt,v="object"==("undefined"==typeof t?"undefined":u(t))&&t&&t.Object===Object&&t,y="object"==("undefined"==typeof self?"undefined":u(self))&&self&&self.Object===Object&&self,g=v||y||Function("return this")(),h=Object.prototype,w=h.toString,k=Math.max,x=Math.min,j=function(){return g.Date.now()};e.exports=n}).call(t,function(){return this}())},function(e,t){"use strict";function n(e){var t=void 0,o=void 0,i=void 0;for(t=0;t<e.length;t+=1){if(o=e[t],o.dataset&&o.dataset.aos)return!0;if(i=o.children&&n(o.children))return!0}return!1}function o(){return window.MutationObserver||window.WebKitMutationObserver||window.MozMutationObserver}function i(){return!!o()}function r(e,t){var n=window.document,i=o(),r=new i(a);u=t,r.observe(n.documentElement,{childList:!0,subtree:!0,removedNodes:!0})}function a(e){e&&e.forEach(function(e){var t=Array.prototype.slice.call(e.addedNodes),o=Array.prototype.slice.call(e.removedNodes),i=t.concat(o);if(n(i))return u()})}Object.defineProperty(t,"__esModule",{value:!0});var u=function(){};t.default={isSupported:i,ready:r}},function(e,t){"use strict";function n(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(){return navigator.userAgent||navigator.vendor||window.opera||""}Object.defineProperty(t,"__esModule",{value:!0});var i=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),r=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i,a=/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i,u=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i,c=/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i,s=function(){function e(){n(this,e)}return i(e,[{key:"phone",value:function(){var e=o();return!(!r.test(e)&&!a.test(e.substr(0,4)))}},{key:"mobile",value:function(){var e=o();return!(!u.test(e)&&!c.test(e.substr(0,4)))}},{key:"tablet",value:function(){return this.mobile()&&!this.phone()}}]),e}();t.default=new s},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=function(e,t,n){var o=e.node.getAttribute("data-aos-once");t>e.position?e.node.classList.add("aos-animate"):"undefined"!=typeof o&&("false"===o||!n&&"true"!==o)&&e.node.classList.remove("aos-animate")},o=function(e,t){var o=window.pageYOffset,i=window.innerHeight;e.forEach(function(e,r){n(e,i+o,t)})};t.default=o},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var i=n(12),r=o(i),a=function(e,t){return e.forEach(function(e,n){e.node.classList.add("aos-init"),e.position=(0,r.default)(e.node,t.offset)}),e};t.default=a},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var i=n(13),r=o(i),a=function(e,t){var n=0,o=0,i=window.innerHeight,a={offset:e.getAttribute("data-aos-offset"),anchor:e.getAttribute("data-aos-anchor"),anchorPlacement:e.getAttribute("data-aos-anchor-placement")};switch(a.offset&&!isNaN(a.offset)&&(o=parseInt(a.offset)),a.anchor&&document.querySelectorAll(a.anchor)&&(e=document.querySelectorAll(a.anchor)[0]),n=(0,r.default)(e).top,a.anchorPlacement){case"top-bottom":break;case"center-bottom":n+=e.offsetHeight/2;break;case"bottom-bottom":n+=e.offsetHeight;break;case"top-center":n+=i/2;break;case"bottom-center":n+=i/2+e.offsetHeight;break;case"center-center":n+=i/2+e.offsetHeight/2;break;case"top-top":n+=i;break;case"bottom-top":n+=e.offsetHeight+i;break;case"center-top":n+=e.offsetHeight/2+i}return a.anchorPlacement||a.offset||isNaN(t)||(o=t),n+o};t.default=a},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=function(e){for(var t=0,n=0;e&&!isNaN(e.offsetLeft)&&!isNaN(e.offsetTop);)t+=e.offsetLeft-("BODY"!=e.tagName?e.scrollLeft:0),n+=e.offsetTop-("BODY"!=e.tagName?e.scrollTop:0),e=e.offsetParent;return{top:n,left:t}};t.default=n},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=function(e){return e=e||document.querySelectorAll("[data-aos]"),Array.prototype.map.call(e,function(e){return{node:e}})};t.default=n}])});
+
+/***/ }),
+
 /***/ "./resources/frontend/compoments/event-handler.js":
 /*!********************************************************!*\
   !*** ./resources/frontend/compoments/event-handler.js ***!
@@ -3240,6 +3250,896 @@ var KTEventHandler = function () {
 if ( true && typeof module.exports !== 'undefined') {
   module.exports = KTEventHandler;
 }
+
+/***/ }),
+
+/***/ "./resources/frontend/compoments/lazyload.js":
+/*!***************************************************!*\
+  !*** ./resources/frontend/compoments/lazyload.js ***!
+  \***************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+(function (global, factory) {
+  ( false ? 0 : _typeof(exports)) === 'object' && "object" !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : (0);
+})(this, function () {
+  'use strict';
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  var runningOnBrowser = typeof window !== "undefined";
+  var isBot = runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined" && /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent);
+  var supportsIntersectionObserver = runningOnBrowser && "IntersectionObserver" in window;
+  var supportsClassList = runningOnBrowser && "classList" in document.createElement("p");
+  var isHiDpi = runningOnBrowser && window.devicePixelRatio > 1;
+  var defaultSettings = {
+    elements_selector: ".lazy",
+    container: isBot || runningOnBrowser ? document : null,
+    threshold: 300,
+    thresholds: null,
+    data_src: "src",
+    data_srcset: "srcset",
+    data_sizes: "sizes",
+    data_bg: "bg",
+    data_bg_hidpi: "bg-hidpi",
+    data_bg_multi: "bg-multi",
+    data_bg_multi_hidpi: "bg-multi-hidpi",
+    data_poster: "poster",
+    class_applied: "applied",
+    class_loading: "loading",
+    class_loaded: "loaded",
+    class_error: "error",
+    class_entered: "entered",
+    class_exited: "exited",
+    unobserve_completed: true,
+    unobserve_entered: false,
+    cancel_on_exit: true,
+    callback_enter: null,
+    callback_exit: null,
+    callback_applied: null,
+    callback_loading: null,
+    callback_loaded: null,
+    callback_error: null,
+    callback_finish: null,
+    callback_cancel: null,
+    use_native: false
+  };
+
+  var getExtendedSettings = function getExtendedSettings(customSettings) {
+    return _extends({}, defaultSettings, customSettings);
+  };
+  /* Creates instance and notifies it through the window element */
+
+
+  var createInstance = function createInstance(classObj, options) {
+    var event;
+    var eventString = "LazyLoad::Initialized";
+    var instance = new classObj(options);
+
+    try {
+      // Works in modern browsers
+      event = new CustomEvent(eventString, {
+        detail: {
+          instance: instance
+        }
+      });
+    } catch (err) {
+      // Works in Internet Explorer (all versions)
+      event = document.createEvent("CustomEvent");
+      event.initCustomEvent(eventString, false, false, {
+        instance: instance
+      });
+    }
+
+    window.dispatchEvent(event);
+  };
+  /* Auto initialization of one or more instances of lazyload, depending on the 
+      options passed in (plain object or an array) */
+
+
+  var autoInitialize = function autoInitialize(classObj, options) {
+    if (!options) {
+      return;
+    }
+
+    if (!options.length) {
+      // Plain object
+      createInstance(classObj, options);
+    } else {
+      // Array of objects
+      for (var i = 0, optionsItem; optionsItem = options[i]; i += 1) {
+        createInstance(classObj, optionsItem);
+      }
+    }
+  };
+
+  var SRC = "src";
+  var SRCSET = "srcset";
+  var SIZES = "sizes";
+  var POSTER = "poster";
+  var ORIGINALS = "llOriginalAttrs";
+  var statusLoading = "loading";
+  var statusLoaded = "loaded";
+  var statusApplied = "applied";
+  var statusEntered = "entered";
+  var statusError = "error";
+  var statusNative = "native";
+  var dataPrefix = "data-";
+  var statusDataName = "ll-status";
+
+  var getData = function getData(element, attribute) {
+    return element.getAttribute(dataPrefix + attribute);
+  };
+
+  var setData = function setData(element, attribute, value) {
+    var attrName = dataPrefix + attribute;
+
+    if (value === null) {
+      element.removeAttribute(attrName);
+      return;
+    }
+
+    element.setAttribute(attrName, value);
+  };
+
+  var getStatus = function getStatus(element) {
+    return getData(element, statusDataName);
+  };
+
+  var setStatus = function setStatus(element, status) {
+    return setData(element, statusDataName, status);
+  };
+
+  var resetStatus = function resetStatus(element) {
+    return setStatus(element, null);
+  };
+
+  var hasEmptyStatus = function hasEmptyStatus(element) {
+    return getStatus(element) === null;
+  };
+
+  var hasStatusLoading = function hasStatusLoading(element) {
+    return getStatus(element) === statusLoading;
+  };
+
+  var hasStatusError = function hasStatusError(element) {
+    return getStatus(element) === statusError;
+  };
+
+  var hasStatusNative = function hasStatusNative(element) {
+    return getStatus(element) === statusNative;
+  };
+
+  var statusesAfterLoading = [statusLoading, statusLoaded, statusApplied, statusError];
+
+  var hadStartedLoading = function hadStartedLoading(element) {
+    return statusesAfterLoading.indexOf(getStatus(element)) >= 0;
+  };
+
+  var safeCallback = function safeCallback(callback, arg1, arg2, arg3) {
+    if (!callback) {
+      return;
+    }
+
+    if (arg3 !== undefined) {
+      callback(arg1, arg2, arg3);
+      return;
+    }
+
+    if (arg2 !== undefined) {
+      callback(arg1, arg2);
+      return;
+    }
+
+    callback(arg1);
+  };
+
+  var addClass = function addClass(element, className) {
+    if (supportsClassList) {
+      element.classList.add(className);
+      return;
+    }
+
+    element.className += (element.className ? " " : "") + className;
+  };
+
+  var removeClass = function removeClass(element, className) {
+    if (supportsClassList) {
+      element.classList.remove(className);
+      return;
+    }
+
+    element.className = element.className.replace(new RegExp("(^|\\s+)" + className + "(\\s+|$)"), " ").replace(/^\s+/, "").replace(/\s+$/, "");
+  };
+
+  var addTempImage = function addTempImage(element) {
+    element.llTempImage = document.createElement("IMG");
+  };
+
+  var deleteTempImage = function deleteTempImage(element) {
+    delete element.llTempImage;
+  };
+
+  var getTempImage = function getTempImage(element) {
+    return element.llTempImage;
+  };
+
+  var unobserve = function unobserve(element, instance) {
+    if (!instance) return;
+    var observer = instance._observer;
+    if (!observer) return;
+    observer.unobserve(element);
+  };
+
+  var resetObserver = function resetObserver(observer) {
+    observer.disconnect();
+  };
+
+  var unobserveEntered = function unobserveEntered(element, settings, instance) {
+    if (settings.unobserve_entered) unobserve(element, instance);
+  };
+
+  var updateLoadingCount = function updateLoadingCount(instance, delta) {
+    if (!instance) return;
+    instance.loadingCount += delta;
+  };
+
+  var decreaseToLoadCount = function decreaseToLoadCount(instance) {
+    if (!instance) return;
+    instance.toLoadCount -= 1;
+  };
+
+  var setToLoadCount = function setToLoadCount(instance, value) {
+    if (!instance) return;
+    instance.toLoadCount = value;
+  };
+
+  var isSomethingLoading = function isSomethingLoading(instance) {
+    return instance.loadingCount > 0;
+  };
+
+  var haveElementsToLoad = function haveElementsToLoad(instance) {
+    return instance.toLoadCount > 0;
+  };
+
+  var getSourceTags = function getSourceTags(parentTag) {
+    var sourceTags = [];
+
+    for (var i = 0, childTag; childTag = parentTag.children[i]; i += 1) {
+      if (childTag.tagName === "SOURCE") {
+        sourceTags.push(childTag);
+      }
+    }
+
+    return sourceTags;
+  };
+
+  var forEachPictureSource = function forEachPictureSource(element, fn) {
+    var parent = element.parentNode;
+
+    if (!parent || parent.tagName !== "PICTURE") {
+      return;
+    }
+
+    var sourceTags = getSourceTags(parent);
+    sourceTags.forEach(fn);
+  };
+
+  var forEachVideoSource = function forEachVideoSource(element, fn) {
+    var sourceTags = getSourceTags(element);
+    sourceTags.forEach(fn);
+  };
+
+  var attrsSrc = [SRC];
+  var attrsSrcPoster = [SRC, POSTER];
+  var attrsSrcSrcsetSizes = [SRC, SRCSET, SIZES];
+
+  var hasOriginalAttrs = function hasOriginalAttrs(element) {
+    return !!element[ORIGINALS];
+  };
+
+  var getOriginalAttrs = function getOriginalAttrs(element) {
+    return element[ORIGINALS];
+  };
+
+  var deleteOriginalAttrs = function deleteOriginalAttrs(element) {
+    return delete element[ORIGINALS];
+  }; // ## SAVE ##
+
+
+  var setOriginalsObject = function setOriginalsObject(element, attributes) {
+    if (hasOriginalAttrs(element)) {
+      return;
+    }
+
+    var originals = {};
+    attributes.forEach(function (attribute) {
+      originals[attribute] = element.getAttribute(attribute);
+    });
+    element[ORIGINALS] = originals;
+  };
+
+  var saveOriginalBackgroundStyle = function saveOriginalBackgroundStyle(element) {
+    if (hasOriginalAttrs(element)) {
+      return;
+    }
+
+    element[ORIGINALS] = {
+      backgroundImage: element.style.backgroundImage
+    };
+  }; // ## RESTORE ##
+
+
+  var setOrResetAttribute = function setOrResetAttribute(element, attrName, value) {
+    if (!value) {
+      element.removeAttribute(attrName);
+      return;
+    }
+
+    element.setAttribute(attrName, value);
+  };
+
+  var restoreOriginalAttrs = function restoreOriginalAttrs(element, attributes) {
+    if (!hasOriginalAttrs(element)) {
+      return;
+    }
+
+    var originals = getOriginalAttrs(element);
+    attributes.forEach(function (attribute) {
+      setOrResetAttribute(element, attribute, originals[attribute]);
+    });
+  };
+
+  var restoreOriginalBgImage = function restoreOriginalBgImage(element) {
+    if (!hasOriginalAttrs(element)) {
+      return;
+    }
+
+    var originals = getOriginalAttrs(element);
+    element.style.backgroundImage = originals.backgroundImage;
+  };
+
+  var manageApplied = function manageApplied(element, settings, instance) {
+    addClass(element, settings.class_applied);
+    setStatus(element, statusApplied); // Instance is not provided when loading is called from static class
+
+    if (!instance) return;
+
+    if (settings.unobserve_completed) {
+      // Unobserve now because we can't do it on load
+      unobserve(element, settings);
+    }
+
+    safeCallback(settings.callback_applied, element, instance);
+  };
+
+  var manageLoading = function manageLoading(element, settings, instance) {
+    addClass(element, settings.class_loading);
+    setStatus(element, statusLoading); // Instance is not provided when loading is called from static class
+
+    if (!instance) return;
+    updateLoadingCount(instance, +1);
+    safeCallback(settings.callback_loading, element, instance);
+  };
+
+  var setAttributeIfValue = function setAttributeIfValue(element, attrName, value) {
+    if (!value) {
+      return;
+    }
+
+    element.setAttribute(attrName, value);
+  };
+
+  var setImageAttributes = function setImageAttributes(element, settings) {
+    setAttributeIfValue(element, SIZES, getData(element, settings.data_sizes));
+    setAttributeIfValue(element, SRCSET, getData(element, settings.data_srcset));
+    setAttributeIfValue(element, SRC, getData(element, settings.data_src));
+  };
+
+  var setSourcesImg = function setSourcesImg(imgEl, settings) {
+    forEachPictureSource(imgEl, function (sourceTag) {
+      setOriginalsObject(sourceTag, attrsSrcSrcsetSizes);
+      setImageAttributes(sourceTag, settings);
+    });
+    setOriginalsObject(imgEl, attrsSrcSrcsetSizes);
+    setImageAttributes(imgEl, settings);
+  };
+
+  var setSourcesIframe = function setSourcesIframe(iframe, settings) {
+    setOriginalsObject(iframe, attrsSrc);
+    setAttributeIfValue(iframe, SRC, getData(iframe, settings.data_src));
+  };
+
+  var setSourcesVideo = function setSourcesVideo(videoEl, settings) {
+    forEachVideoSource(videoEl, function (sourceEl) {
+      setOriginalsObject(sourceEl, attrsSrc);
+      setAttributeIfValue(sourceEl, SRC, getData(sourceEl, settings.data_src));
+    });
+    setOriginalsObject(videoEl, attrsSrcPoster);
+    setAttributeIfValue(videoEl, POSTER, getData(videoEl, settings.data_poster));
+    setAttributeIfValue(videoEl, SRC, getData(videoEl, settings.data_src));
+    videoEl.load();
+  };
+
+  var setBackground = function setBackground(element, settings, instance) {
+    var bg1xValue = getData(element, settings.data_bg);
+    var bgHiDpiValue = getData(element, settings.data_bg_hidpi);
+    var bgDataValue = isHiDpi && bgHiDpiValue ? bgHiDpiValue : bg1xValue;
+    if (!bgDataValue) return;
+    element.style.backgroundImage = "url(\"".concat(bgDataValue, "\")");
+    getTempImage(element).setAttribute(SRC, bgDataValue);
+    manageLoading(element, settings, instance);
+  }; // NOTE: THE TEMP IMAGE TRICK CANNOT BE DONE WITH data-multi-bg
+  // BECAUSE INSIDE ITS VALUES MUST BE WRAPPED WITH URL() AND ONE OF THEM
+  // COULD BE A GRADIENT BACKGROUND IMAGE
+
+
+  var setMultiBackground = function setMultiBackground(element, settings, instance) {
+    var bg1xValue = getData(element, settings.data_bg_multi);
+    var bgHiDpiValue = getData(element, settings.data_bg_multi_hidpi);
+    var bgDataValue = isHiDpi && bgHiDpiValue ? bgHiDpiValue : bg1xValue;
+
+    if (!bgDataValue) {
+      return;
+    }
+
+    element.style.backgroundImage = bgDataValue;
+    manageApplied(element, settings, instance);
+  };
+
+  var setSourcesFunctions = {
+    IMG: setSourcesImg,
+    IFRAME: setSourcesIframe,
+    VIDEO: setSourcesVideo
+  };
+
+  var setSourcesNative = function setSourcesNative(element, settings) {
+    var setSourcesFunction = setSourcesFunctions[element.tagName];
+
+    if (!setSourcesFunction) {
+      return;
+    }
+
+    setSourcesFunction(element, settings);
+  };
+
+  var setSources = function setSources(element, settings, instance) {
+    var setSourcesFunction = setSourcesFunctions[element.tagName];
+
+    if (!setSourcesFunction) {
+      return;
+    }
+
+    setSourcesFunction(element, settings);
+    manageLoading(element, settings, instance);
+  };
+
+  var elementsWithLoadEvent = ["IMG", "IFRAME", "VIDEO"];
+
+  var hasLoadEvent = function hasLoadEvent(element) {
+    return elementsWithLoadEvent.indexOf(element.tagName) > -1;
+  };
+
+  var checkFinish = function checkFinish(settings, instance) {
+    if (instance && !isSomethingLoading(instance) && !haveElementsToLoad(instance)) {
+      safeCallback(settings.callback_finish, instance);
+    }
+  };
+
+  var addEventListener = function addEventListener(element, eventName, handler) {
+    element.addEventListener(eventName, handler);
+    element.llEvLisnrs[eventName] = handler;
+  };
+
+  var removeEventListener = function removeEventListener(element, eventName, handler) {
+    element.removeEventListener(eventName, handler);
+  };
+
+  var hasEventListeners = function hasEventListeners(element) {
+    return !!element.llEvLisnrs;
+  };
+
+  var addEventListeners = function addEventListeners(element, loadHandler, errorHandler) {
+    if (!hasEventListeners(element)) element.llEvLisnrs = {};
+    var loadEventName = element.tagName === "VIDEO" ? "loadeddata" : "load";
+    addEventListener(element, loadEventName, loadHandler);
+    addEventListener(element, "error", errorHandler);
+  };
+
+  var removeEventListeners = function removeEventListeners(element) {
+    if (!hasEventListeners(element)) {
+      return;
+    }
+
+    var eventListeners = element.llEvLisnrs;
+
+    for (var eventName in eventListeners) {
+      var handler = eventListeners[eventName];
+      removeEventListener(element, eventName, handler);
+    }
+
+    delete element.llEvLisnrs;
+  };
+
+  var doneHandler = function doneHandler(element, settings, instance) {
+    deleteTempImage(element);
+    updateLoadingCount(instance, -1);
+    decreaseToLoadCount(instance);
+    removeClass(element, settings.class_loading);
+
+    if (settings.unobserve_completed) {
+      unobserve(element, instance);
+    }
+  };
+
+  var loadHandler = function loadHandler(event, element, settings, instance) {
+    var goingNative = hasStatusNative(element);
+    doneHandler(element, settings, instance);
+    addClass(element, settings.class_loaded);
+    setStatus(element, statusLoaded);
+    safeCallback(settings.callback_loaded, element, instance);
+    if (!goingNative) checkFinish(settings, instance);
+  };
+
+  var errorHandler = function errorHandler(event, element, settings, instance) {
+    var goingNative = hasStatusNative(element);
+    doneHandler(element, settings, instance);
+    addClass(element, settings.class_error);
+    setStatus(element, statusError);
+    safeCallback(settings.callback_error, element, instance);
+    if (!goingNative) checkFinish(settings, instance);
+  };
+
+  var addOneShotEventListeners = function addOneShotEventListeners(element, settings, instance) {
+    var elementToListenTo = getTempImage(element) || element;
+
+    if (hasEventListeners(elementToListenTo)) {
+      // This happens when loading is retried twice
+      return;
+    }
+
+    var _loadHandler = function _loadHandler(event) {
+      loadHandler(event, element, settings, instance);
+      removeEventListeners(elementToListenTo);
+    };
+
+    var _errorHandler = function _errorHandler(event) {
+      errorHandler(event, element, settings, instance);
+      removeEventListeners(elementToListenTo);
+    };
+
+    addEventListeners(elementToListenTo, _loadHandler, _errorHandler);
+  };
+
+  var loadBackground = function loadBackground(element, settings, instance) {
+    addTempImage(element);
+    addOneShotEventListeners(element, settings, instance);
+    saveOriginalBackgroundStyle(element);
+    setBackground(element, settings, instance);
+    setMultiBackground(element, settings, instance);
+  };
+
+  var loadRegular = function loadRegular(element, settings, instance) {
+    addOneShotEventListeners(element, settings, instance);
+    setSources(element, settings, instance);
+  };
+
+  var load = function load(element, settings, instance) {
+    if (hasLoadEvent(element)) {
+      loadRegular(element, settings, instance);
+    } else {
+      loadBackground(element, settings, instance);
+    }
+  };
+
+  var loadNative = function loadNative(element, settings, instance) {
+    element.setAttribute("loading", "lazy");
+    addOneShotEventListeners(element, settings, instance);
+    setSourcesNative(element, settings);
+    setStatus(element, statusNative);
+  };
+
+  var removeImageAttributes = function removeImageAttributes(element) {
+    element.removeAttribute(SRC);
+    element.removeAttribute(SRCSET);
+    element.removeAttribute(SIZES);
+  };
+
+  var resetSourcesImg = function resetSourcesImg(element) {
+    forEachPictureSource(element, function (sourceTag) {
+      removeImageAttributes(sourceTag);
+    });
+    removeImageAttributes(element);
+  };
+
+  var restoreImg = function restoreImg(imgEl) {
+    forEachPictureSource(imgEl, function (sourceEl) {
+      restoreOriginalAttrs(sourceEl, attrsSrcSrcsetSizes);
+    });
+    restoreOriginalAttrs(imgEl, attrsSrcSrcsetSizes);
+  };
+
+  var restoreVideo = function restoreVideo(videoEl) {
+    forEachVideoSource(videoEl, function (sourceEl) {
+      restoreOriginalAttrs(sourceEl, attrsSrc);
+    });
+    restoreOriginalAttrs(videoEl, attrsSrcPoster);
+    videoEl.load();
+  };
+
+  var restoreIframe = function restoreIframe(iframeEl) {
+    restoreOriginalAttrs(iframeEl, attrsSrc);
+  };
+
+  var restoreFunctions = {
+    IMG: restoreImg,
+    IFRAME: restoreIframe,
+    VIDEO: restoreVideo
+  };
+
+  var restoreAttributes = function restoreAttributes(element) {
+    var restoreFunction = restoreFunctions[element.tagName];
+
+    if (!restoreFunction) {
+      restoreOriginalBgImage(element);
+      return;
+    }
+
+    restoreFunction(element);
+  };
+
+  var resetClasses = function resetClasses(element, settings) {
+    if (hasEmptyStatus(element) || hasStatusNative(element)) {
+      return;
+    }
+
+    removeClass(element, settings.class_entered);
+    removeClass(element, settings.class_exited);
+    removeClass(element, settings.class_applied);
+    removeClass(element, settings.class_loading);
+    removeClass(element, settings.class_loaded);
+    removeClass(element, settings.class_error);
+  };
+
+  var restore = function restore(element, settings) {
+    restoreAttributes(element);
+    resetClasses(element, settings);
+    resetStatus(element);
+    deleteOriginalAttrs(element);
+  };
+
+  var cancelLoading = function cancelLoading(element, entry, settings, instance) {
+    if (!settings.cancel_on_exit) return;
+    if (!hasStatusLoading(element)) return;
+    if (element.tagName !== "IMG") return; //Works only on images
+
+    removeEventListeners(element);
+    resetSourcesImg(element);
+    restoreImg(element);
+    removeClass(element, settings.class_loading);
+    updateLoadingCount(instance, -1);
+    resetStatus(element);
+    safeCallback(settings.callback_cancel, element, entry, instance);
+  };
+
+  var onEnter = function onEnter(element, entry, settings, instance) {
+    var dontLoad = hadStartedLoading(element);
+    /* Save status 
+    before setting it, to prevent loading it again. Fixes #526. */
+
+    setStatus(element, statusEntered);
+    addClass(element, settings.class_entered);
+    removeClass(element, settings.class_exited);
+    unobserveEntered(element, settings, instance);
+    safeCallback(settings.callback_enter, element, entry, instance);
+    if (dontLoad) return;
+    load(element, settings, instance);
+  };
+
+  var onExit = function onExit(element, entry, settings, instance) {
+    if (hasEmptyStatus(element)) return; //Ignore the first pass, at landing
+
+    addClass(element, settings.class_exited);
+    cancelLoading(element, entry, settings, instance);
+    safeCallback(settings.callback_exit, element, entry, instance);
+  };
+
+  var tagsWithNativeLazy = ["IMG", "IFRAME", "VIDEO"];
+
+  var shouldUseNative = function shouldUseNative(settings) {
+    return settings.use_native && "loading" in HTMLImageElement.prototype;
+  };
+
+  var loadAllNative = function loadAllNative(elements, settings, instance) {
+    elements.forEach(function (element) {
+      if (tagsWithNativeLazy.indexOf(element.tagName) === -1) {
+        return;
+      }
+
+      loadNative(element, settings, instance);
+    });
+    setToLoadCount(instance, 0);
+  };
+
+  var isIntersecting = function isIntersecting(entry) {
+    return entry.isIntersecting || entry.intersectionRatio > 0;
+  };
+
+  var getObserverSettings = function getObserverSettings(settings) {
+    return {
+      root: settings.container === document ? null : settings.container,
+      rootMargin: settings.thresholds || settings.threshold + "px"
+    };
+  };
+
+  var intersectionHandler = function intersectionHandler(entries, settings, instance) {
+    entries.forEach(function (entry) {
+      return isIntersecting(entry) ? onEnter(entry.target, entry, settings, instance) : onExit(entry.target, entry, settings, instance);
+    });
+  };
+
+  var observeElements = function observeElements(observer, elements) {
+    elements.forEach(function (element) {
+      observer.observe(element);
+    });
+  };
+
+  var updateObserver = function updateObserver(observer, elementsToObserve) {
+    resetObserver(observer);
+    observeElements(observer, elementsToObserve);
+  };
+
+  var setObserver = function setObserver(settings, instance) {
+    if (!supportsIntersectionObserver || shouldUseNative(settings)) {
+      return;
+    }
+
+    instance._observer = new IntersectionObserver(function (entries) {
+      intersectionHandler(entries, settings, instance);
+    }, getObserverSettings(settings));
+  };
+
+  var toArray = function toArray(nodeSet) {
+    return Array.prototype.slice.call(nodeSet);
+  };
+
+  var queryElements = function queryElements(settings) {
+    return settings.container.querySelectorAll(settings.elements_selector);
+  };
+
+  var excludeManagedElements = function excludeManagedElements(elements) {
+    return toArray(elements).filter(hasEmptyStatus);
+  };
+
+  var hasError = function hasError(element) {
+    return hasStatusError(element);
+  };
+
+  var filterErrorElements = function filterErrorElements(elements) {
+    return toArray(elements).filter(hasError);
+  };
+
+  var getElementsToLoad = function getElementsToLoad(elements, settings) {
+    return excludeManagedElements(elements || queryElements(settings));
+  };
+
+  var retryLazyLoad = function retryLazyLoad(settings, instance) {
+    var errorElements = filterErrorElements(queryElements(settings));
+    errorElements.forEach(function (element) {
+      removeClass(element, settings.class_error);
+      resetStatus(element);
+    });
+    instance.update();
+  };
+
+  var setOnlineCheck = function setOnlineCheck(settings, instance) {
+    if (!runningOnBrowser) {
+      return;
+    }
+
+    window.addEventListener("online", function () {
+      retryLazyLoad(settings, instance);
+    });
+  };
+
+  var LazyLoad = function LazyLoad(customSettings, elements) {
+    var settings = getExtendedSettings(customSettings);
+    this._settings = settings;
+    this.loadingCount = 0;
+    setObserver(settings, this);
+    setOnlineCheck(settings, this);
+    this.update(elements);
+  };
+
+  LazyLoad.prototype = {
+    update: function update(givenNodeset) {
+      var settings = this._settings;
+      var elementsToLoad = getElementsToLoad(givenNodeset, settings);
+      setToLoadCount(this, elementsToLoad.length);
+
+      if (isBot || !supportsIntersectionObserver) {
+        this.loadAll(elementsToLoad);
+        return;
+      }
+
+      if (shouldUseNative(settings)) {
+        loadAllNative(elementsToLoad, settings, this);
+        return;
+      }
+
+      updateObserver(this._observer, elementsToLoad);
+    },
+    destroy: function destroy() {
+      // Observer
+      if (this._observer) {
+        this._observer.disconnect();
+      } // Clean custom attributes on elements
+
+
+      queryElements(this._settings).forEach(function (element) {
+        deleteOriginalAttrs(element);
+      }); // Delete all internal props
+
+      delete this._observer;
+      delete this._settings;
+      delete this.loadingCount;
+      delete this.toLoadCount;
+    },
+    loadAll: function loadAll(elements) {
+      var _this = this;
+
+      var settings = this._settings;
+      var elementsToLoad = getElementsToLoad(elements, settings);
+      elementsToLoad.forEach(function (element) {
+        unobserve(element, _this);
+        load(element, settings, _this);
+      });
+    },
+    restoreAll: function restoreAll() {
+      var settings = this._settings;
+      queryElements(settings).forEach(function (element) {
+        restore(element, settings);
+      });
+    }
+  };
+
+  LazyLoad.load = function (element, customSettings) {
+    var settings = getExtendedSettings(customSettings);
+    load(element, settings);
+  };
+
+  LazyLoad.resetStatus = function (element) {
+    resetStatus(element);
+  }; // Automatic instances creation if required (useful for async script loading)
+
+
+  if (runningOnBrowser) {
+    autoInitialize(LazyLoad, window.lazyLoadOptions);
+  }
+
+  return LazyLoad;
+});
 
 /***/ }),
 
@@ -5053,8 +5953,12 @@ if ( true && typeof module.exports !== 'undefined') {
 /*!*************************************!*\
   !*** ./resources/frontend/front.js ***!
   \*************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var aos_dist_aos_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! aos/dist/aos.js */ "./node_modules/aos/dist/aos.js");
+/* harmony import */ var aos_dist_aos_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(aos_dist_aos_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 // 3rd-Party Plugins JavaScript Includes
 //
@@ -5074,18 +5978,25 @@ window.bootstrap = __webpack_require__(/*! bootstrap */ "./node_modules/bootstra
 window.Popper = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js"); // Wnumb - Number & Money formatting. Learn more: https://refreshless.com/wnumb/
 
 window.wNumb = __webpack_require__(/*! wnumb */ "./node_modules/wnumb/wNumb.js");
-window.pristine = __webpack_require__(/*! pristinejs */ "./node_modules/pristinejs/dist/pristine.js"); // Moment - Parse, validate, manipulate, and display dates and times in JavaScript. Learn more: https://momentjs.com/
+window.pristine = __webpack_require__(/*! pristinejs */ "./node_modules/pristinejs/dist/pristine.js"); //https://pristine.js.org/demo.html
+// Moment - Parse, validate, manipulate, and display dates and times in JavaScript. Learn more: https://momentjs.com/
 
 window.moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); // ES6-Shim - ECMAScript 6 compatibility shims for legacy JS engines.  Learn more: https://github.com/paulmillr/es6-shim
 
-__webpack_require__(/*! es6-shim/es6-shim.min.js */ "./node_modules/es6-shim/es6-shim.min.js"); // A lightweight script to animate scrolling to anchor links
+__webpack_require__(/*! es6-shim/es6-shim.min.js */ "./node_modules/es6-shim/es6-shim.min.js");
 
+
+aos_dist_aos_js__WEBPACK_IMPORTED_MODULE_0__.init({
+  easing: 'ease-out-back',
+  duration: 1000
+}); // A lightweight script to animate scrolling to anchor links
 
 window.KTUtil = __webpack_require__(/*! ./compoments/util.js */ "./resources/frontend/compoments/util.js");
 window.KTEventHandler = __webpack_require__(/*! ./compoments/event-handler.js */ "./resources/frontend/compoments/event-handler.js");
 window.SmoothScroll = __webpack_require__(/*! smooth-scroll/dist/smooth-scroll.js */ "./node_modules/smooth-scroll/dist/smooth-scroll.js");
 window.KTScroll = __webpack_require__(/*! ./compoments/scroll.js */ "./resources/frontend/compoments/scroll.js");
 window.KTScrolltop = __webpack_require__(/*! ./compoments/scrolltop.js */ "./resources/frontend/compoments/scrolltop.js");
+window.Lazyload = __webpack_require__(/*! ./compoments/lazyload.js */ "./resources/frontend/compoments/lazyload.js");
 window.KTApp = __webpack_require__(/*! ./layout/app.js */ "./resources/frontend/layout/app.js");
 
 /***/ }),
@@ -44568,6 +45479,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	

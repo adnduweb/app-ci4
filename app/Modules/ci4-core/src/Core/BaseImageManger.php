@@ -199,6 +199,7 @@ class BaseImageManger
 		if(service('settings')->get('Medias.format', 'watermark') == 1 && !empty(service('settings')->get('Medias.format', 'text_watermark'))){
 
 			if ( \Config\Services::image()
+				
 				->withFile($file->getRealPath() ?: $file->__toString())
 				->fit($this->width, $this->height, 'center')
 				->text(service('settings')->get('Medias.format', 'text_watermark'), [            
@@ -210,6 +211,7 @@ class BaseImageManger
 					'fontSize'   => 20         
 				]) 
 				->convert($this->getImageType($file->getMimeType()))
+				
 				->save($output)){
 				if (exif_imagetype($output) === $this->getImageType($file->getMimeType())){
 					$result = true;
@@ -218,9 +220,11 @@ class BaseImageManger
 
 		}else{
 			if ( \Config\Services::image()
+				
 				->withFile($file->getRealPath() ?: $file->__toString())
 				->fit($this->width, $this->height, 'center')
 				->convert($this->getImageType($file->getMimeType()))
+				
 				->save($output)){
 				if (exif_imagetype($output) === $this->getImageType($file->getMimeType())){
 					$result = true;
@@ -228,15 +232,112 @@ class BaseImageManger
 			}
 		}
 
-		
-		
-		
-
 		if (! $result)
 		{
 			throw new ThumbnailsException(lang('Thumbnails.createFailed', [$input]));
 		}
 
+		return $this;
+	}
+
+
+		/**
+	 * Uses a framework image handler to fit the image to its new size.
+	 *
+	 * @param File    $file      The file that needs a thumbnail
+	 * @param string  $output    Path to the output file
+	 * @param integer $imageType A PHP imagetype constant, https://www.php.net/manual/en/function.image-type-to-mime-type.php
+	 * @param integer $width     Width of the created thumbnail
+	 * @param integer $height    Height of the created thumbnail
+	 *
+	 * @return boolean  Success or failure
+	 */
+	public function createWebp($media, string $path): self
+	{
+
+		list($width, $height, $type, $attr) = getimagesize($path . DIRECTORY_SEPARATOR .$media->localname.'.webp');
+
+		try
+		{
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 180) ? 180 : $width, ($width > 180) ? 180 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_180w.webp');
+			// echo 'exit'; exit;
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 360) ? 360 : $width, ($width > 360) ? 360 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_360w.webp');
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 540) ? 540 : $width, ($width > 360) ? 360 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_540w.webp');
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 720) ? 720 : $width, ($width > 720) ? 720 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_720w.webp');
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 900) ? 900 : $width, ($width > 900) ? 900 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_900w.webp');
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 1080) ? 1080 : $width, ($width > 1080) ? 1080 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1080w.webp');
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 1260) ? 1260 : $width, ($width > 1260) ? 1260 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1260w.webp');
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 1440) ? 1440 : $width, ($width > 1440) ? 1440 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1440w.webp');
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.webp')
+				->resize(($width > 1620) ? 1620 : $width, ($width > 1620) ? 1620 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1620w.webp');
+
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 180) ? 180 : $width, ($width > 180) ? 180 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_180w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 360) ? 360 : $width, ($width > 360) ? 360 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_360w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 540) ? 540 : $width, ($width > 360) ? 360 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_540w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 720) ? 720 : $width, ($width > 720) ? 720 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_720w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 900) ? 900 : $width, ($width > 900) ? 900 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_900w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 1080) ? 1080 : $width, ($width > 1080) ? 1080 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1080w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 1260) ? 1260 : $width, ($width > 1260) ? 1260 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1260w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 1440) ? 1440 : $width, ($width > 1440) ? 1440 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1440w.' . $media->ext);
+			\Config\Services::image()
+				->withFile($path . DIRECTORY_SEPARATOR .$media->localname.'.' . $media->ext)
+				->resize(($width > 1620) ? 1620 : $width, ($width > 1620) ? 1620 : $width, true, 'wight')
+				->save($path .DIRECTORY_SEPARATOR . 'responsive-images' . DIRECTORY_SEPARATOR .$media->localname.'_1620w.' . $media->ext);
+		}
+		catch (ImageException $e)
+		{
+			throw new ThumbnailsException(lang('Thumbnails.createFailed', [$input]));
+		}
 		return $this;
 	}
 

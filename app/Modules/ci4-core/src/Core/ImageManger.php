@@ -70,4 +70,5 @@ class ImageThumbnail extends BaseHandler implements ThumbnailInterface
 			return false;
 		}
 	}
+
 }

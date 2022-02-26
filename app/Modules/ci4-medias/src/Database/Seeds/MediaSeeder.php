@@ -47,58 +47,5 @@ class MediaSeeder extends \CodeIgniter\Database\Seeder
 				model(SettingModel::class)->insert($template);
 			}
 		}
-
-		// Get item menu
-		// $tabBO = array(
-		// 	'media'        => array('en' => 'Image Manager', 'fr' => 'médias')
-		// );
-		
-		
-		// // Création du menu en BO
-		// $rows = [
-		// 	[
-		// 		'id'        => 18,
-		// 		'id_parent' => 17,
-		// 		'depth'     => 2,
-		// 		'left'      => 13,
-		// 		'right'     => 14,
-		// 		'position'  => 3,
-		// 		'section'   => 0,
-		// 		'module'    => NULL,
-		// 		'namespace' => 'App\Controllers\Admin',
-		// 		'class_name'      => 'media',
-		// 		'active'    => 1,
-		// 		'icon'      => '',
-		// 		'slug'      => 'medias',
-		// 	],
-		// ];
-
-		// // Check for and create project langue templates
-		// $tab = new TabModel();
-		// $db = \Config\Database::connect();
-		// $languages = new languageModel();
-		// $langues = $languages->get()->getResult();
-		// foreach ($rows as $row) {
-		// 	$tabRow = $tab->where('class_name', $row['class_name'])->first();
-
-		// 	if (empty($tabRow)) {
-		// 		// No langue - add the row
-		// 		//print_r($row); exit;
-		// 		$tab->insert($row);
-		// 		$i = 0;
-		// 		$newInsert = $tab->insertID();
-		// 		foreach ($langues as $langue) {
-		// 			$rowsLang[$i]['tab_id']   = $newInsert;
-		// 			$rowsLang[$i]['id_lang']  = $langue->id;
-		// 			$rowsLang[$i]['name']     =  $tabBO[$row['class_name']][$langue->iso_code];
-		// 			$i++;
-		// 		}
-		// 		//print_r($rowsLang); exit;
-		// 		foreach ($rowsLang as $rowLang) {
-		// 			$db->table('tabs_langs')->insert($rowLang);
-		// 		}
-		// 	}
-		// }
-
 	}
 }

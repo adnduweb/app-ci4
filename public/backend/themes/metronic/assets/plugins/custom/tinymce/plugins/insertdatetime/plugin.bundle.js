@@ -1,1 +1,206 @@
-!function(){"use strict";var e=tinymce.util.Tools.resolve("tinymce.PluginManager"),t=function(e){return e.getParam("insertdatetime_timeformat",e.translate("%H:%M:%S"))},n=function(e){return e.getParam("insertdatetime_formats",["%H:%M:%S","%Y-%m-%d","%I:%M:%S %p","%D"])},r="Sun Mon Tue Wed Thu Fri Sat Sun".split(" "),a="Sunday Monday Tuesday Wednesday Thursday Friday Saturday Sunday".split(" "),i="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" "),o="January February March April May June July August September October November December".split(" "),u=function(e,t){if((e=""+e).length<t)for(var n=0;n<t-e.length;n++)e="0"+e;return e},c=function(e,t,n){return void 0===n&&(n=new Date),t=(t=(t=(t=(t=(t=(t=(t=(t=(t=(t=(t=(t=(t=(t=(t=t.replace("%D","%m/%d/%Y")).replace("%r","%I:%M:%S %p")).replace("%Y",""+n.getFullYear())).replace("%y",""+n.getYear())).replace("%m",u(n.getMonth()+1,2))).replace("%d",u(n.getDate(),2))).replace("%H",""+u(n.getHours(),2))).replace("%M",""+u(n.getMinutes(),2))).replace("%S",""+u(n.getSeconds(),2))).replace("%I",""+((n.getHours()+11)%12+1))).replace("%p",n.getHours()<12?"AM":"PM")).replace("%B",""+e.translate(o[n.getMonth()]))).replace("%b",""+e.translate(i[n.getMonth()]))).replace("%A",""+e.translate(a[n.getDay()]))).replace("%a",""+e.translate(r[n.getDay()]))).replace("%%","%")},m=function(e,t){if(function(e){return e.getParam("insertdatetime_element",!1)}(e)){var n=c(e,t),r=void 0;r=/%[HMSIp]/.test(t)?c(e,"%Y-%m-%dT%H:%M"):c(e,"%Y-%m-%d");var a=e.dom.getParent(e.selection.getStart(),"time");a?function(e,t,n,r){var a=e.dom.create("time",{datetime:n},r);t.parentNode.insertBefore(a,t),e.dom.remove(t),e.selection.select(a,!0),e.selection.collapse(!1)}(e,a,r,n):e.insertContent('<time datetime="'+r+'">'+n+"</time>")}else e.insertContent(c(e,t))},l=tinymce.util.Tools.resolve("tinymce.util.Tools"),s=function(e){var r,a,i=n(e),o=(r=function(e){var r=n(e);return r.length>0?r[0]:t(e)}(e),a=r,{get:function(){return a},set:function(e){a=e}}),u=function(t){return e.execCommand("mceInsertDate",!1,t)};e.ui.registry.addSplitButton("insertdatetime",{icon:"insert-time",tooltip:"Insert date/time",select:function(e){return e===o.get()},fetch:function(t){t(l.map(i,(function(t){return{type:"choiceitem",text:c(e,t),value:t}})))},onAction:function(e){u(o.get())},onItemAction:function(e,t){o.set(t),u(t)}});var m=function(e){return function(){o.set(e),u(e)}};e.ui.registry.addNestedMenuItem("insertdatetime",{icon:"insert-time",text:"Date/time",getSubmenuItems:function(){return l.map(i,(function(t){return{type:"menuitem",text:c(e,t),onAction:m(t)}}))}})};e.add("insertdatetime",(function(e){!function(e){e.addCommand("mceInsertDate",(function(t,n){m(e,null!=n?n:function(e){return e.getParam("insertdatetime_dateformat",e.translate("%Y-%m-%d"))}(e))})),e.addCommand("mceInsertTime",(function(n,r){m(e,null!=r?r:t(e))}))}(e),s(e)}))}();
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!****************************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/insertdatetime/plugin.js ***!
+  \****************************************************************************************/
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.0 (2021-10-11)
+ */
+(function () {
+  'use strict';
+
+  var global$1 = tinymce.util.Tools.resolve('tinymce.PluginManager');
+
+  var getDateFormat = function getDateFormat(editor) {
+    return editor.getParam('insertdatetime_dateformat', editor.translate('%Y-%m-%d'));
+  };
+
+  var getTimeFormat = function getTimeFormat(editor) {
+    return editor.getParam('insertdatetime_timeformat', editor.translate('%H:%M:%S'));
+  };
+
+  var getFormats = function getFormats(editor) {
+    return editor.getParam('insertdatetime_formats', ['%H:%M:%S', '%Y-%m-%d', '%I:%M:%S %p', '%D']);
+  };
+
+  var getDefaultDateTime = function getDefaultDateTime(editor) {
+    var formats = getFormats(editor);
+    return formats.length > 0 ? formats[0] : getTimeFormat(editor);
+  };
+
+  var shouldInsertTimeElement = function shouldInsertTimeElement(editor) {
+    return editor.getParam('insertdatetime_element', false);
+  };
+
+  var daysShort = 'Sun Mon Tue Wed Thu Fri Sat Sun'.split(' ');
+  var daysLong = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday Sunday'.split(' ');
+  var monthsShort = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
+  var monthsLong = 'January February March April May June July August September October November December'.split(' ');
+
+  var addZeros = function addZeros(value, len) {
+    value = '' + value;
+
+    if (value.length < len) {
+      for (var i = 0; i < len - value.length; i++) {
+        value = '0' + value;
+      }
+    }
+
+    return value;
+  };
+
+  var getDateTime = function getDateTime(editor, fmt, date) {
+    if (date === void 0) {
+      date = new Date();
+    }
+
+    fmt = fmt.replace('%D', '%m/%d/%Y');
+    fmt = fmt.replace('%r', '%I:%M:%S %p');
+    fmt = fmt.replace('%Y', '' + date.getFullYear());
+    fmt = fmt.replace('%y', '' + date.getYear());
+    fmt = fmt.replace('%m', addZeros(date.getMonth() + 1, 2));
+    fmt = fmt.replace('%d', addZeros(date.getDate(), 2));
+    fmt = fmt.replace('%H', '' + addZeros(date.getHours(), 2));
+    fmt = fmt.replace('%M', '' + addZeros(date.getMinutes(), 2));
+    fmt = fmt.replace('%S', '' + addZeros(date.getSeconds(), 2));
+    fmt = fmt.replace('%I', '' + ((date.getHours() + 11) % 12 + 1));
+    fmt = fmt.replace('%p', '' + (date.getHours() < 12 ? 'AM' : 'PM'));
+    fmt = fmt.replace('%B', '' + editor.translate(monthsLong[date.getMonth()]));
+    fmt = fmt.replace('%b', '' + editor.translate(monthsShort[date.getMonth()]));
+    fmt = fmt.replace('%A', '' + editor.translate(daysLong[date.getDay()]));
+    fmt = fmt.replace('%a', '' + editor.translate(daysShort[date.getDay()]));
+    fmt = fmt.replace('%%', '%');
+    return fmt;
+  };
+
+  var updateElement = function updateElement(editor, timeElm, computerTime, userTime) {
+    var newTimeElm = editor.dom.create('time', {
+      datetime: computerTime
+    }, userTime);
+    timeElm.parentNode.insertBefore(newTimeElm, timeElm);
+    editor.dom.remove(timeElm);
+    editor.selection.select(newTimeElm, true);
+    editor.selection.collapse(false);
+  };
+
+  var insertDateTime = function insertDateTime(editor, format) {
+    if (shouldInsertTimeElement(editor)) {
+      var userTime = getDateTime(editor, format);
+      var computerTime = void 0;
+
+      if (/%[HMSIp]/.test(format)) {
+        computerTime = getDateTime(editor, '%Y-%m-%dT%H:%M');
+      } else {
+        computerTime = getDateTime(editor, '%Y-%m-%d');
+      }
+
+      var timeElm = editor.dom.getParent(editor.selection.getStart(), 'time');
+
+      if (timeElm) {
+        updateElement(editor, timeElm, computerTime, userTime);
+      } else {
+        editor.insertContent('<time datetime="' + computerTime + '">' + userTime + '</time>');
+      }
+    } else {
+      editor.insertContent(getDateTime(editor, format));
+    }
+  };
+
+  var register$1 = function register$1(editor) {
+    editor.addCommand('mceInsertDate', function (_ui, value) {
+      insertDateTime(editor, value !== null && value !== void 0 ? value : getDateFormat(editor));
+    });
+    editor.addCommand('mceInsertTime', function (_ui, value) {
+      insertDateTime(editor, value !== null && value !== void 0 ? value : getTimeFormat(editor));
+    });
+  };
+
+  var Cell = function Cell(initial) {
+    var value = initial;
+
+    var get = function get() {
+      return value;
+    };
+
+    var set = function set(v) {
+      value = v;
+    };
+
+    return {
+      get: get,
+      set: set
+    };
+  };
+
+  var global = tinymce.util.Tools.resolve('tinymce.util.Tools');
+
+  var register = function register(editor) {
+    var formats = getFormats(editor);
+    var defaultFormat = Cell(getDefaultDateTime(editor));
+
+    var insertDateTime = function insertDateTime(format) {
+      return editor.execCommand('mceInsertDate', false, format);
+    };
+
+    editor.ui.registry.addSplitButton('insertdatetime', {
+      icon: 'insert-time',
+      tooltip: 'Insert date/time',
+      select: function select(value) {
+        return value === defaultFormat.get();
+      },
+      fetch: function fetch(done) {
+        done(global.map(formats, function (format) {
+          return {
+            type: 'choiceitem',
+            text: getDateTime(editor, format),
+            value: format
+          };
+        }));
+      },
+      onAction: function onAction(_api) {
+        insertDateTime(defaultFormat.get());
+      },
+      onItemAction: function onItemAction(_api, value) {
+        defaultFormat.set(value);
+        insertDateTime(value);
+      }
+    });
+
+    var makeMenuItemHandler = function makeMenuItemHandler(format) {
+      return function () {
+        defaultFormat.set(format);
+        insertDateTime(format);
+      };
+    };
+
+    editor.ui.registry.addNestedMenuItem('insertdatetime', {
+      icon: 'insert-time',
+      text: 'Date/time',
+      getSubmenuItems: function getSubmenuItems() {
+        return global.map(formats, function (format) {
+          return {
+            type: 'menuitem',
+            text: getDateTime(editor, format),
+            onAction: makeMenuItemHandler(format)
+          };
+        });
+      }
+    });
+  };
+
+  function Plugin() {
+    global$1.add('insertdatetime', function (editor) {
+      register$1(editor);
+      register(editor);
+    });
+  }
+
+  Plugin();
+})();
+/******/ })()
+;

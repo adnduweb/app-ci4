@@ -20,7 +20,7 @@
                 <p><strong>ADN du Web</strong>37 rue des terrasses 56250 Elven</p>
                 <p><strong>ADN du Web</strong>18 rue des Linaires 18200 Drevant</p>
                 <p class="mt-3">
-                    <span class="phone"><a href="tel:+33684635390"> <i class="fas fa-phone-alt"></i> 06 84 63 53 90</a></span><span class="email"><a href="mailto:contact@eskimoz.fr"><i class="far fa-envelope"></i> contact@adnduweb.com</a></span>
+                    <span class="phone"><a href="tel:+33684635390"> <i class="fas fa-phone-alt"></i> 06 84 63 53 90</a></span><span class="email"><a href="mailto:contact@adnduweb.com"><i class="far fa-envelope"></i> contact@adnduweb.com</a></span>
                 </p>
                 <p style="margin-top: 13px;">
                     <span>
@@ -37,14 +37,8 @@
                     <li id="menu-item-8319" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8319"><a href="<?= site_url(); ?>plan-du-site/">Plan du site</a></li>
                     <li id="menu-item-8323" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8323"><a href="<?= site_url(); ?>mentions-legales/">Mentions légales</a></li>
                     <li id="menu-item-8323" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8323"><a href="<?= site_url(); ?>conditions-utilisations/">Conditions d'utilisations</a></li>
-                    <!-- <li id="menu-item-8325" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8325"><a href="<?= site_url(); ?>blog/">Blog</a></li> -->
+                    <li id="menu-item-8325" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8325"><a id="tarteaucitronManager" href="<?= current_url(); ?>#tarteaucitron">Gestion des cookies</a></li>
                     <li id="menu-item-9572" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9572"><a href="<?= site_url(); ?>contact/">Contact</a></li>
-                    <!-- <li id="menu-item-9126" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9126"><a href="<?= site_url(); ?>lyon/">Lyon</a></li>
-                    <li id="menu-item-9142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9142"><a href="<?= site_url(); ?>bordeaux/">Bordeaux</a></li>
-                    <li id="menu-item-9134" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9134"><a href="<?= site_url(); ?>lille/">Lille</a></li>
-                    <li id="menu-item-19505" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19505"><a href="<?= site_url(); ?>marseille/">Marseille</a></li>
-                    <li id="menu-item-19508" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19508"><a href="<?= site_url(); ?>nice/">Nice</a></li>
-                    <li id="menu-item-19961" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19961"><a href="<?= site_url(); ?>toulouse/">Toulouse</a></li> -->
                 </ul>
                 <p class="footer-legal">Créé avec beaucoup <i class="fas fa-heart"></i> et un peu de <i class="fas fa-code"></i> © 2021 ADN du Web</p>
             </div>

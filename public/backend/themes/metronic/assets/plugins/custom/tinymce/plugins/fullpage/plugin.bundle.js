@@ -1,1 +1,642 @@
-!function(){"use strict";var t=function(t){var e=t;return{get:function(){return e},set:function(t){e=t}}},e=tinymce.util.Tools.resolve("tinymce.PluginManager"),n=function(){return n=Object.assign||function(t){for(var e,n=1,i=arguments.length;n<i;n++)for(var l in e=arguments[n])Object.prototype.hasOwnProperty.call(e,l)&&(t[l]=e[l]);return t},n.apply(this,arguments)},i=tinymce.util.Tools.resolve("tinymce.util.Tools"),l=tinymce.util.Tools.resolve("tinymce.html.DomParser"),r=tinymce.util.Tools.resolve("tinymce.html.Node"),o=tinymce.util.Tools.resolve("tinymce.html.Serializer"),a=function(t){return t.getParam("fullpage_hide_in_source_view")},c=function(t){return t.getParam("fullpage_default_encoding")},s=function(t){return t.getParam("fullpage_default_font_family")},d=function(t){return t.getParam("fullpage_default_font_size")},u=function(t,e){return l({validate:!1,root_name:"#document"},t.schema).parse(e,{format:"xhtml"})},f=function(t,e){var l=function(t,e){var n,l,r=u(t,e),o={},a=function(t,e){return t.attr(e)||""};return o.fontface=s(t),o.fontsize=d(t),7===(n=r.firstChild).type&&(o.xml_pi=!0,(l=/encoding="([^"]+)"/.exec(n.value))&&(o.docencoding=l[1])),(n=r.getAll("#doctype")[0])&&(o.doctype="<!DOCTYPE"+n.value+">"),(n=r.getAll("title")[0])&&n.firstChild&&(o.title=n.firstChild.value),i.each(r.getAll("meta"),(function(t){var e,n=t.attr("name"),i=t.attr("http-equiv");n?o[n.toLowerCase()]=t.attr("content"):"Content-Type"===i&&(e=/charset\s*=\s*(.*)\s*/gi.exec(t.attr("content")))&&(o.docencoding=e[1])})),(n=r.getAll("html")[0])&&(o.langcode=a(n,"lang")||a(n,"xml:lang")),o.stylesheets=[],i.each(r.getAll("link"),(function(t){"stylesheet"===t.attr("rel")&&o.stylesheets.push(t.attr("href"))})),(n=r.getAll("body")[0])&&(o.langdir=a(n,"dir"),o.style=a(n,"style"),o.visited_color=a(n,"vlink"),o.link_color=a(n,"link"),o.active_color=a(n,"alink")),o}(t,e.get()),a=n(n({},{title:"",keywords:"",description:"",robots:"",author:"",docencoding:""}),l);t.windowManager.open({title:"Metadata and Document Properties",size:"normal",body:{type:"panel",items:[{name:"title",type:"input",label:"Title"},{name:"keywords",type:"input",label:"Keywords"},{name:"description",type:"input",label:"Description"},{name:"robots",type:"input",label:"Robots"},{name:"author",type:"input",label:"Author"},{name:"docencoding",type:"input",label:"Encoding"}]},buttons:[{type:"cancel",name:"cancel",text:"Cancel"},{type:"submit",name:"save",text:"Save",primary:!0}],initialData:a,onSubmit:function(n){var a=n.getData(),c=function(t,e,n){var l,a,c=t.dom,s=function(t,e,n){t.attr(e,n||void 0)},d=function(t){l.firstChild?l.insert(t,l.firstChild):l.append(t)},f=u(t,n);if((l=f.getAll("head")[0])||(a=f.getAll("html")[0],l=new r("head",1),a.firstChild?a.insert(l,a.firstChild,!0):a.append(l)),a=f.firstChild,e.xml_pi){var m='version="1.0"';e.docencoding&&(m+=' encoding="'+e.docencoding+'"'),7!==a.type&&(a=new r("xml",7),f.insert(a,f.firstChild,!0)),a.value=m}else a&&7===a.type&&a.remove();a=f.getAll("#doctype")[0],e.doctype?(a||(a=new r("#doctype",10),e.xml_pi?f.insert(a,f.firstChild):d(a)),a.value=e.doctype.substring(9,e.doctype.length-1)):a&&a.remove(),a=null,i.each(f.getAll("meta"),(function(t){"Content-Type"===t.attr("http-equiv")&&(a=t)})),e.docencoding?(a||((a=new r("meta",1)).attr("http-equiv","Content-Type"),a.shortEnded=!0,d(a)),a.attr("content","text/html; charset="+e.docencoding)):a&&a.remove(),a=f.getAll("title")[0],e.title?(a?a.empty():(a=new r("title",1),d(a)),a.append(new r("#text",3)).value=e.title):a&&a.remove(),i.each("keywords,description,author,copyright,robots".split(","),(function(t){var n,i,l=f.getAll("meta"),o=e[t];for(n=0;n<l.length;n++)if((i=l[n]).attr("name")===t)return void(o?i.attr("content",o):i.remove());o&&((a=new r("meta",1)).attr("name",t),a.attr("content",o),a.shortEnded=!0,d(a))}));var g={};i.each(f.getAll("link"),(function(t){"stylesheet"===t.attr("rel")&&(g[t.attr("href")]=t)})),i.each(e.stylesheets,(function(t){g[t]||((a=new r("link",1)).attr({rel:"stylesheet",text:"text/css",href:t}),a.shortEnded=!0,d(a)),delete g[t]})),i.each(g,(function(t){t.remove()})),(a=f.getAll("body")[0])&&(s(a,"dir",e.langdir),s(a,"style",e.style),s(a,"vlink",e.visited_color),s(a,"link",e.link_color),s(a,"alink",e.active_color),c.setAttribs(t.getBody(),{style:e.style,dir:e.dir,vLink:e.visited_color,link:e.link_color,aLink:e.active_color})),(a=f.getAll("html")[0])&&(s(a,"lang",e.langcode),s(a,"xml:lang",e.langcode)),l.firstChild||l.remove();var p=o({validate:!1,indent:!0,indent_before:"head,html,body,meta,title,script,link,style",indent_after:"head,html,body,meta,title,script,link,style"}).serialize(f);return p.substring(0,p.indexOf("</body>"))}(t,i.extend(l,a),e.get());e.set(c),n.close()}})},m=i.each,g=function(t){return t.replace(/<\/?[A-Z]+/g,(function(t){return t.toLowerCase()}))},p=function(t,e,n,l){var r,o,c,s,d,f="",p=t.dom;if(!(l.selection||(s=function(t){return t.getParam("protect")}(t),d=l.content,i.each(s,(function(t){d=d.replace(t,(function(t){return"\x3c!--mce:protected "+escape(t)+"--\x3e"}))})),c=d,"raw"===l.format&&e.get()||l.source_view&&a(t)))){0!==c.length||l.source_view||(c=i.trim(e.get())+"\n"+i.trim(c)+"\n"+i.trim(n.get())),-1!==(r=(c=c.replace(/<(\/?)BODY/gi,"<$1body")).indexOf("<body"))?(r=c.indexOf(">",r),e.set(g(c.substring(0,r+1))),-1===(o=c.indexOf("</body",r))&&(o=c.length),l.content=i.trim(c.substring(r+1,o)),n.set(g(c.substring(o)))):(e.set(h(t)),n.set("\n</body>\n</html>"));var y=u(t,e.get());m(y.getAll("style"),(function(t){t.firstChild&&(f+=t.firstChild.value)}));var v=y.getAll("body")[0];v&&p.setAttribs(t.getBody(),{style:v.attr("style")||"",dir:v.attr("dir")||"",vLink:v.attr("vlink")||"",link:v.attr("link")||"",aLink:v.attr("alink")||""}),p.remove("fullpage_styles");var _=t.getDoc().getElementsByTagName("head")[0];f&&p.add(_,"style",{id:"fullpage_styles"}).appendChild(document.createTextNode(f));var b={};i.each(_.getElementsByTagName("link"),(function(t){"stylesheet"===t.rel&&t.getAttribute("data-mce-fullpage")&&(b[t.href]=t)})),i.each(y.getAll("link"),(function(t){var e=t.attr("href");if(!e)return!0;b[e]||"stylesheet"!==t.attr("rel")||p.add(_,"link",{rel:"stylesheet",text:"text/css",href:e,"data-mce-fullpage":"1"}),delete b[e]})),i.each(b,(function(t){t.parentNode.removeChild(t)}))}},h=function(t){var e,n="",i="";if(function(t){return t.getParam("fullpage_default_xml_pi")}(t)){var l=c(t);n+='<?xml version="1.0" encoding="'+(l||"ISO-8859-1")+'" ?>\n'}return n+=function(t){return t.getParam("fullpage_default_doctype","<!DOCTYPE html>")}(t),n+="\n<html>\n<head>\n",(e=function(t){return t.getParam("fullpage_default_title")}(t))&&(n+="<title>"+e+"</title>\n"),(e=c(t))&&(n+='<meta http-equiv="Content-Type" content="text/html; charset='+e+'" />\n'),(e=s(t))&&(i+="font-family: "+e+";"),(e=d(t))&&(i+="font-size: "+e+";"),(e=function(t){return t.getParam("fullpage_default_text_color")}(t))&&(i+="color: "+e+";"),n+="</head>\n<body"+(i?' style="'+i+'"':"")+">\n"},y=function(t,e,n,l){"html"!==l.format||l.selection||l.source_view&&a(t)||(l.content=(i.trim(e)+"\n"+i.trim(l.content)+"\n"+i.trim(n)).replace(/<!--mce:protected ([\s\S]*?)-->/g,(function(t,e){return unescape(e)})))};e.add("fullpage",(function(e){var n=t(""),i=t("");!function(t,e){t.addCommand("mceFullPageProperties",(function(){f(t,e)}))}(e,n),function(t){t.ui.registry.addButton("fullpage",{tooltip:"Metadata and document properties",icon:"document-properties",onAction:function(){t.execCommand("mceFullPageProperties")}}),t.ui.registry.addMenuItem("fullpage",{text:"Metadata and document properties",icon:"document-properties",onAction:function(){t.execCommand("mceFullPageProperties")}})}(e),function(t,e,n){t.on("BeforeSetContent",(function(i){p(t,e,n,i)})),t.on("GetContent",(function(i){y(t,e.get(),n.get(),i)}))}(e,n,i)}))}();
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**********************************************************************************!*\
+  !*** ./resources/backend/core/plugins/custom/tinymce/plugins/fullpage/plugin.js ***!
+  \**********************************************************************************/
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.0 (2021-10-11)
+ */
+(function () {
+  'use strict';
+
+  var Cell = function Cell(initial) {
+    var value = initial;
+
+    var get = function get() {
+      return value;
+    };
+
+    var set = function set(v) {
+      value = v;
+    };
+
+    return {
+      get: get,
+      set: set
+    };
+  };
+
+  var global$4 = tinymce.util.Tools.resolve('tinymce.PluginManager');
+
+  var _assign = function __assign() {
+    _assign = Object.assign || function __assign(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+
+        for (var p in s) {
+          if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+      }
+
+      return t;
+    };
+
+    return _assign.apply(this, arguments);
+  };
+
+  var global$3 = tinymce.util.Tools.resolve('tinymce.util.Tools');
+  var global$2 = tinymce.util.Tools.resolve('tinymce.html.DomParser');
+  var global$1 = tinymce.util.Tools.resolve('tinymce.html.Node');
+  var global = tinymce.util.Tools.resolve('tinymce.html.Serializer');
+
+  var shouldHideInSourceView = function shouldHideInSourceView(editor) {
+    return editor.getParam('fullpage_hide_in_source_view');
+  };
+
+  var getDefaultXmlPi = function getDefaultXmlPi(editor) {
+    return editor.getParam('fullpage_default_xml_pi');
+  };
+
+  var getDefaultEncoding = function getDefaultEncoding(editor) {
+    return editor.getParam('fullpage_default_encoding');
+  };
+
+  var getDefaultFontFamily = function getDefaultFontFamily(editor) {
+    return editor.getParam('fullpage_default_font_family');
+  };
+
+  var getDefaultFontSize = function getDefaultFontSize(editor) {
+    return editor.getParam('fullpage_default_font_size');
+  };
+
+  var getDefaultTextColor = function getDefaultTextColor(editor) {
+    return editor.getParam('fullpage_default_text_color');
+  };
+
+  var getDefaultTitle = function getDefaultTitle(editor) {
+    return editor.getParam('fullpage_default_title');
+  };
+
+  var getDefaultDocType = function getDefaultDocType(editor) {
+    return editor.getParam('fullpage_default_doctype', '<!DOCTYPE html>');
+  };
+
+  var getProtect = function getProtect(editor) {
+    return editor.getParam('protect');
+  };
+
+  var parseHeader = function parseHeader(editor, head) {
+    return global$2({
+      validate: false,
+      root_name: '#document'
+    }, editor.schema).parse(head, {
+      format: 'xhtml'
+    });
+  };
+
+  var htmlToData = function htmlToData(editor, head) {
+    var headerFragment = parseHeader(editor, head);
+    var data = {};
+    var elm, matches;
+
+    var getAttr = function getAttr(elm, name) {
+      var value = elm.attr(name);
+      return value || '';
+    };
+
+    data.fontface = getDefaultFontFamily(editor);
+    data.fontsize = getDefaultFontSize(editor);
+    elm = headerFragment.firstChild;
+
+    if (elm.type === 7) {
+      data.xml_pi = true;
+      matches = /encoding="([^"]+)"/.exec(elm.value);
+
+      if (matches) {
+        data.docencoding = matches[1];
+      }
+    }
+
+    elm = headerFragment.getAll('#doctype')[0];
+
+    if (elm) {
+      data.doctype = '<!DOCTYPE' + elm.value + '>';
+    }
+
+    elm = headerFragment.getAll('title')[0];
+
+    if (elm && elm.firstChild) {
+      data.title = elm.firstChild.value;
+    }
+
+    global$3.each(headerFragment.getAll('meta'), function (meta) {
+      var name = meta.attr('name');
+      var httpEquiv = meta.attr('http-equiv');
+      var matches;
+
+      if (name) {
+        data[name.toLowerCase()] = meta.attr('content');
+      } else if (httpEquiv === 'Content-Type') {
+        matches = /charset\s*=\s*(.*)\s*/gi.exec(meta.attr('content'));
+
+        if (matches) {
+          data.docencoding = matches[1];
+        }
+      }
+    });
+    elm = headerFragment.getAll('html')[0];
+
+    if (elm) {
+      data.langcode = getAttr(elm, 'lang') || getAttr(elm, 'xml:lang');
+    }
+
+    data.stylesheets = [];
+    global$3.each(headerFragment.getAll('link'), function (link) {
+      if (link.attr('rel') === 'stylesheet') {
+        data.stylesheets.push(link.attr('href'));
+      }
+    });
+    elm = headerFragment.getAll('body')[0];
+
+    if (elm) {
+      data.langdir = getAttr(elm, 'dir');
+      data.style = getAttr(elm, 'style');
+      data.visited_color = getAttr(elm, 'vlink');
+      data.link_color = getAttr(elm, 'link');
+      data.active_color = getAttr(elm, 'alink');
+    }
+
+    return data;
+  };
+
+  var dataToHtml = function dataToHtml(editor, data, head) {
+    var headElement, elm;
+    var dom = editor.dom;
+
+    var setAttr = function setAttr(elm, name, value) {
+      elm.attr(name, value ? value : undefined);
+    };
+
+    var addHeadNode = function addHeadNode(node) {
+      if (headElement.firstChild) {
+        headElement.insert(node, headElement.firstChild);
+      } else {
+        headElement.append(node);
+      }
+    };
+
+    var headerFragment = parseHeader(editor, head);
+    headElement = headerFragment.getAll('head')[0];
+
+    if (!headElement) {
+      elm = headerFragment.getAll('html')[0];
+      headElement = new global$1('head', 1);
+
+      if (elm.firstChild) {
+        elm.insert(headElement, elm.firstChild, true);
+      } else {
+        elm.append(headElement);
+      }
+    }
+
+    elm = headerFragment.firstChild;
+
+    if (data.xml_pi) {
+      var value = 'version="1.0"';
+
+      if (data.docencoding) {
+        value += ' encoding="' + data.docencoding + '"';
+      }
+
+      if (elm.type !== 7) {
+        elm = new global$1('xml', 7);
+        headerFragment.insert(elm, headerFragment.firstChild, true);
+      }
+
+      elm.value = value;
+    } else if (elm && elm.type === 7) {
+      elm.remove();
+    }
+
+    elm = headerFragment.getAll('#doctype')[0];
+
+    if (data.doctype) {
+      if (!elm) {
+        elm = new global$1('#doctype', 10);
+
+        if (data.xml_pi) {
+          headerFragment.insert(elm, headerFragment.firstChild);
+        } else {
+          addHeadNode(elm);
+        }
+      }
+
+      elm.value = data.doctype.substring(9, data.doctype.length - 1);
+    } else if (elm) {
+      elm.remove();
+    }
+
+    elm = null;
+    global$3.each(headerFragment.getAll('meta'), function (meta) {
+      if (meta.attr('http-equiv') === 'Content-Type') {
+        elm = meta;
+      }
+    });
+
+    if (data.docencoding) {
+      if (!elm) {
+        elm = new global$1('meta', 1);
+        elm.attr('http-equiv', 'Content-Type');
+        elm.shortEnded = true;
+        addHeadNode(elm);
+      }
+
+      elm.attr('content', 'text/html; charset=' + data.docencoding);
+    } else if (elm) {
+      elm.remove();
+    }
+
+    elm = headerFragment.getAll('title')[0];
+
+    if (data.title) {
+      if (!elm) {
+        elm = new global$1('title', 1);
+        addHeadNode(elm);
+      } else {
+        elm.empty();
+      }
+
+      elm.append(new global$1('#text', 3)).value = data.title;
+    } else if (elm) {
+      elm.remove();
+    }
+
+    global$3.each('keywords,description,author,copyright,robots'.split(','), function (name) {
+      var nodes = headerFragment.getAll('meta');
+      var i, meta;
+      var value = data[name];
+
+      for (i = 0; i < nodes.length; i++) {
+        meta = nodes[i];
+
+        if (meta.attr('name') === name) {
+          if (value) {
+            meta.attr('content', value);
+          } else {
+            meta.remove();
+          }
+
+          return;
+        }
+      }
+
+      if (value) {
+        elm = new global$1('meta', 1);
+        elm.attr('name', name);
+        elm.attr('content', value);
+        elm.shortEnded = true;
+        addHeadNode(elm);
+      }
+    });
+    var currentStyleSheetsMap = {};
+    global$3.each(headerFragment.getAll('link'), function (stylesheet) {
+      if (stylesheet.attr('rel') === 'stylesheet') {
+        currentStyleSheetsMap[stylesheet.attr('href')] = stylesheet;
+      }
+    });
+    global$3.each(data.stylesheets, function (stylesheet) {
+      if (!currentStyleSheetsMap[stylesheet]) {
+        elm = new global$1('link', 1);
+        elm.attr({
+          rel: 'stylesheet',
+          text: 'text/css',
+          href: stylesheet
+        });
+        elm.shortEnded = true;
+        addHeadNode(elm);
+      }
+
+      delete currentStyleSheetsMap[stylesheet];
+    });
+    global$3.each(currentStyleSheetsMap, function (stylesheet) {
+      stylesheet.remove();
+    });
+    elm = headerFragment.getAll('body')[0];
+
+    if (elm) {
+      setAttr(elm, 'dir', data.langdir);
+      setAttr(elm, 'style', data.style);
+      setAttr(elm, 'vlink', data.visited_color);
+      setAttr(elm, 'link', data.link_color);
+      setAttr(elm, 'alink', data.active_color);
+      dom.setAttribs(editor.getBody(), {
+        style: data.style,
+        dir: data.dir,
+        vLink: data.visited_color,
+        link: data.link_color,
+        aLink: data.active_color
+      });
+    }
+
+    elm = headerFragment.getAll('html')[0];
+
+    if (elm) {
+      setAttr(elm, 'lang', data.langcode);
+      setAttr(elm, 'xml:lang', data.langcode);
+    }
+
+    if (!headElement.firstChild) {
+      headElement.remove();
+    }
+
+    var html = global({
+      validate: false,
+      indent: true,
+      indent_before: 'head,html,body,meta,title,script,link,style',
+      indent_after: 'head,html,body,meta,title,script,link,style'
+    }).serialize(headerFragment);
+    return html.substring(0, html.indexOf('</body>'));
+  };
+
+  var open = function open(editor, headState) {
+    var data = htmlToData(editor, headState.get());
+    var defaultData = {
+      title: '',
+      keywords: '',
+      description: '',
+      robots: '',
+      author: '',
+      docencoding: ''
+    };
+
+    var initialData = _assign(_assign({}, defaultData), data);
+
+    editor.windowManager.open({
+      title: 'Metadata and Document Properties',
+      size: 'normal',
+      body: {
+        type: 'panel',
+        items: [{
+          name: 'title',
+          type: 'input',
+          label: 'Title'
+        }, {
+          name: 'keywords',
+          type: 'input',
+          label: 'Keywords'
+        }, {
+          name: 'description',
+          type: 'input',
+          label: 'Description'
+        }, {
+          name: 'robots',
+          type: 'input',
+          label: 'Robots'
+        }, {
+          name: 'author',
+          type: 'input',
+          label: 'Author'
+        }, {
+          name: 'docencoding',
+          type: 'input',
+          label: 'Encoding'
+        }]
+      },
+      buttons: [{
+        type: 'cancel',
+        name: 'cancel',
+        text: 'Cancel'
+      }, {
+        type: 'submit',
+        name: 'save',
+        text: 'Save',
+        primary: true
+      }],
+      initialData: initialData,
+      onSubmit: function onSubmit(api) {
+        var nuData = api.getData();
+        var headHtml = dataToHtml(editor, global$3.extend(data, nuData), headState.get());
+        headState.set(headHtml);
+        api.close();
+      }
+    });
+  };
+
+  var register$1 = function register$1(editor, headState) {
+    editor.addCommand('mceFullPageProperties', function () {
+      open(editor, headState);
+    });
+  };
+
+  var protectHtml = function protectHtml(protect, html) {
+    global$3.each(protect, function (pattern) {
+      html = html.replace(pattern, function (str) {
+        return '<!--mce:protected ' + escape(str) + '-->';
+      });
+    });
+    return html;
+  };
+
+  var unprotectHtml = function unprotectHtml(html) {
+    return html.replace(/<!--mce:protected ([\s\S]*?)-->/g, function (a, m) {
+      return unescape(m);
+    });
+  };
+
+  var each = global$3.each;
+
+  var low = function low(s) {
+    return s.replace(/<\/?[A-Z]+/g, function (a) {
+      return a.toLowerCase();
+    });
+  };
+
+  var handleSetContent = function handleSetContent(editor, headState, footState, evt) {
+    var startPos,
+        endPos,
+        content,
+        styles = '';
+    var dom = editor.dom;
+
+    if (evt.selection) {
+      return;
+    }
+
+    content = protectHtml(getProtect(editor), evt.content);
+
+    if (evt.format === 'raw' && headState.get()) {
+      return;
+    }
+
+    if (evt.source_view && shouldHideInSourceView(editor)) {
+      return;
+    }
+
+    if (content.length === 0 && !evt.source_view) {
+      content = global$3.trim(headState.get()) + '\n' + global$3.trim(content) + '\n' + global$3.trim(footState.get());
+    }
+
+    content = content.replace(/<(\/?)BODY/gi, '<$1body');
+    startPos = content.indexOf('<body');
+
+    if (startPos !== -1) {
+      startPos = content.indexOf('>', startPos);
+      headState.set(low(content.substring(0, startPos + 1)));
+      endPos = content.indexOf('</body', startPos);
+
+      if (endPos === -1) {
+        endPos = content.length;
+      }
+
+      evt.content = global$3.trim(content.substring(startPos + 1, endPos));
+      footState.set(low(content.substring(endPos)));
+    } else {
+      headState.set(getDefaultHeader(editor));
+      footState.set('\n</body>\n</html>');
+    }
+
+    var headerFragment = parseHeader(editor, headState.get());
+    each(headerFragment.getAll('style'), function (node) {
+      if (node.firstChild) {
+        styles += node.firstChild.value;
+      }
+    });
+    var bodyElm = headerFragment.getAll('body')[0];
+
+    if (bodyElm) {
+      dom.setAttribs(editor.getBody(), {
+        style: bodyElm.attr('style') || '',
+        dir: bodyElm.attr('dir') || '',
+        vLink: bodyElm.attr('vlink') || '',
+        link: bodyElm.attr('link') || '',
+        aLink: bodyElm.attr('alink') || ''
+      });
+    }
+
+    dom.remove('fullpage_styles');
+    var headElm = editor.getDoc().getElementsByTagName('head')[0];
+
+    if (styles) {
+      var styleElm = dom.add(headElm, 'style', {
+        id: 'fullpage_styles'
+      });
+      styleElm.appendChild(document.createTextNode(styles));
+    }
+
+    var currentStyleSheetsMap = {};
+    global$3.each(headElm.getElementsByTagName('link'), function (stylesheet) {
+      if (stylesheet.rel === 'stylesheet' && stylesheet.getAttribute('data-mce-fullpage')) {
+        currentStyleSheetsMap[stylesheet.href] = stylesheet;
+      }
+    });
+    global$3.each(headerFragment.getAll('link'), function (stylesheet) {
+      var href = stylesheet.attr('href');
+
+      if (!href) {
+        return true;
+      }
+
+      if (!currentStyleSheetsMap[href] && stylesheet.attr('rel') === 'stylesheet') {
+        dom.add(headElm, 'link', {
+          'rel': 'stylesheet',
+          'text': 'text/css',
+          href: href,
+          'data-mce-fullpage': '1'
+        });
+      }
+
+      delete currentStyleSheetsMap[href];
+    });
+    global$3.each(currentStyleSheetsMap, function (stylesheet) {
+      stylesheet.parentNode.removeChild(stylesheet);
+    });
+  };
+
+  var getDefaultHeader = function getDefaultHeader(editor) {
+    var header = '',
+        value,
+        styles = '';
+
+    if (getDefaultXmlPi(editor)) {
+      var piEncoding = getDefaultEncoding(editor);
+      header += '<?xml version="1.0" encoding="' + (piEncoding ? piEncoding : 'ISO-8859-1') + '" ?>\n';
+    }
+
+    header += getDefaultDocType(editor);
+    header += '\n<html>\n<head>\n';
+
+    if (value = getDefaultTitle(editor)) {
+      header += '<title>' + value + '</title>\n';
+    }
+
+    if (value = getDefaultEncoding(editor)) {
+      header += '<meta http-equiv="Content-Type" content="text/html; charset=' + value + '" />\n';
+    }
+
+    if (value = getDefaultFontFamily(editor)) {
+      styles += 'font-family: ' + value + ';';
+    }
+
+    if (value = getDefaultFontSize(editor)) {
+      styles += 'font-size: ' + value + ';';
+    }
+
+    if (value = getDefaultTextColor(editor)) {
+      styles += 'color: ' + value + ';';
+    }
+
+    header += '</head>\n<body' + (styles ? ' style="' + styles + '"' : '') + '>\n';
+    return header;
+  };
+
+  var handleGetContent = function handleGetContent(editor, head, foot, evt) {
+    if (evt.format === 'html' && !evt.selection && (!evt.source_view || !shouldHideInSourceView(editor))) {
+      evt.content = unprotectHtml(global$3.trim(head) + '\n' + global$3.trim(evt.content) + '\n' + global$3.trim(foot));
+    }
+  };
+
+  var setup = function setup(editor, headState, footState) {
+    editor.on('BeforeSetContent', function (evt) {
+      handleSetContent(editor, headState, footState, evt);
+    });
+    editor.on('GetContent', function (evt) {
+      handleGetContent(editor, headState.get(), footState.get(), evt);
+    });
+  };
+
+  var register = function register(editor) {
+    editor.ui.registry.addButton('fullpage', {
+      tooltip: 'Metadata and document properties',
+      icon: 'document-properties',
+      onAction: function onAction() {
+        editor.execCommand('mceFullPageProperties');
+      }
+    });
+    editor.ui.registry.addMenuItem('fullpage', {
+      text: 'Metadata and document properties',
+      icon: 'document-properties',
+      onAction: function onAction() {
+        editor.execCommand('mceFullPageProperties');
+      }
+    });
+  };
+
+  function Plugin() {
+    global$4.add('fullpage', function (editor) {
+      var headState = Cell(''),
+          footState = Cell('');
+      register$1(editor, headState);
+      register(editor);
+      setup(editor, headState, footState);
+    });
+  }
+
+  Plugin();
+})();
+/******/ })()
+;

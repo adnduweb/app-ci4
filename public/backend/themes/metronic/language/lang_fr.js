@@ -153,5 +153,11 @@ var _LANG_ = {
 "SorryErrorsDetected" : "Désolé, il semble qu'il y ait des erreurs, veuillez réessayer.", 
 "Fermer" : "Fermer", 
 "JetonNotConforme" : "Votre jeton est non conforme", 
+"password_is_required" : "Votre mot de passse est requis", 
+"Showing" : "Montrer", 
+"to" : "de", 
+"of" : "à", 
+"ShowingNoRecords" : "pas d'enregistrement", 
+"NoDataAvailableInTable" : "Aucune donnée disponible", 
 
 }

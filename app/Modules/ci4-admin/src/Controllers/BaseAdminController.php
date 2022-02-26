@@ -192,7 +192,7 @@ abstract class BaseAdminController extends Controller
         setlocale(LC_TIME, service('request')->getLocale() . '_' .  service('request')->getLocale());
 
         $this->token = Tools::getAdminToken(service('router')->controllerName() . (isset(user()->id) ?? null ) . (isset(user()->last_login_at) ?? null ) );
-        $this->path_redirect = '/' . CI_AREA_ADMIN . '/' . $this->category . '/' . $this->table;
+        $this->path_redirect = DIRECTORY_SEPARATOR . CI_AREA_ADMIN . DIRECTORY_SEPARATOR . $this->category . DIRECTORY_SEPARATOR . $this->table;
         $this->display = service('router')->methodName();
 
         
@@ -346,7 +346,7 @@ abstract class BaseAdminController extends Controller
             'type_export' => $this->type_export,
             'allow_import' => $this->allow_import,
             'allow_change_categorie' => $this->allow_change_categorie,
-            'backcategory' => $this->category . '/' . strtolower( $this->className ),
+            'backcategory' => (!empty($this->category )) ? $this->category . '/' . strtolower( $this->className ) :  strtolower( $this->className ),
             'multilangue' =>(isset($this->multilangue)) ? $this->multilangue : false
         ];
 
@@ -772,6 +772,10 @@ abstract class BaseAdminController extends Controller
      */
     public function edit(string $id): string
     {
+
+        if(is_null($this->object)){
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
         $this->errors = array_unique($this->errors);
 

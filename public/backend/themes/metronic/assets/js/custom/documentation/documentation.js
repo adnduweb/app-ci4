@@ -1,1 +1,60 @@
-(()=>{"use strict";var e={init:function(e){!function(e){var t=e;if(void 0===t&&(t=document.querySelectorAll(".highlight")),t&&t.length>0)for(var i=0;i<t.length;++i){var n=t[i].querySelector(".highlight-copy");n&&new ClipboardJS(n,{target:function(e){var t=e.closest(".highlight"),i=t.querySelector(".tab-pane.active");return null==i&&(i=t.querySelector(".highlight-code")),i}}).on("success",(function(e){var t=e.trigger.innerHTML;e.trigger.innerHTML="copied",e.clearSelection(),setTimeout((function(){e.trigger.innerHTML=t}),2e3)}))}}(e)}};KTUtil.onDOMContentLoaded((function(){e.init()}))})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+var __webpack_exports__ = {};
+/*!*************************************************************************!*\
+  !*** ./resources/backend/core/js/custom/documentation/documentation.js ***!
+  \*************************************************************************/
+
+
+var KTLayoutDocumentation = function () {
+  var _init = function _init(element) {
+    var elements = element;
+
+    if (typeof elements === 'undefined') {
+      elements = document.querySelectorAll('.highlight');
+    }
+
+    if (elements && elements.length > 0) {
+      for (var i = 0; i < elements.length; ++i) {
+        var highlight = elements[i];
+        var copy = highlight.querySelector('.highlight-copy');
+
+        if (copy) {
+          var clipboard = new ClipboardJS(copy, {
+            target: function target(trigger) {
+              var highlight = trigger.closest('.highlight');
+              var el = highlight.querySelector('.tab-pane.active');
+
+              if (el == null) {
+                el = highlight.querySelector('.highlight-code');
+              }
+
+              return el;
+            }
+          });
+          clipboard.on('success', function (e) {
+            var caption = e.trigger.innerHTML;
+            e.trigger.innerHTML = 'copied';
+            e.clearSelection();
+            setTimeout(function () {
+              e.trigger.innerHTML = caption;
+            }, 2000);
+          });
+        }
+      }
+    }
+  };
+
+  return {
+    init: function init(element) {
+      _init(element);
+    }
+  };
+}(); // On document ready
+
+
+KTUtil.onDOMContentLoaded(function () {
+  KTLayoutDocumentation.init();
+});
+/******/ })()
+;
