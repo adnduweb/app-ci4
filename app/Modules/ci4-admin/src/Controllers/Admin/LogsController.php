@@ -31,7 +31,7 @@ class LogsController extends BaseAdminController
     protected $viewPrefix = 'Adnduweb\Ci4Admin\Views\themes\\';
 
     /**  @var string  */
-    public $category  = 'settings-advanced';
+    public $category  = 'settings-advanced'; 
 
     /**  @var object  */
     public $tableModel = AuditModel::class;
@@ -373,6 +373,55 @@ class LogsController extends BaseAdminController
          $this->viewData['logFilePretty'] = date('F j, Y', strtotime(str_replace('.log', '', str_replace('log-', '', $file))));
 
         return $this->render($this->viewPrefix . $this->theme . '/\pages\logs\view_log', $this->viewData);
+    }
+
+       /**
+     * Delete the specified log file or all.
+     *
+     * @return RedirectResponse
+     */
+    public function deleteLog()
+    {
+        $delete    = $this->request->getPost('delete');
+        $deleteAll = $this->request->getPost('delete_all');
+
+        if (empty($delete) && empty($deleteAll)) {
+            return redirect()->to('log-views-files')->with(
+                'error',
+                lang('Core.resourcesNotFound', ['logs'])
+            );
+        }
+
+        if (! empty($delete)) {
+            helper('security');
+
+            $checked    = $_POST['checked'];
+            $numChecked = count($checked);
+
+            if (is_array($checked) && $numChecked) {
+                foreach ($checked as $file) {
+                    @unlink($this->logsPath . sanitize_filename($file));
+                }
+                Theme::set_message('success', lang('Core.saved_data'), lang('Logs.delete_success'));
+                return redirect()->route('log-list-files');
+            }
+        }
+
+        if (! empty($deleteAll)) {
+            if (delete_files($this->logsPath)) {
+                // Restore the index.html file.
+                @copy(APPPATH . '/index.html', "{$this->logsPath}index.html");
+
+                Theme::set_message('success', lang('Core.saved_data'), lang('Logs.delete_all_success'));
+                return redirect()->route('log-list-files');
+            }
+
+            Theme::set_message('error', lang('Logs.delete_error'));
+            return redirect()->route('log-list-files')->with('error', lang('Logs.delete_error'));
+        }
+
+        Theme::set_message('error', lang('Core.unknownAction'));
+        return redirect()->route('log-list-files');
     }
 
 }

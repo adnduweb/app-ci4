@@ -8,11 +8,11 @@
 
 <x-admin-box>
     <div class="table-responsive">
-        <table class="table table-hover nowrap" id="log">
+        <table class="table align-middle table-row-dashed fs-6 gy-5 nowrap" id="log">
             <tr>
-                <th><?= lang('Logs.level'); ?></th>
-                <th><?= lang('Logs.date'); ?></th>
-                <th><?= lang('Logs.content'); ?></th>
+                <th class="min-w-125px"><?= lang('Logs.level'); ?></th>
+                <th class="min-w-125px"><?= lang('Logs.date'); ?></th>
+                <th class="min-w-125px"><?= lang('Logs.content'); ?></th>
 
             </tr>
             <tbody>
@@ -56,7 +56,7 @@
 
     <?php if ($canDelete) : ?>
 
-        <form action="<?= site_url(CI_AREA_ADMIN . '/tools/delete-log'); ?>" class='form-horizontal' method="post">
+        <form action="<?= route_to('log-delete-file'); ?>" class='form-horizontal' method="post">
             <?= csrf_field() ?>
 
             <input type="hidden" name="checked[]" value="<?= $logFile; ?>"/>

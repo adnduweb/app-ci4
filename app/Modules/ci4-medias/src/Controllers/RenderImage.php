@@ -74,9 +74,9 @@ class RenderImage extends \CodeIgniter\Controller
 
     public function module(...$param){
 
-        print_r($param); exit;
+       $path = implode('/', $param);
 
-        $file = new \CodeIgniter\Files\File(WRITEPATH.'medias' . DIRECTORY_SEPARATOR . $directory. DIRECTORY_SEPARATOR . $secondDirectory . DIRECTORY_SEPARATOR . $file);
+        $file = new \CodeIgniter\Files\File(WRITEPATH.'medias' . DIRECTORY_SEPARATOR .$path);
         $this->image = @file_get_contents($file->getPathname());
 
          $mimeType = $file->getMimeType();

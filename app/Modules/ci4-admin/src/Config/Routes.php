@@ -120,6 +120,7 @@ $routes->group(CI_AREA_ADMIN, ['namespace' => '\Adnduweb\Ci4Admin\Controllers\Ad
         $routes->get('datatable-connexions', 'LogsController::ajaxDatatableConnexions', ['as' => 'logs-connexions-listajax']);
         $routes->get('files', 'LogsController::indexFiles', ['as' => 'log-list-files']);
         $routes->get('files/(:any)', 'LogsController::viewsFiles/$1', ['as' => 'log-views-files']);
+        $routes->post('files/delete-log', 'LogsController::deleteLog', ['as' => 'log-delete-file']);
 
     });
 

@@ -6,18 +6,22 @@
     </x-page-head>
 
     <x-admin-box>
-            <?php if (count($logs)) { ?>
+            <?php if (count($logs)) { ?> 
 
-                <form action="<?= site_url(CI_AREA_ADMIN . '/tools/delete-log'); ?>" method="post">
+                <form action="<?= route_to('log-delete-file'); ?>" method="post">
                     <?= csrf_field() ?>
 
                 <div class="table-responsive">
-                <table class="table table-hover logs" cellspacing="0" width="100%" >
+                <table id="kt_log_manager_list" class="table align-middle table-row-dashed fs-6 gy-5 logs" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="column-check"><input class="check-all" type="checkbox" /></th>
-                            <th class='date'><?= lang('Logs.date'); ?></th>
-                            <th><?= lang('Logs.file'); ?></th>
+                            <th class="w-10px pe-2">
+                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_log_manager_list .form-check-input" value="1" />
+                                </div>
+                            </th>
+                            <th class="min-w-125px date "><?= lang('Logs.date'); ?></th>
+                            <th class="min-w-125px file"><?= lang('Logs.file'); ?></th>
                         </tr>
                     </thead>
 
@@ -31,7 +35,9 @@
                             ?>
                         <tr>
                             <td class="column-check">
-                                <input type="checkbox" value="<?= esc($log); ?>" name="checked[]" />
+                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                    <input class="form-check-input" name="checked[]" type="checkbox" value="<?= esc($log); ?>" />
+                                </div>
                             </td>
                             <td class='date'>
                                 <a href='<?= route_to('log-views-files', $log); ?>'>
@@ -46,7 +52,7 @@
                     </tbody>
                 </table>
                 </div>
-        <?= $pager->links() ?>
+        <?= $pager->links('group1','metronic_simple') ?>
 
         <input type="submit" name="delete" id="delete-me" class="btn btn-sm btn-danger" value="<?= lang('Logs.delete_selected'); ?>" onclick="return confirm('<?= lang('Logs.delete_selected_confirm'); ?>')" />
 
