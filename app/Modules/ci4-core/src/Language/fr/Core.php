@@ -195,7 +195,9 @@ return [
 	'ModeMaintenance'                                                      => 'Activer le mode maintenance',
 	'deleteSelected'                                                       => 'Suppression sélectionnée',
 	'selected'                                                             => 'Selections',
-	'selectAtLeastOne' 														=> 'Veuillez sélectionner au moins une option.',
+	'selectAtLeastOne' 													   => 'Veuillez sélectionner au moins une option.',
+	'itemUpdatedSuccessfully' 											   => 'L\'élément a été mis à jour avec succès',
+	'itemNotUpdated' 													   => 'L\'élément n\'a pas été mis à jour. veuillez réssayer.',
 
 ];
 

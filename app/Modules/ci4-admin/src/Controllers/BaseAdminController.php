@@ -663,7 +663,7 @@ abstract class BaseAdminController extends Controller
             $this->viewData['paramJs']['id_group']            = json_encode($id_group);
             $this->viewData['paramJs']['activer_multilangue'] = service('settings')->get('App.language_bo', 'multilangue');
             $this->viewData['paramJs']['tokenHashPage']       = $this->token;
-            $this->viewData['paramJs']['System']              = json_encode(['sendMailAccountManager' =>site_url(route_to('send-mail-account-manager'))]);
+            $this->viewData['paramJs']['System']              = json_encode(['sendMailAccountManager' =>site_url(route_to('send-mail-account-manager')), 'controller' => $this->table]);
         }
         return $this->viewData['paramJs'];
     }
