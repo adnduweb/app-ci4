@@ -194,7 +194,8 @@ return [
 	'displayServicesWworkers'                                              => 'Activer le mode worker sur le front',
 	'ModeMaintenance'                                                      => 'Activer le mode maintenance',
 	'deleteSelected'                                                       => 'Suppression sélectionnée',
-	'selected'                                                             => 'Selections'
+	'selected'                                                             => 'Selections',
+	'selectAtLeastOne' 														=> 'Veuillez sélectionner au moins une option.',
 
 ];
 

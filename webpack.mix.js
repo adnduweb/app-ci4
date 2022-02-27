@@ -65,7 +65,7 @@ if (args.indexOf('admin') !== -1) {
         })
         // .options({processCssUrls: false})
         //'resources/backend/extended/button-ajax.js', 
-        .js(['resources/backend/' + demo + '/js/scripts.js', 'resources/backend/extended/general.js', 'resources/backend/extended/examples.js', 'resources/backend/extended/imageManager.js'], OutputDir + '/js/scripts.bundle.js');
+        .js(['resources/backend/' + demo + '/js/scripts.js', 'resources/backend/extended/general.js', 'resources/backend/extended/examples.js', 'resources/backend/extended/imageManager.js', 'resources/backend/extended/managerAccount.js'], OutputDir + '/js/scripts.bundle.js');
 
     // Dark skin mode css files
     if (args.indexOf('dark_mode') !== -1) {

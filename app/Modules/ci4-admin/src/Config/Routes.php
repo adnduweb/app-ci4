@@ -158,6 +158,8 @@ $routes->group(CI_AREA_ADMIN, ['namespace' => '\Adnduweb\Ci4Admin\Controllers\Ad
     //AJAX
     $routes->group('ajax', function ($routes) {
         $routes->post('ktAsideUser', 'UsersController::ktAsideUser');
+        $routes->post('send-mail-account-manager', 'AjaxController::sendMailAccountManager', ['as' => 'send-mail-account-manager']);
+       
     });
 
 });

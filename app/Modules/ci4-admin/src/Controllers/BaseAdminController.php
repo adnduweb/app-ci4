@@ -662,10 +662,8 @@ abstract class BaseAdminController extends Controller
             $this->viewData['paramJs']['user_uuid']           = user()->uuid;
             $this->viewData['paramJs']['id_group']            = json_encode($id_group);
             $this->viewData['paramJs']['activer_multilangue'] = service('settings')->get('App.language_bo', 'multilangue');
-            //$this->viewData['paramJs']['supportedLocales']    = implode('|', $this->langue->supportedLocales());
-            //$this->viewData['paramJs']['crsftoken']           = csrf_token();
-           // $this->viewData['paramJs']['tokenHashPage']       = md5(user()->uuid . strtolower($this->className));
             $this->viewData['paramJs']['tokenHashPage']       = $this->token;
+            $this->viewData['paramJs']['System']              = json_encode(['sendMailAccountManager' =>site_url(route_to('send-mail-account-manager'))]);
         }
         return $this->viewData['paramJs'];
     }
@@ -720,14 +718,6 @@ abstract class BaseAdminController extends Controller
      */
     public function index(): string
     {
-
-       
-
-        // $this->viewData['addcategory'] = $this->category . '/' . strtolower($this->className) .  '/create';
-
-        // if (isset($this->add) && $this->add == true)
-        //     $this->viewData['add'] = lang('Core.add_' . strtolower($this->className));
-
          return true;
     }
 

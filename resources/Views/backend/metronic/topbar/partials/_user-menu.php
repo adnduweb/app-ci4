@@ -5,7 +5,7 @@
         <div class="menu-content d-flex align-items-center px-3">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img alt="Logo" src="<?= assetAdmin('/media/avatars/150-2.jpg'); ?>"/>
+                <img alt="Logo" src="<?= assetAdmin('/media/avatars/200-4.png'); ?>"/>
             </div>
             <!--end::Avatar-->
 
@@ -13,7 +13,7 @@
             <div class="d-flex flex-column">
                 <div class="fw-bolder d-flex align-items-center fs-5">
                 <?= user()->firstname; ?> <?= user()->lastname; ?>
-                    <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
+                    <!-- <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span> -->
                 </div>
                 <a href="#" class="fw-bold text-muted text-hover-primary fs-7"><?= user()->email; ?></a>
             </div>

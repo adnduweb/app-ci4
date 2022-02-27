@@ -75,6 +75,8 @@
      <?php } ?>
      <?= $this->renderSection('AdminModal') ?>
 
+     <?= $this->include('\Themes\backend\/'.$theme_admin.'/\aside/_modals/_modal_devis') ?> 
+
     <?= $this->include('\Themes\backend\/'.$theme_admin.'/\partials\javascript') ?>
     
 </body>

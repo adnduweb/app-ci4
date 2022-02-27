@@ -17,6 +17,8 @@ use Adnduweb\Ci4Core\Core\BaseSettings;
 use Adnduweb\Ci4Core\Core\BaseAudits;
 use Adnduweb\Ci4Core\Config\Audits as AuditsConfig;
 
+use Adnduweb\Ci4Core\Libraries\Mail;
+
 class Services extends BaseService
 {
 
@@ -113,22 +115,14 @@ class Services extends BaseService
 		return new BaseVisits($config);
 	}
 
-	// public static function currency(BaseConfig $config = null, bool $getShared = true)
-	// {
-	// 	if ($getShared) {
-	// 		return static::getSharedInstance('currency', $config);
-	// 	}
+	public static function mail(bool $getShared = true)
+    {
+		if ($getShared):
+			return static::getSharedInstance('mail');
+		endif;
 
-	// 	// If no config was injected then load one
-	// 	if (empty($config)) {
-	// 		$config = config('Currency');
-	// 	}
+		return new Mail();
+	}
 
-	// 	return new \Adnduweb\Ci4Core\Core\BaseCurrency($config);
-	// }
-
-	public static function getSecretKey(){
-		return getenv('JWT_SECRET_KEY');
-	} 
 
 }

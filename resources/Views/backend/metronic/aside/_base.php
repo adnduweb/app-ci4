@@ -48,17 +48,21 @@
  
     <!--begin::Footer-->
      <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
-         <?php if(service('theme')->isDocumentationMenu()){ ?>
-             <a href="<?= site_url(); ?> " class="btn btn-primary w-100"> <?= lang('Core.Preview Application'); ?></a>
-         <?php }else{ ?>
-                 <a href="<?= current_url(); ?> " class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="8000" title="Check out the complete documentation with over 100 components">
+         <!-- <?php // if(service('theme')->isDocumentationMenu()){ ?>
+             <a href="<?= ''; //site_url(); ?> " 
+             class="btn btn-primary w-100"> <?= '' ;// lang('Core.Preview Application'); ?></a>
+         <?php// }else{ ?>
+                 <a href="<?= ''; // current_url(); ?> " class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="8000" title="Check out the complete documentation with over 100 components">
              <span class="btn-label">
-                 <?= lang('Core.Documentation'); ?>
+                 <?= ''; // lang('Core.Documentation'); ?>
              </span>
-                 <?= service('theme')->getSVG("icons/duotone/General/Clipboard.svg", "btn-icon svg-icon-2"); ?>
+                 <?=''; // service('theme')->getSVG("icons/duotone/General/Clipboard.svg", "btn-icon svg-icon-2"); ?>
              </a>
-         <?php } ?>
+         <?php ///} ?> -->
+         <?=  $this->include('\Themes\backend\/'.$theme_admin.'/\aside\_account'); ?>
+         
      </div>
     <!--end::Footer-->
  </div>
  <!--end::Aside-->
+ 
