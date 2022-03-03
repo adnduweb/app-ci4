@@ -9,6 +9,10 @@ use \Adnduweb\Ci4Admin\Libraries\Init;
 use \Adnduweb\Ci4Admin\Libraries\Validate;
 use \Adnduweb\Ci4Admin\Libraries\Tools;
 use \Adnduweb\Ci4Admin\Libraries\Breadcrumb;
+use Adnduweb\Ci4Core\Models\OperationActivityModel;
+use Adnduweb\Ci4Core\Entities\OperationActivity;
+use CodeIgniter\I18n\Time;
+use CodeIgniter\I18n\TimeDifference; 
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
@@ -663,7 +667,7 @@ abstract class BaseAdminController extends Controller
             $this->viewData['paramJs']['id_group']            = json_encode($id_group);
             $this->viewData['paramJs']['activer_multilangue'] = service('settings')->get('App.language_bo', 'multilangue');
             $this->viewData['paramJs']['tokenHashPage']       = $this->token;
-            $this->viewData['paramJs']['System']              = json_encode(['sendMailAccountManager' =>site_url(route_to('send-mail-account-manager')), 'controller' => $this->table]);
+            $this->viewData['paramJs']['System']              = json_encode(['sendMailAccountManager' => site_url(route_to('send-mail-account-manager')), 'controller' => $this->table,  'ajax' => site_url(route_to('ajax'))]);
         }
         return $this->viewData['paramJs'];
     }
@@ -737,6 +741,21 @@ abstract class BaseAdminController extends Controller
             $order = $this->tableModel::ORDERABLE[$this->request->getVar('order[0][column]')];
             $dir = $this->request->getVar('order[0][dir]');
 
+            $data = $this->convertBinToUuid($this->tableModel->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject());
+            if(!empty($data)){
+                foreach($data as &$d){
+                    $activityModel = model(OperationActivityModel::class)->where(["operation_id" => $d->id, 'class' => service('router')->controllerName()])->first();
+                    if(!empty($activityModel)){
+                        $time = Time::parse($activityModel->updated_at);
+                         if($activityModel->is_editing && $time->difference(Time::now())->getMinutes()<5 && $activityModel->editing_by != user()->id){
+                            $d->activity = $activityModel;
+                         }
+                    }
+                   
+                }
+            }
+            //print_r($data); exit;
+
            return $this
             ->response
             ->setStatusCode(200)
@@ -744,7 +763,8 @@ abstract class BaseAdminController extends Controller
                 'draw'            => $this->request->getVar('draw'),
                 'recordsTotal'    => $this->tableModel->getResource()->countAllResults(),
                 'recordsFiltered' => $this->tableModel->getResource($search)->countAllResults(),
-                'data'            => $this->convertBinToUuid($this->tableModel->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject()),
+                //'data'            => $this->convertBinToUuid($this->tableModel->getResource($search)->orderBy($order, $dir)->limit($length, $start)->get()->getResultObject()), 
+                'data'            => $data, 
                 'token'           => csrf_hash()
             ]);
 
@@ -1043,7 +1063,6 @@ abstract class BaseAdminController extends Controller
             return true;
 
         if(in_array($this->display, $this->cruds)) {
-
             if(!has_permission($this->controller . '.'. $this->display)){
 
                 if ( service('request')->isAJAX()) {
@@ -1055,8 +1074,9 @@ abstract class BaseAdminController extends Controller
                 exit;
             }
         }
+    }
 
-       
-
+    public function stopConcurrentOperations(){
+        //silent
     }
 }

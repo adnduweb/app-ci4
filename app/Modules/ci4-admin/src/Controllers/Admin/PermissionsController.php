@@ -137,7 +137,7 @@ class PermissionsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminCont
         }
 
         $name = $this->request->getPost('name');
-        if (!stristr($this->request->getPost('name'), '-')) {
+        if (!stristr($this->request->getPost('name'), '.')) {
            Theme::set_message('error', lang('Core.mauvais_formattage_name'), lang('Core.warning_error'));
             return redirect()->back()->withInput();
         }
@@ -176,7 +176,7 @@ class PermissionsController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminCont
             return redirect()->back()->withInput();
         }
 
-        if (!stristr($this->request->getPost('name'), '-')) {
+        if (!stristr($this->request->getPost('name'), '.')) {
            Theme::set_message('error', lang('Core.mauvais_formattage_name'), lang('Core.warning_error'));
             return redirect()->back()->withInput();
         }

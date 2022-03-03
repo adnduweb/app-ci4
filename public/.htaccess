@@ -1,5 +1,5 @@
 # Disable directory browsing
-##Options All -Indexes
+Options All -Indexes
 
 # ----------------------------------------------------------------------
 # Rewrite engine
@@ -8,21 +8,13 @@
 # Turning on the rewrite engine is necessary for the following rules and features.
 # FollowSymLinks must be enabled for this to work.
 <IfModule mod_rewrite.c>
-	##Options +FollowSymlinks
+	Options +FollowSymlinks
 	RewriteEngine On
 
 	# If you installed CodeIgniter in a subfolder, you will need to
 	# change the following line to match the subfolder you need.
 	# http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
 	# RewriteBase /
-
-
-	# Force trailing slash
-	#RewriteCond %{REQUEST_FILENAME} !-f
-	#RewriteCond %{REQUEST_METHOD} GET
-	#RewriteCond %{REQUEST_URI} !(.*)/$
-	#RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/ [L,R=301]
-
 
 	# Redirect Trailing Slashes...
 	RewriteCond %{REQUEST_FILENAME} !-d
@@ -46,28 +38,6 @@
 	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
 
-# add this bellow 
-<IfModule mod_headers.c>
-
- # Add Font Types
-#        AddType application/vnd.ms-fontobject .eot
-#        AddType application/x-font-ttf        .ttf
-#        AddType application/x-font-opentype  .otf
-#        AddType application/font-woff        .woff
-#        AddType application/font-woff2        .woff2
-
-#        <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|svg|svgz|jpg|png|ico|font.css|css|js)$">
-            ## un-remark this one for all access and remark out the one below it
-            #Header set Access-Control-Allow-Origin "*"
-            ## Change this to your local host url. and https or http
-			#Header add Access-Control-Allow-Origin: "http://localhost:4200"
-            #Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
-            #Header add Access-Control-Allow-Headers: "origin, x-api-key, x-requested-with, content-type, accept, access-control-request-method, access-control-allow-headers, authorization, observe, enctype, content-length, x-csrf-token"
-            #Header add Access-Control-Allow-Credentials true
-#        </FilesMatch>
-
-</IfModule>
-
 <IfModule !mod_rewrite.c>
 	# If we don't have mod_rewrite installed, all 404's
 	# can be sent to index.php, and everything works as normal.
@@ -77,9 +47,3 @@
 # Disable server signature start
 	ServerSignature Off
 # Disable server signature end
-
-<IfModule mod_deflate.c>
-	<FilesMatch "\.(js|css|html|htm|php|json|xml|jpg|jpeg|gif|raw)$">
-		SetOutputFilter DEFLATE
-	</FilesMatch>
-</IfModule>

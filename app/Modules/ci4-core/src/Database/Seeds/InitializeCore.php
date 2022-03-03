@@ -404,6 +404,11 @@ class InitializeCore extends Seeder
                 'description'       => 'Voir les modules',
                 'is_natif'          => '1',
             ],
+            [
+                'name'              => 'dashboard.index',
+                'description'       => 'Accès au tableau de bord',
+                'is_natif'          => '1',
+            ],
         ];
         // On insére le role par default au user
         foreach ($rowsPermissionsUsers as $row) {

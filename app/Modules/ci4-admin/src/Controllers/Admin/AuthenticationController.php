@@ -5,6 +5,7 @@ namespace Adnduweb\Ci4Admin\Controllers\Admin;
 use CodeIgniter\Events\Events;
 use Adnduweb\Ci4Admin\Entities\User;
 use Adnduweb\Ci4Admin\Models\UserModel;
+use Firebase\JWT\JWT;
 use CodeIgniter\API\ResponseTrait;
 
 class AuthenticationController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
@@ -83,6 +84,7 @@ class AuthenticationController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminC
     public function attemptLogin()
     {
         if ($this->request->isAJAX()) {
+            $let = [];
             $rules = [
                 'login'    => 'required',
                 'password' => 'required',
@@ -152,17 +154,39 @@ class AuthenticationController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminC
     
             $users->save($user);
 
+            $key = getenv('TOKEN_SECRET');
+
+            $iat = time();
+            $nbf = $iat + 10;
+            $exp = $iat + getenv('app.sessionExpiration'); 
+    
+            $payload = array(
+                "iss" => "The_claim",
+                "aud" => "The_Aud",
+                "iat" => $iat,
+                "nbf" => $nbf,
+                "exp" => $exp,
+                "uid" => $user->id,
+                "email" => $user->email
+            );
+            $token = JWT::encode($payload, $key, 'HS256');
+
+            $let['app']['accessToken'] = $token;
+            $let['app']['id'] = $user->id;
+            $let['app']['email'] = $user->email;
+
+
             // Double authentification
             if($user->isTwoFactorActive()){
-                $let = [
-                    'two_factor' => $user->isTwoFactorActive(),
-                    'redirect' => route_to('two-factor-auth-2fa')
-                ];
+
+                $let['two_factor'] = $user->isTwoFactorActive();
+                $let['redirect'] = route_to('two-factor-auth-2fa');
+
                 return $this->getResponse(['success' => lang('Auth.loginSuccess')], 200, $let);
             }
             
 
-            $let = ['redirect' => $redirectURL];
+            $let['redirect'] = $redirectURL;
 
             return $this->getResponse(['success' => lang('Auth.loginSuccess')], 200, $let);
         }

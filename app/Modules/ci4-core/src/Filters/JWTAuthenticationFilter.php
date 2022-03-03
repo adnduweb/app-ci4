@@ -17,7 +17,7 @@ class JWTAuthenticationFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
 
-        $key = getenv('JWT_SECRET_KEY');
+        $key = getenv('TOKEN_SECRET');
         $header = $request->getServer('HTTP_AUTHORIZATION');
         if(!$header) return Services::response()
                             ->setJSON(['msg' => 'Token Required'])
@@ -33,9 +33,7 @@ class JWTAuthenticationFilter implements FilterInterface
         }
     }
 
-    public function after(RequestInterface $request,
-                          ResponseInterface $response,
-                          $arguments = null)
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
     }
 }

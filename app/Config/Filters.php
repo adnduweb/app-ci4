@@ -8,6 +8,7 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use \Adnduweb\Ci4Core\Filters\StopConcurrentOperations;
 use \Adnduweb\Ci4Admin\Filters\LoginFilter;
 use \Adnduweb\Ci4Admin\Filters\RoleFilter;
 use \Adnduweb\Ci4Admin\Filters\PermissionFilter;
@@ -24,16 +25,17 @@ class Filters extends BaseConfig
 	 * @var array
 	 */
 	public $aliases = [
-		'csrf'          => CSRF::class,
-		'toolbar'       => DebugToolbar::class,
-		'honeypot'      => Honeypot::class,
-		'invalidchars'  => InvalidChars::class,
-		'secureheaders' => SecureHeaders::class,
-		'login'         => LoginFilter::class,               // Applicate Route
-		'role'          => RoleFilter::class,                // Applicate Route
-		'permission'    => PermissionFilter::class,          // Applicate Route
-		'cors'          => CorsFilter::class,
-		'auth'          => JWTAuthenticationFilter::class,   // add this line
+		'csrf'                     => CSRF::class,
+		'toolbar'                  => DebugToolbar::class,
+		'honeypot'                 => Honeypot::class,
+		'invalidchars'             => InvalidChars::class,
+		'secureheaders'            => SecureHeaders::class,
+		'stopconcurrentoperations' => StopConcurrentOperations::class,
+		'login'                    => LoginFilter::class,                // Applicate Route
+		'role'                     => RoleFilter::class,                 // Applicate Route
+		'permission'               => PermissionFilter::class,           // Applicate Route
+		'cors'                     => CorsFilter::class,
+		'auth'                     => JWTAuthenticationFilter::class,    // add this line
 	];
 
 	/**
@@ -47,6 +49,7 @@ class Filters extends BaseConfig
 			'csrf' => [
                 'except' => ['api/*'],
 			],
+			'stopconcurrentoperations',
 			'cors',
 		],
 		'after'  => [

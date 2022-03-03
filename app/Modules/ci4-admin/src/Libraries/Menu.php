@@ -42,6 +42,7 @@ class Menu {
 
 
          // print_r($item); 
+        
          if(isset( $item['ancre'])){
             if(!has_permission( $item['ancre'] . '.index')){
                 return false;
