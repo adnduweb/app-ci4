@@ -6,6 +6,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+.no-header.php-cs-fixer.dist.php
 
 # OS X Thumbnails
 ._*
@@ -123,11 +124,13 @@ nb-configuration.xml
 node_modules/*
 # app/Modules/*
 tests/
+admin/
 public/backend/themes/metronic/cache/*
 public/frontend/themes/metronic/cache/*
 app/Modules/ci4-vassorts/*
 app/Modules/ci4-pages/*
 app/Modules/ci4-carousels/*
+app/Modules/ci4-catalog/*
 fonts/*
 
 # Visual Studio Code

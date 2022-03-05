@@ -18,6 +18,7 @@ use Adnduweb\Ci4Core\Core\BaseAudits;
 use Adnduweb\Ci4Core\Config\Audits as AuditsConfig;
 
 use Adnduweb\Ci4Core\Libraries\Mail;
+use Adnduweb\Ci4Core\Libraries\Cart;
 
 class Services extends BaseService
 {
@@ -124,5 +125,19 @@ class Services extends BaseService
 		return new Mail();
 	}
 
-
+	/**
+     * Shopping Cart Service
+     *
+     * @param  bool $getShared
+     *
+     * @return mixed
+     *
+     */
+    public static function cart($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('cart');
+        }
+        return new Cart();
+    }
 }

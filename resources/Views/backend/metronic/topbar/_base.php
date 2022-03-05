@@ -7,6 +7,9 @@
 
 <!--begin::Toolbar wrapper-->
 <div class="d-flex align-items-stretch flex-shrink-0">
+    <?php if (class_exists('\Adnduweb\Ci4Pages\Controllers\Admin\PagesController')) { ?>
+        <?= $this->include('\Themes\backend\/'.$theme_admin.'/\topbar\partials\_front'); ?>
+    <?php } ?>
 
     <?= $this->include('\Themes\backend\/'.$theme_admin.'/\topbar\partials\_theme_mode'); ?>
 

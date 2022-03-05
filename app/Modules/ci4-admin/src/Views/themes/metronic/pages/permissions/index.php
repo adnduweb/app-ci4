@@ -156,7 +156,7 @@ var KTPermissionsList = function () {
 
                             htmlContent += '<td class="text-end">';
                             htmlContent += '<a href="javascript:;" class="btn btn-light btn-active-light-primary btn-sm ajax-datatable-action" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">Actions';
-                            htmlContent += '<?= service('theme')->getSVG('duotune/arrows/arr072.svg', "svg-icon svg-icon-5 m-0", false, true); ?>';
+                            htmlContent += '<?= service('theme')->getSVG('icons/duotone/arrows/arr072.svg', "svg-icon svg-icon-5 m-0", false, true); ?>';
                             htmlContent += '</a>';
                             htmlContent += ' <!--begin::Menu-->';
                             htmlContent += ' <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">';

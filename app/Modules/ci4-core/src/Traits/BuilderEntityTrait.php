@@ -6,6 +6,7 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Services;
 use Adnduweb\Ci4Core\Entities\Builder;
 use Adnduweb\Ci4Core\Models\BuilderModel;
+use Adnduweb\Ci4Medias\Models\MediaModel;
 use Adnduweb\Ci4Core\Exceptions\DataException;
 
 trait BuilderEntityTrait
@@ -105,4 +106,29 @@ trait BuilderEntityTrait
 
         return $this;
     }
+
+    public function getUrlMedia(string $dir){
+
+        $media =  'https://via.placeholder.com/300';
+        if(!empty($this->attributes['media_id'])){
+            $this->attributes['medias'] = model(MediaModel::class)->find($this->attributes['media_id']);
+           $media = $this->attributes['medias']->getUrlMedia('medium');
+        }
+
+        return $media;
+       
+    }
+
+    public function getMedia(){
+
+        $this->attributes['medias'] = model(MediaModel::class)->find(1);
+        if(!empty($this->attributes['media_id'])){
+            $this->attributes['medias'] = model(MediaModel::class)->find($this->attributes['media_id']);
+            $this->attributes['medias']->getUrlMedia('medium');
+        }
+
+        return $this->attributes['medias'];
+       
+    }
+    
 }
