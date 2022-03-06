@@ -46,7 +46,7 @@ class Modules extends BaseModules
 	public $aliases = [
 		'events',
 		'filters',
-		'registrars',
+		//'registrars',
 		'routes',
 		'services',
 	];
