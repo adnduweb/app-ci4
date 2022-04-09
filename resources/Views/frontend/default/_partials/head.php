@@ -42,7 +42,7 @@
 <link rel="canonical" href="<?= current_url(); ?>"/>
 
 <meta property="og:locale" content="<?= service('request')->getLocale(); ?>_<?= strtoupper(service('request')->getLocale()); ?>" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:title" content="<?= (isset($meta_title)) ? ucfirst($meta_title) : ''; ?> | <?= service('settings')->get('App.core', 'nameApp'); ?>" />
 <meta property="og:description" content="<?= (isset($meta_description)) ? ucfirst($meta_description) : ''; ?>" />
 <meta property="og:url" content="<?= current_url(); ?>" />
